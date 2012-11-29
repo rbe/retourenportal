@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+              metadata-complete="false">
+    <!--
+        Factories.
+    -->
+    <factory>
+        <exception-handler-factory>eu.artofcoding.retoure.web.RetoureExceptionHandlerFactory</exception-handler-factory>
+    </factory>
+    <!--
+    
+        Managed Beans.
+    
+    -->
+    <!--
+        Beetlejuice
+    -->
+    <!-- language -->
+    <managed-bean>
+        <managed-bean-name>language</managed-bean-name>
+        <managed-bean-class>eu.artofcoding.beetlejuice.web.LanguageBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <!--
+        Converters.
+    -->
+    <converter>
+        <converter-for-class>java.lang.Enum</converter-for-class>
+        <converter-class>javax.faces.convert.EnumConverter</converter-class>
+    </converter>
+    <!--
+        Application.
+    -->
+    <application>
+        <!--
+            Multilanguage.
+        -->
+        <locale-config>
+            <default-locale>de</default-locale>
+            <supported-locale>de</supported-locale>
+        </locale-config>
+        <!-- Resource bundle for messages in menus 
+        <resource-bundle>
+            <base-name>eu.artofcoding.odisee.resource.menu</base-name>
+            <var>menumsg</var>
+        </resource-bundle>
+        -->
+    </application>
+</faces-config>

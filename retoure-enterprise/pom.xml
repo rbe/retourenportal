@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--
+        POM.
+    -->
+    <groupId>eu.artofcoding.retoure</groupId>
+    <artifactId>retoure-enterprise</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <parent>
+        <artifactId>retoure-server</artifactId>
+        <groupId>eu.artofcoding.retoure</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <!--
+        Project Information.
+    -->
+    <name>Retoure Enterprise</name>
+    <url>http://www.retourenportal.com</url>
+    <!--
+        Build Settings.
+    -->
+    <packaging>ear</packaging>
+    <!-- Properties. -->
+    <properties>
+    </properties>
+    <dependencies>
+        <!--
+            Retoure
+        -->
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-persistence</artifactId>
+            <version>${project.version}</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-web</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+    <build>
+        <!--
+             Build Plugins.
+             http://maven.apache.org/plugins/index.html
+         -->
+        <plugins>
+            <!-- maven-resources-plugin -->
+            <!--
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/extra-resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/glassfish-*.xml</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+            <!-- maven-ear-plugin, http://maven.apache.org/plugins/maven-ear-plugin/ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>${version.org.apache.maven.ear.plugin}</version>
+                <configuration>
+                    <applicationName>retoure-enterprise</applicationName>
+                    <displayName>Retourenportal</displayName>
+                    <description>Retourenportal</description>
+                    <version>6</version>
+                    <initializeInOrder>true</initializeInOrder>
+                    <defaultJavaBundleDir>.</defaultJavaBundleDir>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <generateApplicationXml>true</generateApplicationXml>
+                    <!-- Modules -->
+                    <generateModuleId>true</generateModuleId>
+                    <modules>
+                        <!--
+                            Retoure.
+                        -->
+                        <!-- retoure-api -->
+                        <!--
+                        <jarModule>
+                            <groupId>eu.artofcoding.retoure</groupId>
+                            <artifactId>retoure-api</artifactId>
+                            <includeInApplicationXml>true</includeInApplicationXml>
+                            <bundleDir>.</bundleDir>
+                            <uri>retoure-api.jar</uri>
+                            <unpack>true</unpack>
+                        </jarModule>
+                        -->
+                        <!-- retoure-persistence -->
+                        <ejbModule>
+                            <groupId>eu.artofcoding.retoure</groupId>
+                            <artifactId>retoure-persistence</artifactId>
+                            <unpack>true</unpack>
+                            <uri>retoure-persistence</uri>
+                        </ejbModule>
+                        <!-- retoure-web -->
+                        <webModule>
+                            <groupId>eu.artofcoding.retoure</groupId>
+                            <artifactId>retoure-web</artifactId>
+                            <contextRoot>retoure</contextRoot>
+                            <uri>retoure-web</uri>
+                            <unpack>true</unpack>
+                        </webModule>
+                    </modules>
+                    <!-- Security. -->
+                    <security>
+                        <security-role>
+                            <description>Administrator</description>
+                            <role-name>admin</role-name>
+                        </security-role>
+                        <security-role>
+                            <description>User</description>
+                            <role-name>user</role-name>
+                        </security-role>
+                    </security>
+                </configuration>
+            </plugin>
+            <!-- buildnumber-maven-plugin -->
+            <!--
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.2</version>
+                <configuration>
+                    <format>{0,date,yyyyMMddHHmmss}</format>
+                    <items>
+                        <item>timestamp</item>
+                    </items>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
+
+<ui:composition template="layout.xhtml">
+
+    <ui:define name="content">
+
+        <f:event type="preRenderView" listener="#{retoure.preRenderView}"/>
+
+        <h:panelGroup id="reasonPanel" class="reason-panel">
+
+            <retoure:show-no-customer/>
+
+            <h:form id="customerDataForm" rendered="#{not empty retoure.articlesMarkedForReturn}">
+
+                <retoure:select-return-reason readonly="true"/>
+
+                <h:panelGrid id="customerDataPanel"
+                             styleClass="customer-data-table"
+                             columnClasses="customer-data-column1,customer-data-column2,customer-data-column3"
+                             rowClasses="customer-data-row1,customer-data-row2"
+                             cellpadding="0" cellspacing="0"
+                             columns="2">
+
+                    <f:facet name="header">
+                        <h1>Meine Daten</h1>
+                    </f:facet>
+
+                    <h:column headerClass="customer-data-column-header">
+                        <h:outputText styleClass="customer-data-content" value="Anrede"/>
+                    </h:column>
+                    <h:column headerClass="customer-data-column-header">
+                        <h:selectOneRadio value="#{retoure.customer.salutation}">
+                            <f:selectItem itemLabel="Herr" itemValue="#{retoure.salutationMr}"/>
+                            <f:selectItem itemLabel="Frau" itemValue="#{retoure.salutationMs}"/>
+                        </h:selectOneRadio>
+                    </h:column>
+
+                    <h:column headerClass="customer-data-column-header">
+                        <h:outputText styleClass="customer-data-content" value="Vor- und Nachname"/>
+                    </h:column>
+                    <h:column headerClass="customer-data-column-header">
+                        <h:inputText value="#{retoure.customer.firstname}"/>
+                        <h:inputText value="#{retoure.customer.lastname}"/>
+                    </h:column>
+
+                    <h:column headerClass="customer-data-column-header">
+                        <h:outputText styleClass="customer-data-content" value="Stra&szlig;e und Hausnummer"/>
+                    </h:column>
+                    <h:column headerClass="customer-data-column-header">
+                        <h:inputText value="#{retoure.customer.shippingAddress1}"/>
+                        <h:inputText value="#{retoure.customer.shippingAddress1StreetNumber}"/>
+                    </h:column>
+
+                    <h:column headerClass="customer-data-column-header">
+                        <h:outputText styleClass="customer-data-content" value="PLZ Ort"/>
+                    </h:column>
+                    <h:column headerClass="customer-data-column-header">
+                        <h:inputText value="#{retoure.customer.zipcode}"/>
+                        <h:inputText value="#{retoure.customer.city}"/>
+                    </h:column>
+
+                    <h:column headerClass="customer-data-column-header">
+                        <h:outputText styleClass="customer-data-content" value="R&uuml;ckerstattung"/>
+                    </h:column>
+                    <h:column headerClass="customer-data-column-header">
+
+                        <h:panelGrid columns="3">
+
+                            <h:panelGrid columns="2">
+
+                                <f:facet name="header">
+                                    <h3>Art der Erstattung</h3>
+                                </f:facet>
+
+                                <h:selectOneRadio id="bankAccountTypeRadio1" value="#{retoure.customer.bankAccount.accountType}" immediate="true">
+                                    <f:selectItem itemValue="#{retoure.accountTypeCreditNote}"/>
+                                    <f:ajax event="click" listener="#{retoure.bankAccountTypeSelected}" render="@form"/>
+                                </h:selectOneRadio>
+                                <h:outputText styleClass="customer-data-content" value="Gutschrift"/>
+
+                                <h:selectOneRadio id="bankAccountTypeRadio2" value="#{retoure.customer.bankAccount.accountType}" immediate="true">
+                                    <f:selectItem itemValue="#{retoure.accountTypeBankAccount}"/>
+                                    <f:ajax event="click" listener="#{retoure.bankAccountTypeSelected}" render="@form"/>
+                                </h:selectOneRadio>
+                                <h:outputText styleClass="customer-data-content" value="&Uuml;berweisung auf Bankkonto"/>
+
+                                <h:selectOneRadio id="bankAccountTypeRadio3" value="#{retoure.customer.bankAccount.accountType}" immediate="true">
+                                    <f:selectItem itemValue="#{retoure.accountTypeCreditcard}"/>
+                                    <f:ajax event="click" listener="#{retoure.bankAccountTypeSelected}" render="@form"/>
+                                </h:selectOneRadio>
+                                <h:outputText styleClass="customer-data-content" value="&Uuml;berweisung auf Kreditkarte"/>
+
+                                <h:selectOneRadio id="bankAccountTypeRadio4" value="#{retoure.customer.bankAccount.accountType}" immediate="true">
+                                    <f:selectItem itemValue="#{retoure.accountTypePayPal}"/>
+                                    <f:ajax event="click" listener="#{retoure.bankAccountTypeSelected}" render="@form"/>
+                                </h:selectOneRadio>
+                                <h:outputText styleClass="customer-data-content" value="&Uuml;berweisung auf PayPal-Konto"/>
+
+                            </h:panelGrid>
+
+                            <retoure:spacer width="30"/>
+
+                            <h:panelGrid rendered="#{retoure.accountTypeIsCreditNote()}" columns="2" styleClass="customer-bank-account">
+
+                                <f:facet name="header">
+                                    <h3>Wir freuen uns auf Sie!</h3>
+                                </f:facet>
+
+                                <h:outputText styleClass="customer-data-content"
+                                              value="Der Betrag wird Ihrem Kundenkonto gutgeschrieben und bei Ihrem n&auml;chsten Einkauf verrechnet."/>
+
+                            </h:panelGrid>
+
+                            <h:panelGrid rendered="#{retoure.accountTypeIsBankAccount()}" columns="2" styleClass="customer-bank-account">
+
+                                <f:facet name="header">
+                                    <h3>Kontoverbindung</h3>
+                                </f:facet>
+
+                                <h:outputLabel for="bankAccountHolder" value="Beg&uuml;nstigter"/>
+                                <h:inputText id="bankAccountHolder" value="#{retoure.customer.bankAccount.accountHolder}" maxlength="100"/>
+
+                                <h:outputLabel for="bankAccountRoutingCode" value="Bankleitzahl"/>
+                                <h:inputText id="bankAccountRoutingCode" value="#{retoure.customer.bankAccount.routingCode}" maxlength="8"/>
+
+                                <h:outputLabel for="bankAccountNumber" value="Kontonummer"/>
+                                <h:inputText id="bankAccountNumber" value="#{retoure.customer.bankAccount.accountNumber}" maxlength="10"/>
+
+                            </h:panelGrid>
+
+                            <h:panelGrid rendered="#{retoure.accountTypeIsCreditcard()}" columns="2" styleClass="customer-bank-account">
+
+                                <f:facet name="header">
+                                    <h3>Kreditkartendaten</h3>
+                                </f:facet>
+
+                                <h:outputLabel for="creditcardHolder" value="Beg&uuml;nstigter"/>
+                                <h:inputText id="creditcardHolder" value="#{retoure.customer.bankAccount.accountHolder}" maxlength="100"/>
+
+                                <h:outputLabel for="creditcardFinanceCompany" value="Unternehmen"/>
+                                <h:selectOneListbox id="creditcardFinanceCompany" value="#{retoure.customer.bankAccount.financeCompany}" immediate="true">
+                                    <f:selectItems value="#{retoure.financeCompanyValues}"/>
+                                    <f:ajax event="click" listener="#{retoure.creditcardFinanceCompanySelected}" render="@form"/>
+                                </h:selectOneListbox>
+
+                                <h:outputLabel for="creditcardNumber" value="Kartennummer"/>
+                                <h:inputText id="creditcardNumber" value="#{retoure.customer.bankAccount.accountNumber}" maxlength="15"/>
+
+                            </h:panelGrid>
+
+                            <h:panelGrid rendered="#{retoure.accountTypeIsPayPal()}" columns="2" styleClass="customer-bank-account">
+
+                                <f:facet name="header">
+                                    <h3>Bankdaten</h3>
+                                </f:facet>
+
+                                <h:outputLabel for="paypalAccountHolder" value="Beg&uuml;nstigter"/>
+                                <h:inputText id="paypalAccountHolder" value="#{retoure.customer.bankAccount.accountHolder}" maxlength="100"/>
+
+                                <h:outputLabel for="paypalEmail" value="PayPal-Konto"/>
+                                <h:inputText id="paypalEmail" value="#{retoure.customer.bankAccount.email}" maxlength="100"/>
+
+                            </h:panelGrid>
+
+                        </h:panelGrid>
+
+                    </h:column>
+
+                    <f:facet name="footer">
+                        <retoure:wizard-buttons/>
+                    </f:facet>
+
+                </h:panelGrid>
+            </h:form>
+        </h:panelGroup>
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

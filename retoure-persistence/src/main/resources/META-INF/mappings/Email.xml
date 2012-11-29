@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 version="2.0">
+    <entity class="eu.artofcoding.beetlejuice.entity.Email">
+        <table name="email" schema="" catalog="retoure"/>
+        <pre-persist method-name="updateLastModified"/>
+        <pre-update method-name="updateLastModified"/>
+        <attributes>
+            <id name="id">
+                <column name="id" nullable="false" length="10"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="lastModified">
+                <column name="last_modified" length="19"/>
+                <temporal>TIMESTAMP</temporal>
+            </basic>
+            <basic name="fromAddress">
+                <column name="from_address" length="100"/>
+            </basic>
+            <basic name="toAddress">
+                <column name="to_address" length="100"/>
+            </basic>
+            <basic name="subject">
+                <column name="subject" length="100"/>
+            </basic>
+            <basic name="body">
+                <column name="body" length="2147483647"/>
+            </basic>
+            <basic name="sentDate">
+                <column name="sent_date" length="19"/>
+            </basic>
+            <basic name="sentSuccessfully">
+                <column name="sent_successfully"/>
+            </basic>
+            <version name="version">
+                <column name="version" length="10"/>
+            </version>
+        </attributes>
+    </entity>
+</entity-mappings>

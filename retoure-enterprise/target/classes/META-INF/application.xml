@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://java.sun.com/xml/ns/javaee"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_6.xsd"
+             version="6">
+    <application-name>retoure-enterprise</application-name>
+    <description>Retourenportal</description>
+    <display-name>Retourenportal</display-name>
+    <!-- Load modules in order -->
+    <initialize-in-order>true</initialize-in-order>
+    <!--
+        Modules.
+    -->
+    <!-- Repository to hold configuration information, templates, ... -->
+    <module id="retoure-persistence">
+        <ejb>retoure-persistence</ejb>
+    </module>
+    <!-- The web console -->
+    <module id="retoure-web">
+        <web>
+            <web-uri>retoure-web</web-uri>
+            <context-root>retoure</context-root>
+        </web>
+    </module>
+    <!--
+        Security.
+    -->
+    <security-role>
+        <description>Administrator</description>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <description>User</description>
+        <role-name>user</role-name>
+    </security-role>
+    <library-directory>lib</library-directory>
+</application>

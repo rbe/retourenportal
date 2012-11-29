@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>retoure-store-aktivshop</artifactId>
+
+    <parent>
+        <artifactId>retoure-server</artifactId>
+        <groupId>eu.artofcoding.retoure</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <!--
+        Project Information.
+    -->
+    <name>Retoure Store Aktivshop</name>
+    <url>http://www.retourenportal.com</url>
+
+    <packaging>jar</packaging>
+
+    <properties>
+    </properties>
+
+    <dependencies>
+        <!--
+            Java EE
+        -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>${version.javaee-api}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--
+            CDI.
+        -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>${version.javax.cdi}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--
+            Apache Axis 2.
+        -->
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-kernel</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-adb</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <!-- NoClassDefFoundError: com.sun.xml.messaging.saaj.soap.SOAPDocumentImpl -->
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-saaj</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <!-- NoClassDefFoundError: com.sun.xml.messaging.saaj.soap.SOAPDocumentImpl
+        <dependency>
+            <groupId>com.sun.xml.messaging.saaj</groupId>
+            <artifactId>saaj-impl</artifactId>
+            <version>1.3.19</version>
+        </dependency>
+        -->
+        <!-- NoClassDefFoundError com.sun.org.apache.xml.internal.resolver.CatalogManager -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-xjc</artifactId>
+            <version>2.2.6</version>
+        </dependency>
+        <!--
+            Beetlejuice.
+        -->
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>beetlejuice-api</artifactId>
+            <version>${version.eu.artofcoding.beetlejuice}</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>beetlejuice-template</artifactId>
+            <version>${version.eu.artofcoding.beetlejuice}</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>beetlejuice-email</artifactId>
+            <version>${version.eu.artofcoding.beetlejuice}</version>
+        </dependency>
+        <!--
+            Retoure.
+        -->
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-persistence</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-dhl-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>

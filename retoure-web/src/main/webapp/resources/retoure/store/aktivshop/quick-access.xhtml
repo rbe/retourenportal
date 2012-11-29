@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+<ui:component>
+
+    <cc:interface>
+    </cc:interface>
+
+    <cc:implementation>
+        <div class="quick-access">
+            <p class="welcome-msg">&nbsp;</p>
+            <div class="sp"></div>
+            <div class="block-cart-top">
+                <div class="block-content" style="display: none;">
+                    <div class="summary">
+                        <p class="amount">
+                            <a href="http://www.aktivshop.de/checkout/cart/" class="title">Mein Warenkorb</a>
+                            <span class="qty">0</span> Artikel: <span class="price">0,00&nbsp;€</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <form id="search_mini_form" action="http://www.aktivshop.de/catalogsearch/result/" method="get">
+                <div class="form-search">
+                    <label for="search">Suche:</label>
+                    <input id="search" type="text" name="q" value="" class="input-text ff-basic-autocomplete"/>
+                    <button type="submit" title="Suche" class="button"><span><span>Suche</span></span>
+                    </button>
+                    <div id="search_autocomplete" class="search-autocomplete advanced-suggest" style="display: none; "></div>
+                </div>
+            </form>
+            <div class="head-telefon">
+                <div class="head-telefon-img">
+                    <p>kostenlose Bestellung:</p>
+                    <div class="head-telefon-nr"><p>0800 436 00 05</p></div>
+                </div>
+            </div>
+            <div class="head-ts-logo">
+                <a href="https://www.trustedshops.de/shop/certificate.php?shop_id=X4817B503D22CA66C15F65DDAB8F0DD23" target="_blank">
+                    <img src="http://www.aktivshop.de/media/ts/ts_logo_gross.gif" alt="TrustedShops"/>
+                </a>
+            </div>
+            <div class="sp"></div>
+            <ul class="links">
+                <li class="first">
+                    <a href="http://www.aktivshop.de/Hersteller.html/" title="Hersteller">Hersteller</a>
+                </li>
+                <li>
+                    <a href="http://www.aktivshop.de/customer/account/login/" title="Anmelden">Anmelden</a>
+                </li>
+                <li class=" last">
+                    <a href="http://www.aktivshop.de/glossary/" title="Glossar">Glossar</a>
+                </li>
+            </ul>
+        </div>
+    </cc:implementation>
+
+</ui:component>
+
+</html>

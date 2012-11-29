@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 version="2.0">
+    <entity class="eu.artofcoding.retoure.entity.BankAccount">
+        <table name="bank_account" schema="" catalog="retoure"/>
+        <pre-persist method-name="updateLastModified"/>
+        <pre-update method-name="updateLastModified"/>
+        <attributes>
+            <id name="id">
+                <column name="id" nullable="false" length="10"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="lastModified">
+                <column name="last_modified" length="19"/>
+                <temporal>TIMESTAMP</temporal>
+            </basic>
+            <basic name="accountType">
+                <column name="account_type"/>
+            </basic>
+            <basic name="financeCompany">
+                <column name="finance_company"/>
+            </basic>
+            <basic name="accountHolder">
+                <column name="account_holder" length="100"/>
+            </basic>
+            <basic name="accountNumber">
+                <column name="account_number" length="10"/>
+            </basic>
+            <basic name="routingCode">
+                <column name="routing_code" length="10"/>
+            </basic>
+            <basic name="email">
+                <column name="email" length="100"/>
+            </basic>
+            <version name="version">
+                <column name="version" length="10"/>
+            </version>
+        </attributes>
+    </entity>
+</entity-mappings>
