@@ -25,6 +25,7 @@ import eu.artofcoding.retoure.api.RetoureException;
 import eu.artofcoding.retoure.store.RetoureFacade;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.html.HtmlSelectBooleanCheckbox;
