@@ -36,7 +36,7 @@ public class AmselClient {
         final Binding binding = ((BindingProvider) rpPartnerPort).getBinding();
         List<Handler> handlerList = binding.getHandlerChain();
         if (handlerList == null) {
-            handlerList = new ArrayList<Handler>();
+            handlerList = new ArrayList<>();
         }
         handlerList.add(new AmselSecurityHandler());
         binding.setHandlerChain(handlerList);
