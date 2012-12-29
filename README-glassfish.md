@@ -25,7 +25,7 @@ Version: Open Source Edition 3.1.2.2
             portbase + 86
           o JPDA debugger port:
             portbase + 9
-          o Felix shell service port for OSGi module  management:
+          o Felix shell service port for OSGi module management:
             portbase + 66
     
     --domainproperties
@@ -37,11 +37,11 @@ Version: Open Source Edition 3.1.2.2
 #### Example
 
     asadmin create-domain --domaindir /usr/home/rbe/glassfish --portbase 9000 --user retoure --savelogin=true retoure-domain
-    asadmin enable-secure-admin --port 9048 --user retoure
-    asadmin create-file-user --port 9048 --user retoure --authrealmname admin-realm --groups asadmin retoure-admin
-    asadmin create-password-alias --port 9048 --user retoure retoure-admin-pwdalias
-    asadmin enable-secure-admin-internal-user --port 9048 --user retoure --passwordalias retoure-admin-pwdalias retoure-admin
+    asadmin --port 9048 --user retoure enable-secure-admin
+    asadmin --port 9048 --user retoure create-file-user --authrealmname admin-realm --groups asadmin retoure-admin
+    asadmin --port 9048 --user retoure create-password-alias retoure-admin-pwdalias
+    asadmin --port 9048 --user retoure enable-secure-admin-internal-user --passwordalias retoure-admin-pwdalias retoure-admin
 
 ### Instance Configuration
 
-    asadmin add-resources glassfish-resources.xml
+    asadmin --port 9048 --user retoure add-resources glassfish-resources.xml
