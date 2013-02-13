@@ -32,7 +32,6 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>${version.javaee-api}</version>
             <scope>provided</scope>
         </dependency>
         <!--
@@ -41,7 +40,6 @@
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
-            <version>${version.javax.cdi}</version>
             <scope>provided</scope>
         </dependency>
         <!--
@@ -50,12 +48,10 @@
         <dependency>
             <groupId>eu.artofcoding.beetlejuice</groupId>
             <artifactId>beetlejuice-api</artifactId>
-            <version>${version.eu.artofcoding.beetlejuice}</version>
         </dependency>
         <dependency>
             <groupId>eu.artofcoding.beetlejuice</groupId>
             <artifactId>beetlejuice-cdm</artifactId>
-            <version>${version.eu.artofcoding.beetlejuice}</version>
         </dependency>
     </dependencies>
 

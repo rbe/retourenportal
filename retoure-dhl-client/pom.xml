@@ -19,11 +19,6 @@
     <url>http://www.retourenportal.com</url>
 
     <properties>
-        <!-- Maven Plugins -->
-        <version.org.apache.maven.plugins.jaxws-maven-plugin>2.2</version.org.apache.maven.plugins.jaxws-maven-plugin>
-        <!-- JAX-WS -->
-        <version.javax.xml.ws.jaxws-api>2.2.8</version.javax.xml.ws.jaxws-api>
-        <version.com.sun.xml.ws.jaxws-rt>2.2.7-promoted-b73</version.com.sun.xml.ws.jaxws-rt>
     </properties>
 
     <dependencies>
@@ -42,7 +37,6 @@
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
-            <version>${version.javax.cdi}</version>
             <scope>provided</scope>
         </dependency>
         <!--
@@ -51,12 +45,10 @@
         <dependency>
             <groupId>javax.xml.ws</groupId>
             <artifactId>jaxws-api</artifactId>
-            <version>${version.javax.xml.ws.jaxws-api}</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-rt</artifactId>
-            <version>${version.com.sun.xml.ws.jaxws-rt}</version>
         </dependency>
         <!--
             Metro.
@@ -80,15 +72,10 @@
 
     <build>
         <plugins>
-            <!--
-                jaxws-maven-plugin
-                http://jax-ws-commons.java.net/jaxws-maven-plugin/usage.html
-                Alternative: org.codehaus.mojo:jaxws-maven-plugin
-            -->
+            <!-- jaxws-maven-plugin, http://jax-ws-commons.java.net/jaxws-maven-plugin/ -->
             <plugin>
                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
-                <version>${version.org.apache.maven.plugins.jaxws-maven-plugin}</version>
                 <executions>
                     <execution>
                         <goals>

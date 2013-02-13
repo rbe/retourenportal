@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>eu.artofcoding.retoure</groupId>
+    <artifactId>retoure-web-demo</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>eu.artofcoding.retoure</groupId>
+        <artifactId>retoure-server</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <!--
+        Project Information.
+    -->
+    <name>Retoure Web Demo</name>
+    <url>http://www.retourenportal.com</url>
+
+    <packaging>war</packaging>
+
+    <properties>
+    </properties>
+
+    <dependencies>
+        <!--
+            Java EE
+        -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+            <!--
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-6.0</artifactId>
+            <type>pom</type>
+            -->
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--
+            CDI
+        -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--
+            JavaServer Faces
+        -->
+        <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>javax.faces-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- PrettyFaces -->
+        <dependency>
+            <groupId>com.ocpsoft</groupId>
+            <artifactId>prettyfaces-jsf2</artifactId>
+        </dependency>
+        <!--
+            Beetlejuice
+        -->
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>beetlejuice-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>beetlejuice-cdm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>beetlejuice-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>beetlejuice-web-jsfcomponents</artifactId>
+        </dependency>
+        <!--
+            Retoure
+        -->
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-web-helper</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-store-demo</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <!-- Will be provided via EAR or WAR -->
+                <exclusion>
+                    <groupId>eu.artofcoding.retoure</groupId>
+                    <artifactId>retoure-persistence</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- maven-war-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                    </archive>
+                    <!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <!-- maven-glassfish-plugin -->
+            <plugin>
+                <groupId>org.glassfish.maven.plugin</groupId>
+                <artifactId>maven-glassfish-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+    </build>
+
+    <repositories>
+    </repositories>
+
+</project>

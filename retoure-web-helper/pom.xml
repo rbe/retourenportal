@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>eu.artofcoding.retoure</groupId>
+    <artifactId>retoure-web-helper</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>eu.artofcoding.retoure</groupId>
+        <artifactId>retoure-server</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <!--
+        Project Information.
+    -->
+    <name>Retoure Web Helper</name>
+    <url>http://www.retourenportal.com</url>
+
+    <packaging>jar</packaging>
+
+    <properties>
+    </properties>
+
+    <dependencies>
+        <!--
+            Java EE
+        -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--
+            CDI
+        -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--
+            JavaServer Faces
+        -->
+        <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>javax.faces-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--
+            Retoure
+        -->
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <targetPath>META-INF</targetPath>
+                <directory>src/main/webapp/WEB-INF/</directory>
+                <includes>
+                    <include>beans.xml</include>
+                    <include>faces-*.xml</include>
+                    <include>*.taglib.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <targetPath>META-INF/resources</targetPath>
+                <directory>src/main/webapp/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <!-- maven-jar-plugin -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!--
+                            <bundleName>retoure-web-helper</bundleName>
+                            <bundleSymbolicName>eu.artofcoding.retoure</bundleSymbolicName>
+                            <bundleDescription>art-of-coding.eu's JSF Components</bundleDescription>
+                            -->
+                        </manifest>
+                    </archive>
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
+        </plugins>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+    </build>
+
+</project>
