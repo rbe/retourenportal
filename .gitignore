@@ -21,3 +21,6 @@ target/
 
 # JRebel #
 rebel.xml
+
+# Ignored projects #
+ibmitest
