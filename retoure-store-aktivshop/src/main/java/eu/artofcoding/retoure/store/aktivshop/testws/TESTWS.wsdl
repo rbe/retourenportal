@@ -1,15 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ retoure-server
-  ~ retoure-store-aktivshop
-  ~ Copyright (C) 2012-2012 art of coding UG, http://www.art-of-coding.eu/
-  ~
-  ~ Alle Rechte vorbehalten. Nutzung unterliegt Lizenzbedingungen.
-  ~ All rights reserved. Use is subject to license terms.
-  ~
-  ~ rbe, 24.11.12 15:49
-  -->
-
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
                   xmlns:ns="http://testws.wsbeans.iseries/xsd"
                   xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://testws.wsbeans.iseries"
