@@ -176,6 +176,45 @@
                 </plugins>
             </build>
         </profile>
+        <!-- arquillian-drone-selenium -->
+        <profile>
+            <id>arquillian-drone-selenium</id>
+            <dependencies>
+                <!-- Arquillian Drone -->
+                <dependency>
+                    <groupId>org.jboss.arquillian.extension</groupId>
+                    <artifactId>arquillian-drone-impl</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.arquillian.extension</groupId>
+                    <artifactId>arquillian-drone-selenium</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.arquillian.extension</groupId>
+                    <artifactId>arquillian-drone-selenium-server</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <!-- Selenium -->
+                <dependency>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-server</artifactId>
+                    <scope>test</scope>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.mortbay.jetty</groupId>
+                            <artifactId>servlet-api-2.5</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
     </profiles>
 
     <!--
@@ -205,6 +244,7 @@
                 <artifactId>jboss-javaee-6.0</artifactId>
                 <version>3.0.1.Final</version>
                 <type>pom</type>
+                <scope>provided</scope>
             </dependency>
             <!--
                 Web Services
@@ -229,6 +269,18 @@
             <dependency>
                 <groupId>org.apache.axis2</groupId>
                 <artifactId>axis2-adb</artifactId>
+                <version>1.6.2</version>
+            </dependency>
+            <!-- axis2-transport-local for testing, java.lang.ClassNotFoundException -->
+            <dependency>
+                <groupId>org.apache.axis2</groupId>
+                <artifactId>axis2-transport-local</artifactId>
+                <version>1.6.2</version>
+            </dependency>
+            <!-- axis2-transport-http for testing, java.lang.ClassNotFoundException -->
+            <dependency>
+                <groupId>org.apache.axis2</groupId>
+                <artifactId>axis2-transport-http</artifactId>
                 <version>1.6.2</version>
             </dependency>
             <dependency>
@@ -292,6 +344,15 @@
                 <version>3.1.3.RELEASE</version>
             </dependency>
             <!--
+                Google
+            -->
+            <!-- Guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>13.0.1</version>
+            </dependency>
+            <!--
                 Beetlejuice
             -->
             <dependency>
@@ -334,10 +395,17 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.5.1</version>
                     <configuration>
                         <source>${project.java.version}</source>
                         <target>${project.java.version}</target>
                     </configuration>
+                </plugin>
+                <!-- maven-reactor-plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-reactor-plugin</artifactId>
+                    <version>1.0</version>
                 </plugin>
                 <!--
                     jaxws-maven-plugin

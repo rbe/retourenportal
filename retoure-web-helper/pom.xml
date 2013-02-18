@@ -18,7 +18,7 @@
     <!--
         Project Information.
     -->
-    <name>Retoure Web Helper</name>
+    <name>Retoure Web Components and Helper</name>
     <url>http://www.retourenportal.com</url>
 
     <packaging>jar</packaging>
@@ -31,8 +31,9 @@
             Java EE
         -->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-6.0</artifactId>
+            <type>pom</type>
             <scope>provided</scope>
         </dependency>
         <!--
@@ -58,19 +59,17 @@
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-api</artifactId>
             <version>${project.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
     <build>
-        <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <resource>
                 <targetPath>META-INF</targetPath>
-                <directory>src/main/webapp/WEB-INF/</directory>
+                <directory>src/main/webapp/WEB-INF</directory>
                 <includes>
                     <include>beans.xml</include>
-                    <include>faces-*.xml</include>
-                    <include>*.taglib.xml</include>
                 </includes>
             </resource>
             <resource>
@@ -78,24 +77,6 @@
                 <directory>src/main/webapp/resources</directory>
             </resource>
         </resources>
-        <plugins>
-            <!-- maven-jar-plugin -->
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <!--
-                            <bundleName>retoure-web-helper</bundleName>
-                            <bundleSymbolicName>eu.artofcoding.retoure</bundleSymbolicName>
-                            <bundleDescription>art-of-coding.eu's JSF Components</bundleDescription>
-                            -->
-                        </manifest>
-                    </archive>
-                    <verbose>true</verbose>
-                </configuration>
-            </plugin>
-        </plugins>
         <finalName>${project.artifactId}-${project.version}</finalName>
     </build>
 

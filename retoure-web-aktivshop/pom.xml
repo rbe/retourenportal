@@ -31,8 +31,9 @@
             Java EE
         -->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-6.0</artifactId>
+            <type>pom</type>
             <scope>provided</scope>
         </dependency>
         <!--
@@ -70,6 +71,14 @@
         </dependency>
         <dependency>
             <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>beetlejuice-cdm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>beetlejuice-persistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
             <artifactId>beetlejuice-web</artifactId>
         </dependency>
         <dependency>
@@ -91,38 +100,140 @@
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-api</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-web-helper</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-store-aktivshop</artifactId>
             <version>${project.version}</version>
             <exclusions>
-                <!-- Will be provided via EAR -->
+                <!-- Will be provided via EAR or WAR -->
                 <exclusion>
                     <groupId>eu.artofcoding.retoure</groupId>
                     <artifactId>retoure-persistence</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>com.sun.xml.messaging.saaj</groupId>
-            <artifactId>saaj-impl</artifactId>
-            <version>1.3.19</version>
-        </dependency>
-        -->
     </dependencies>
 
     <build>
         <plugins>
+            <!-- maven-dependency-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <!-- retoure-api -->
+                                <artifactItem>
+                                    <groupId>eu.artofcoding.retoure</groupId>
+                                    <artifactId>retoure-api</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes
+                                    </outputDirectory>
+                                    <includes>
+                                        eu/**
+                                    </includes>
+                                </artifactItem>
+                                <!-- retoure-dhl-client -->
+                                <artifactItem>
+                                    <groupId>eu.artofcoding.retoure</groupId>
+                                    <artifactId>retoure-dhl-client</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes
+                                    </outputDirectory>
+                                    <includes>
+                                        eu/**
+                                    </includes>
+                                </artifactItem>
+                                <!-- retoure-persistence -->
+                                <artifactItem>
+                                    <groupId>eu.artofcoding.retoure</groupId>
+                                    <artifactId>retoure-persistence</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes
+                                    </outputDirectory>
+                                    <includes>
+                                        META-INF/**,
+                                        eu/**
+                                    </includes>
+                                </artifactItem>
+                                <!-- retoure-store-aktivshop -->
+                                <artifactItem>
+                                    <groupId>eu.artofcoding.retoure</groupId>
+                                    <artifactId>retoure-store-aktivshop</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes
+                                    </outputDirectory>
+                                    <includes>
+                                        META-INF/**,
+                                        eu/**
+                                    </includes>
+                                </artifactItem>
+                                <!-- retoure-web-helper -->
+                                <artifactItem>
+                                    <groupId>eu.artofcoding.retoure</groupId>
+                                    <artifactId>retoure-web-helper</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes
+                                    </outputDirectory>
+                                    <includes>
+                                        META-INF/**,
+                                        eu/**
+                                    </includes>
+                                </artifactItem>
+                            </artifactItems>
+                            <!-- This project's META-INF -->
+                            <!--
+                            <includes>META-INF/**</includes>
+                            <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- maven-war-plugin -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>war</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>

@@ -29,8 +29,9 @@
             Java EE
         -->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-6.0</artifactId>
+            <type>pom</type>
             <scope>provided</scope>
         </dependency>
         <!--
@@ -52,6 +53,18 @@
             <groupId>org.apache.axis2</groupId>
             <artifactId>axis2-adb</artifactId>
         </dependency>
+        <!-- axis2-transport-local for testing, java.lang.ClassNotFoundException -->
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-transport-local</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- axis2-transport-http for testing, java.lang.ClassNotFoundException -->
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-transport-http</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- NoClassDefFoundError: com.sun.xml.messaging.saaj.soap.SOAPDocumentImpl -->
         <dependency>
             <groupId>org.apache.axis2</groupId>
@@ -67,6 +80,13 @@
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-xjc</artifactId>
+        </dependency>
+        <!--
+            Google
+        -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
         <!--
             Beetlejuice.
