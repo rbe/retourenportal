@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+<ui:component>
+
+    <cc:interface>
+        <cc:attribute name="readonly" type="java.lang.Boolean" required="false" default="false"/>
+        <cc:facet name="bottomButtons" required="false"/>
+    </cc:interface>
+
+    <cc:implementation>
+
+        <h:dataTable id="returnTable"
+                     rendered="#{not empty retoure.articlesMarkedForReturn}"
+                     styleClass="return-table"
+                     columnClasses="return-column1,return-column2,return-column3"
+                     rowClasses="return-row1,return-row2"
+                     cellpadding="0" cellspacing="0"
+                     value="#{retoure.articlesMarkedForReturn}" var="article"
+                     offset="0" rows="25">
+
+            <h:column headerClass="return-column-header">
+                <f:facet name="header">
+                    Artikelnummer
+                </f:facet>
+                <h:outputText styleClass="return-content" value="#{article.articleIdent}"/>
+            </h:column>
+
+            <h:column headerClass="return-column-header return-description-header">
+                <f:facet name="header">
+                    Bezeichnung
+                </f:facet>
+                <h:outputText styleClass="article-content" value="#{article.description1}"/>
+                <br/>
+                <h:panelGroup rendered="#{cc.attrs.readonly}">
+                    <h:outputText rendered="#{article.articleReturn.returnReason.size() > 0}" value="R&uuml;cksendegrund: "/>#{article.articleReturn.returnReasonsAsString}
+                </h:panelGroup>
+                <h:panelGroup rendered="#{not cc.attrs.readonly}">
+                    <h:panelGrid columns="1">
+                        <f:param name="articleIdent" value="#{article.articleIdent}"/>
+                        <ui:repeat value="#{retoure.getReturnReasonForArticle(article)}" var="reason">
+                            <h:selectOneRadio>
+                                <f:selectItem itemLabel="#{reason.reason}" itemValue="#{reason.id}"/>
+                                <f:param name="articleIdent" value="#{article.articleIdent}"/>
+                                <f:ajax event="click" listener="#{retoure.reasonSelected}"/>
+                            </h:selectOneRadio>
+                        </ui:repeat>
+                    </h:panelGrid>
+                </h:panelGroup>
+            </h:column>
+
+            <h:column headerClass="return-column-header">
+                <f:facet name="header">
+                    Wieviele zur&uuml;cksenden?
+                </f:facet>
+                <h:panelGroup>
+                    <h:outputText styleClass="return-content" value="#{article.articleReturn.returnCount}">
+                        <f:convertNumber/>
+                    </h:outputText>
+                </h:panelGroup>
+            </h:column>
+
+            <f:facet name="footer">
+                <cc:renderFacet name="bottomButtons"/>
+            </f:facet>
+
+        </h:dataTable>
+
+    </cc:implementation>
+
+</ui:component>
+
+</html>

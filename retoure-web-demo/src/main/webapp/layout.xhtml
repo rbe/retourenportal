@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Retourenportal Demo</title>
+    <h:outputStylesheet library="demo/css" name="demo.css"/>
+    <h:outputStylesheet library="retoure/css" name="retourenportal.css"/>
+</h:head>
+<h:body>
+    <div id="wrap">
+        <div id="header">
+            <h1>Das Retourenportal</h1>
+        </div>
+        <div id="navigation">
+            <ul>
+                <li><a href="#">Retoure anmelden</a></li>
+                <li><a href="#">R&uuml;ckruf anfordern</a></li>
+                <li><a href="#">Impressum</a></li>
+            </ul>
+        </div>
+        <div id="content_area">
+            <div id="content">
+                <div class="retoure">
+                    <ui:insert name="content"/>
+                </div>
+            </div>
+            <div id="sidebar">
+                <div class="block">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="#">Item 1</a></li>
+                        <li><a href="#">Item 2</a></li>
+                        <li><a href="#">Item 3</a></li>
+                        <li><a href="#">Item 4</a></li>
+                        <li><a href="#">Item 5</a></li>
+                        <li><a href="#">Item 6</a></li>
+                        <li><a href="#">Item 7</a></li>
+                        <li><a href="#">Item 8</a></li>
+                        <li><a href="#">Item 9</a></li>
+                        <li><a href="#">Item 10</a></li>
+                    </ul>
+                </div>
+                <ui:insert name="sidebar-block"/>
+            </div>
+            </div>
+        <div id="footer">
+            <p>&copy; 2012-2013 retourenportal.com</p>
+        </div>
+    </div>
+</h:body>
+<ui:debug/>
+</html>

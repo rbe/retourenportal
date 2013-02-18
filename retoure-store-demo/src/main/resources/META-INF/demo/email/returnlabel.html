@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<body>
+Hallo ${customer.fullname},<br/>
+<p>
+    wir haben am ${retouredatum?date} folgende Retoure über
+    <#if invoice.returnArticles?size = 1>
+        1 Artikel
+    </#if>
+    <#if invoice.returnArticles?size gt 1>
+        ${invoice.returnArticles?size} Artikel
+    </#if>
+    erhalten:
+</p>
+<table>
+    <thead>
+    <tr>
+        <th>Artikelnummer</th>
+        <th>Bezeichnung</th>
+        <th>Anzahl geliefert</th>
+        <th>Anzahl Retoure</th>
+        <th>Grund der Retoure</th>
+    </tr>
+    </thead>
+    <tbody>
+    <#list invoice.returnArticles as a>
+        <tr>
+            <td>${a.articleIdent}</td>
+            <td>${a.description1}</td>
+            <td>${a.count}</td>
+            <td>${a.articleReturn.returnCount}</td>
+            <td>Gründe 0</td>
+        </tr>
+    </#list>
+    </tbody>
+</table>
+<p>
+    Freundliche Grüße,<br/>
+    Ihr retourenportal.com
+</p>
+</body>
+</html>

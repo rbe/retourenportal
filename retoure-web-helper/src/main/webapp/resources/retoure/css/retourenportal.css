@@ -1,0 +1,292 @@
+/*
+
+  Standard settings
+
+*/
+
+.retoure a,
+.retoure a:active,
+.retoure a:focus {
+    color: #771A04;
+}
+
+.retoure label {
+    height: 23px;
+    padding-left: 5px;
+    color: #000;
+    font-size: 14px;
+}
+
+.retoure input[type=text] {
+    height: 23px;
+    padding-left: 5px;
+    color: #000;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}
+
+.retoure input[type=submit] {
+    font-size: 14px;
+}
+
+.retoure .textlink {
+    color: #000;
+}
+
+/*
+
+  Wizard
+
+*/
+
+.retoure .wizard-back-button {
+}
+
+.retoure .wizard-page-index {
+    padding: 10px 10px !important;
+    margin: 0 !important;
+    font-size: 14px;
+}
+
+.retoure .wizard-next-button {
+}
+
+/*
+
+  Panels
+
+*/
+
+.retoure .info-panel {
+}
+
+.retoure .notice-panel {
+}
+
+.retoure .invoice-panel {
+}
+
+.retoure .reason-panel {
+}
+
+.retoure .customer-data-panel {
+}
+
+/*
+
+  Articles
+
+*/
+
+.retoure .article-table {
+    width: 100% !important;
+    border-left: 1px solid #cecece !important;
+    border-top: 1px solid #cecece !important;
+}
+
+.retoure .article-row1 {
+    background: #fff;
+}
+
+.retoure .article-row2 {
+    background: #f0f0f0;
+}
+
+.retoure .article-column1,
+.retoure .article-column2,
+.retoure .article-column3,
+.retoure .article-column4,
+.retoure .article-column5 {
+    padding: 10px 10px !important;
+    margin: 0 !important;
+    border-left: 0px solid #cecece !important;
+    border-right: 1px solid #cecece !important;
+    border-bottom: 1px solid #cecece !important;
+}
+
+/*.retoure table.article-table th*/
+.retoure .article-column-header {
+    padding: 15px 15px !important;
+    margin: 0 !important;
+    border-right: 1px solid #cecece !important;
+    border-bottom: 1px solid #000 !important;
+    background: #e6e6e6;
+    font-size: 14px;
+}
+
+.retoure .article-description-header {
+    width: 40%;
+}
+
+/*.retoure table.article-table td span.article-content*/
+.retoure .article-content {
+    font-size: 14px;
+}
+
+.retoure table.article-table input[type=text] {
+    height: 23px;
+    /*width: 260px;*/
+    color: #000;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}
+
+.retoure table.article-table .article-not-returnable-content {
+    font-size: 16px;
+}
+
+/*
+
+  Return
+
+*/
+
+.retoure .return-table {
+    width: 100% !important;
+    border-left: 1px solid #cecece !important;
+    border-top: 1px solid #cecece !important;
+}
+
+.retoure .return-row1 {
+    background: #fff;
+}
+
+.retoure .return-row2 {
+    background: #f0f0f0;
+}
+
+.retoure .return-column1 {
+    padding: 10px 10px !important;
+    margin: 0 !important;
+    border-left: 0px solid #cecece !important;
+    border-right: 1px solid #cecece !important;
+    border-bottom: 1px solid #cecece !important;
+    width: 14%;
+}
+
+.retoure .return-column2,
+.retoure .return-column3,
+.retoure .return-column4,
+.retoure .return-column5 {
+    padding: 10px 10px !important;
+    margin: 0 !important;
+    border-left: 0px solid #cecece !important;
+    border-right: 1px solid #cecece !important;
+    border-bottom: 1px solid #cecece !important;
+}
+
+/*.retoure table.return-table th*/
+.retoure .return-column-header {
+    padding: 15px 15px !important;
+    margin: 0 !important;
+    border-right: 1px solid #cecece !important;
+    border-bottom: 1px solid #000 !important;
+    background: #e6e6e6;
+    font-size: 14px;
+}
+
+.retoure .return-description-header {
+    width: 65%;
+}
+
+/*.retoure table.return-table td span.return-content*/
+.retoure .return-content {
+    font-size: 14px;
+}
+
+.retoure table.return-table input[type=text] {
+    height: 23px;
+    /*width: 260px;*/
+    color: #000;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}
+
+/*
+
+  Customer Data
+
+*/
+
+.retoure .customer-data-table {
+    width: 100% !important;
+    border-left: 1px solid #cecece !important;
+    border-top: 1px solid #cecece !important;
+}
+
+.retoure .customer-data-row1 {
+    background: #fff;
+}
+
+.retoure .customer-data-row2 {
+    background: #f0f0f0;
+}
+
+.retoure .customer-data-column1 {
+    padding: 10px 10px !important;
+    margin: 0 !important;
+    border-left: 0px solid #cecece !important;
+    border-right: 1px solid #cecece !important;
+    border-bottom: 1px solid #cecece !important;
+    width: 14%;
+}
+
+.retoure .customer-data-column2,
+.retoure .customer-data-column3,
+.retoure .customer-data-column4,
+.retoure .customer-data-column5 {
+    padding: 10px 10px !important;
+    margin: 0 !important;
+    border-left: 0px solid #cecece !important;
+    border-right: 1px solid #cecece !important;
+    border-bottom: 1px solid #cecece !important;
+}
+
+/*.retoure table.customer-data-table th*/
+.retoure .customer-data-column-header {
+    padding: 15px 15px !important;
+    margin: 0 !important;
+    border-right: 1px solid #cecece !important;
+    border-bottom: 1px solid #000 !important;
+    background: #e6e6e6;
+    font-size: 14px;
+}
+
+.retoure .customer-data-description-header {
+    width: 65%;
+}
+
+/*.retoure table.customer-data-table td span.customer-data-content*/
+.retoure .customer-data-content {
+    font-size: 14px;
+}
+
+.retoure table.customer-data-table input[type=text] {
+    height: 23px;
+    width: 300px;
+    color: #000;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}
+
+.retoure table.customer-data-table .customer-bank-account input[type=text] {
+    height: 23px;
+    width: 260px;
+    color: #000;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}
+
+/*
+
+    Return Label.
+
+ */
+
+.retoure .return-panel input[type=text] {
+    height: 23px;
+    width: 260px;
+    color: #000;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}

@@ -23,13 +23,14 @@ import java.util.logging.Logger;
 @Stateless
 public class RetoureDAO extends GenericDAO<Base> {
 
-    private static final Logger logger = Logger.getLogger(RetoureDAO.class.getName());
+    private transient Logger logger;
 
     @PersistenceContext
     private EntityManager em;
 
     public RetoureDAO() {
         super(null);
+        logger = Logger.getLogger(RetoureDAO.class.getName());
     }
 
     @PostConstruct

@@ -11,28 +11,22 @@
 
 package eu.artofcoding.retoure.store.aktivshop;
 
-import eu.artofcoding.beetlejuice.cdm.Customer;
-import eu.artofcoding.beetlejuice.cdm.Group;
-import eu.artofcoding.beetlejuice.cdm.Salutation;
-import eu.artofcoding.beetlejuice.cdm.accounting.BankAccount;
-import eu.artofcoding.beetlejuice.cdm.accounting.BankAccountType;
-import eu.artofcoding.beetlejuice.cdm.accounting.FinanceCompany;
 import eu.artofcoding.beetlejuice.cdm.accounting.Invoice;
-import eu.artofcoding.beetlejuice.cdm.store.Article;
-import eu.artofcoding.beetlejuice.cdm.store.ArticleReturn;
-import eu.artofcoding.beetlejuice.cdm.store.ReturnLabel;
-import eu.artofcoding.beetlejuice.cdm.store.ReturnReason;
+import eu.artofcoding.beetlejuice.cdm.store.*;
 import eu.artofcoding.beetlejuice.email.Postman;
 import eu.artofcoding.beetlejuice.email.cdi.QPostman;
 import eu.artofcoding.beetlejuice.entity.Attachment;
 import eu.artofcoding.beetlejuice.entity.Email;
 import eu.artofcoding.beetlejuice.entity.MimeType;
 import eu.artofcoding.beetlejuice.template.TemplateProcessor;
+import eu.artofcoding.retoure.api.RetoureConstants;
 import eu.artofcoding.retoure.api.RetoureException;
-import eu.artofcoding.retoure.api.RetoureRuntimeException;
+import eu.artofcoding.retoure.api.TestData;
+import eu.artofcoding.retoure.delivery.ReturnLabelClient;
 import eu.artofcoding.retoure.delivery.dhl.AmselClient;
 import eu.artofcoding.retoure.entity.RetoureDAO;
 import eu.artofcoding.retoure.store.RetoureFacade;
+import eu.artofcoding.retoure.store.aktivshop.irt01.IRT01Stub;
 import freemarker.template.ObjectWrapper;
 import freemarker.template.SimpleHash;
 import freemarker.template.TemplateException;
@@ -49,6 +43,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.servlet.ServletContext;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -60,35 +55,36 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static eu.artofcoding.beetlejuice.email.cdi.TransportType.SSL_TLS;
+import static eu.artofcoding.retoure.store.aktivshop.AktivshopConstants.STORE;
 
 @Stateless
 public class AktivshopFacade implements RetoureFacade {
 
-    private static final Logger logger = Logger.getLogger(AktivshopFacade.class.getName());
+    private static final long serialVersionUID = 1L;
 
-    private static final String STORE = "AKTIVSHOP";
+    private transient Logger logger;
 
     @EJB
     private RetoureDAO retoureDAO;
 
     @Inject
-    private transient TemplateProcessor templateProcessor;
+    private TemplateProcessor templateProcessor;
 
-    // JBoss @Resource(mappedName = "java:/retoure-smtp")
-    @Resource(lookup = "mail/retoure")
-    private transient Session mailSession;
+    @Resource(mappedName = "mail/retoure")
+    private Session mailSession;
 
     @Inject
     @QPostman(transportType = SSL_TLS)
-    private transient Postman postman;
+    private Postman postman;
 
     @PostConstruct
     private void postConstruct() {
+        logger = Logger.getLogger(AktivshopFacade.class.getName());
         // Initialize TemplateProcessor
         ServletContext context = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        // TODO Not found on Glassfish@FreeBSD
-        String format = String.format("/resources/retoure/store/%s/email", STORE);
-        templateProcessor.addTemplateLoader(context, format);
+        // Templates can reside in different paths due to packaging
+        templateProcessor.addTemplateLoader(context, String.format("META-INF/%s/email", STORE));
+        templateProcessor.addTemplateLoader(context, String.format("WEB-INF/classes/META-INF/%s/email", STORE));
         templateProcessor.getConfiguration().setObjectWrapper(ObjectWrapper.BEANS_WRAPPER);
         // Postman
         if (null != postman) {
@@ -99,40 +95,56 @@ public class AktivshopFacade implements RetoureFacade {
     }
 
     @Override
-    public Customer login(Customer customer) {
+    public StoreCustomer login(StoreCustomer customer, String ident) throws RetoureException {
         // Check state
         // Already logged in?
         if (customer.isLoginOk()) {
             // TODO Stay logged in or log out and re-login?
             if (logger.isLoggable(Level.FINE)) {
-                logger.fine(String.format("Customer %s already logged in", customer));
+                logger.fine(String.format("Customer %s-%s already logged in", customer.getCustomerIdent(), customer.getAgentIdent()));
             }
             // Clear data
             customer.setAgentIdent(null);
             customer.setInvoices(null);
         }
-        // TODO Call webservice
-        if (true) {
-            String[] split = customer.getCustomerIdent().split("[-]");
-            String _customer = split[0];
-            String _agent = null;
-            if (split.length == 2) {
-                _agent = split[1];
-            }
-            if (_customer.equalsIgnoreCase("Alfons")) {
-                makeCustomerAlfons(customer);
+        // Get identification entered by user
+        String enteredCustomerIdent = customer.getCustomerIdent();
+        if (null != enteredCustomerIdent) {
+            String[] _customerAgentIdent = CheckUserInput.checkCustomerAndAgentIdent(enteredCustomerIdent);
+            customer.setCustomerIdent(_customerAgentIdent[0]);
+            customer.setAgentIdent(_customerAgentIdent[1]);
+            // Test customers
+            if (customer.getCustomerIdent().equalsIgnoreCase(RetoureConstants.CUSTOMER_ALFONS)) {
+                TestData.makeCustomerALFONS01(this, customer);
                 // Login ok
                 customer.setLoginOk(true);
-            } else if (_customer.equalsIgnoreCase("Manfred")) {
-                makeCustomerManfred(customer);
+            } else if (customer.getCustomerIdent().equalsIgnoreCase(RetoureConstants.CUSTOMER_MANFRED)) {
+                TestData.makeCustomerMANFRED1(this, customer);
                 // Login ok
                 customer.setLoginOk(true);
             } else {
-                // Login invalid
-                customer.setLoginOk(false);
-            }
-            if (null != _agent) {
-                customer.setAgentIdent(_agent);
+                // Call webservice
+                try {
+                    // Agent logging in?
+                    if (null != customer.getAgentIdent() && customer.getAgentIdent().length() > 0) {
+                        IRT01Stub.IRT01Result irt01Result = Irt01Client.call(customer.getCustomerIdent(), customer.getAgentIdent(), ident);
+                        if (irt01Result.get_SBNR().equals(BigDecimal.ZERO)) {
+                            // TODO Error message and handle exception
+                            throw new RetoureException();
+                        }
+                    } else {
+                        IRT01Stub.IRT01Result irt01Result = Irt01Client.call(customer.getCustomerIdent(), null, ident);
+                        if (!irt01Result.get_SBNR().equals(BigDecimal.ZERO)) {
+                            // TODO Error message and handle exception
+                            throw new RetoureException();
+                        }
+                    }
+                    // Login ok
+                    customer.setLoginOk(true);
+                } catch (RetoureException e) {
+                    // Login invalid
+                    customer.setLoginOk(false);
+                }
             }
         }
         // Return
@@ -140,19 +152,21 @@ public class AktivshopFacade implements RetoureFacade {
     }
 
     @Override
-    public Customer fetchInvoice(Customer customer, String invoiceIdent) {
+    public StoreCustomer fetchInvoice(StoreCustomer customer, String invoiceIdent) throws RetoureException {
         // Check state
         if (!customer.isLoginOk()) {
-            throw new RetoureRuntimeException("Customer is not logged in");
+            throw new RetoureException("Customer is not logged in");
         }
         // TODO Call webservice
-        switch (invoiceIdent) {
-            case "4ArtikelDHL":
-                makeInvoice4ArtikelDHL(customer, invoiceIdent);
-                break;
-            case "1ArtikelSpedition":
-                makeInvoice1ArtikelSpedition(customer, invoiceIdent);
-                break;
+        if (null != invoiceIdent) {
+            switch (invoiceIdent) {
+                case RetoureConstants.INVOICE_DHL4:
+                    TestData.makeInvoiceDHL004(this, customer, invoiceIdent);
+                    break;
+                case RetoureConstants.INVOICE_SPED01:
+                    TestData.makeInvoiceSPED01(this, customer, invoiceIdent);
+                    break;
+            }
         }
         // Return
         return customer;
@@ -169,7 +183,7 @@ public class AktivshopFacade implements RetoureFacade {
     }
 
     @Override
-    public void addArticleToInvoice(Customer customer, Invoice invoice, Article article) {
+    public void addArticleToInvoice(StoreCustomer customer, Invoice invoice, Article article) {
         // Agent logged in, unset unreturnable flag
         if (null != customer.getAgentIdent()) {
             ArticleReturn articleReturn = article.getArticleReturn();
@@ -183,27 +197,37 @@ public class AktivshopFacade implements RetoureFacade {
 
     @Override
     @Asynchronous
-    public Future<Customer> placeReturn(Customer customer, String invoiceIdent) throws RetoureException {
-        logger.info("placeReturn: start");
+    public Future<StoreCustomer> placeReturn(StoreCustomer customer, String invoiceIdent) throws RetoureException {
+        if (logger.isLoggable(Level.FINE)) {
+            logger.fine("placeReturn: start");
+        }
         Invoice invoice = customer.getInvoice(invoiceIdent);
         if (null != invoice && null == invoice.getReturnLabel()) {
             // Create label request
-            AmselClient amselClient = new AmselClient();
-            ReturnLabel returnLabel = amselClient.makeLabel(customer);
+            ReturnLabelClient returnLabelClient = new AmselClient();
+            ReturnLabel returnLabel = returnLabelClient.makeLabel(customer);
             invoice.setReturnLabel(returnLabel);
             String base64 = returnLabel.getBase64();
-            logger.info(String.format("placeReturn: stop, got %d bytes", base64.length()));
-            String ident = String.format("%s_%s.pdf", customer.getCustomerIdent(), invoice.getInvoiceIdent());
+            if (logger.isLoggable(Level.FINE)) {
+                logger.fine(String.format("placeReturn: stop, got %d bytes", base64.length()));
+            }
+            // Filename
+            String filename = String.format("%s_Retourenaufkleber_%s.pdf", customer.getCustomerIdent(), invoice.getInvoiceIdent());
+            returnLabel.setFilename(filename);
             try {
-                returnLabel.saveBinary(Paths.get("retoure", STORE, "returnlabel", ident));
-                logger.info(String.format("Saved return label for invoice %s", invoiceIdent));
+                returnLabel.saveBinary(Paths.get("retoure", STORE, "returnlabel", filename));
+                if (logger.isLoggable(Level.FINE)) {
+                    logger.fine(String.format("Saved return label for invoice %s", invoiceIdent));
+                }
             } catch (IOException e) {
                 throw new RetoureException(e);
             }
         } else if (null != invoice && null != invoice.getReturnLabel()) {
-            logger.warning(String.format("Return label for invoice %s already fetched", invoiceIdent));
+            if (logger.isLoggable(Level.WARNING)) {
+                logger.warning(String.format("Return label for invoice %s already fetched", invoiceIdent));
+            }
         } else {
-            String format = String.format("No invoice object for %s or no return label", invoiceIdent);
+            String format = String.format("Invoice %s not found or no return label", invoiceIdent);
             throw new RetoureException(format);
         }
         // Return
@@ -212,8 +236,10 @@ public class AktivshopFacade implements RetoureFacade {
 
     @Override
     @Asynchronous
-    public void sendReturnLabelForInvoiceByMail(Customer customer, Invoice invoice) throws RetoureException {
-        logger.info(String.format("Sending email to %s", customer.getEmail()));
+    public void sendReturnLabelForInvoiceByMail(StoreCustomer customer, Invoice invoice) throws RetoureException {
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(String.format("Sending email to %s", customer.getEmail()));
+        }
         if (null != postman) {
             if (null != customer.getEmail()) {
                 // Data model for template
@@ -228,22 +254,28 @@ public class AktivshopFacade implements RetoureFacade {
                     email.setSubject(String.format("Ihre Retoure zur Rechnung Nr. %s", invoice.getInvoiceIdent()));
                     // Render template depending on request locale
                     email.setMimeType(MimeType.HTML);
-                    // Template /resources/retoure/store/AKTIVSHOP/email/returnlabel.html
+                    // Template returnlabel.html
                     email.setBody(templateProcessor.renderTemplateToString("returnlabel.html", Locale.GERMAN, root));
                     // Add return label
-                    String filename = String.format("%s_Retourenaufkleber_%s.pdf", STORE, invoice.getInvoiceIdent());
+                    // TODO Provide link to fetch label up to 3 times (protected through token)
                     byte[] content = Files.readAllBytes(invoice.getReturnLabel().getPath());
-                    Attachment attachment = new Attachment(MimeType.PDF, filename, content);
+                    Attachment attachment = new Attachment(MimeType.PDF, invoice.getReturnLabel().getFilename(), content);
                     email.addAttachment(attachment);
                     // Set recipient
                     email.setToAddress(customer.getEmail());
                     // Send email
                     postman.sendMail(email);
-                    logger.info("Email sent to " + email);
+                    if (logger.isLoggable(Level.INFO)) {
+                        logger.info("Email sent to " + email);
+                    }
                 } catch (TemplateException e) {
-                    logger.log(Level.SEVERE, "Cannot render template", e);
+                    if (logger.isLoggable(Level.SEVERE)) {
+                        logger.log(Level.SEVERE, "Cannot render template", e);
+                    }
                 } catch (MessagingException | IOException e) {
-                    logger.log(Level.SEVERE, "Cannot send mail", e);
+                    if (logger.isLoggable(Level.SEVERE)) {
+                        logger.log(Level.SEVERE, "Cannot send mail", e);
+                    }
                 }
             } else {
                 throw new RetoureException("Cannot send return label, no email address");
@@ -252,98 +284,5 @@ public class AktivshopFacade implements RetoureFacade {
             throw new RetoureException("No postman, no emails!");
         }
     }
-
-    //<editor-fold desc="Testdata">
-
-    /**
-     * Alfons Aktivmann
-     */
-    private void makeCustomerAlfons(Customer customer) {
-        // Set customer data
-        customer.setSalutation(Salutation.HERR);
-        customer.setFirstname("Alfons");
-        customer.setLastname("Anspruchsvoll");
-        customer.setShippingAddress1("Allerseits Grüne Heide");
-        customer.setShippingAddress1StreetNumber("32a");
-        customer.setZipcode("48333");
-        customer.setCity("Rheine-Laer-Holthausen");
-        customer.setPhone("02550 123456-890");
-        customer.setEmail("ralf@art-of-coding.eu");
-        // BankAccount
-        BankAccount bankAccount = customer.getBankAccount();
-        bankAccount.setAccountHolder("Alfons Anspruchsvoll");
-        bankAccount.setAccountNumber("101450450");
-        bankAccount.setRoutingCode("40351060");
-        // Set account type to CREDITNOTE
-        bankAccount.setAccountType(BankAccountType.CREDITNOTE);
-    }
-
-    /**
-     * Manfred Mangelware
-     */
-    private void makeCustomerManfred(Customer customer) {
-        // Set customer data
-        customer.setSalutation(Salutation.HERR);
-        customer.setFirstname("Manfred");
-        customer.setLastname("Mangelware");
-        customer.setShippingAddress1("Allerseits Grüne Heide");
-        customer.setShippingAddress1StreetNumber("32a");
-        customer.setZipcode("48333");
-        customer.setCity("Oldenburg");
-        customer.setPhone("04124 123456-890");
-        customer.setEmail("ralf@art-of-coding.eu");
-        // BankAccount
-        BankAccount bankAccount = customer.getBankAccount();
-        bankAccount.setAccountHolder("Manfred Mangelware");
-        bankAccount.setAccountNumber("5234123456781234");
-        // Creditcard
-        bankAccount.setFinanceCompany(FinanceCompany.MASTERCARD);
-        // Set account type to CREDITNOTE
-        bankAccount.setAccountType(BankAccountType.CREDITNOTE);
-    }
-
-    /**
-     * 4 Artikel, DHL
-     */
-    private void makeInvoice4ArtikelDHL(Customer customer, String invoiceIdent) {
-        // Groups
-        Group g01 = new Group("G01", "Gruppe 01");
-        Group s22 = new Group("S22", "Subgruppe 22");
-        // Invoice
-        Invoice invoice = new Invoice(invoiceIdent, new java.util.Date(), true, "DHL", true, null);
-        Article article =
-                new Article("AR5640",
-                        g01, s22, "DHL", 1.0f,
-                        "Beschreibung 1 für Artikel", "Beschreibung 2");
-        article.getArticleReturn().setReturnable(true);
-        invoice.addArticle(article);
-        for (int i = 0; i < 3; i++) {
-            article =
-                    new Article(String.format("AR567%d", i),
-                            g01, s22, "DHL", 5.0f + i,
-                            String.format("Beschreibung 1 für Artikel %d", i), "Beschreibung 2");
-            article.getArticleReturn().setReturnable(true);
-            addArticleToInvoice(customer, invoice, article);
-        }
-        customer.addInvoice(invoiceIdent, invoice);
-    }
-
-    /**
-     * 1 Artikel, Spedition
-     */
-    private void makeInvoice1ArtikelSpedition(Customer customer, String invoiceIdent) {
-        // Groups
-        Group g01 = new Group("G01", "Gruppe 01");
-        Group s22 = new Group("S22", "Subgruppe 22");
-        // Invoice
-        Invoice invoice = new Invoice(invoiceIdent, new java.util.Date(), true, "Spedition", true, null);
-        invoice.addArticle(
-                new Article("SP9981",
-                        g01, s22, "Spedition", 1.0f,
-                        "Ein ganz großer schwerer toller Stuhl mit Alles", "So Massage und so..."));
-        customer.addInvoice(invoiceIdent, invoice);
-    }
-
-    //</editor-fold>
 
 }

@@ -13,6 +13,10 @@ package eu.artofcoding.retoure.store.aktivshop;
 
 public class AktivshopConstants {
 
-    public static final String AKTIVSHOP = "aktivshop".intern();
+    public static final String STORE = "aktivshop".intern();
+
+    public static final int LENGTH_RGNR = 9;
+    public static final int LENGTH_KDNR = 8;
+    public static final int LENGTH_SBNR = 10;
 
 }

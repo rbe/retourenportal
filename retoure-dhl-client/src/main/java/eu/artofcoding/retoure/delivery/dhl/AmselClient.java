@@ -11,8 +11,9 @@
 
 package eu.artofcoding.retoure.delivery.dhl;
 
-import eu.artofcoding.beetlejuice.cdm.Customer;
 import eu.artofcoding.beetlejuice.cdm.store.ReturnLabel;
+import eu.artofcoding.beetlejuice.cdm.store.StoreCustomer;
+import eu.artofcoding.retoure.delivery.ReturnLabelClient;
 import eu.artofcoding.retoure.delivery.dhl.amsel.BookLabelRequestType;
 import eu.artofcoding.retoure.delivery.dhl.amsel.BookLabelResponseType;
 import eu.artofcoding.retoure.delivery.dhl.amsel.RpPartnerService;
@@ -25,11 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class AmselClient {
+public class AmselClient implements ReturnLabelClient {
 
     private static final Logger logger = Logger.getLogger(AmselClient.class.getName());
 
-    public ReturnLabel getBookLabel(BookLabelRequestType bookLabelRequestType) {
+    private ReturnLabel getBookLabel(BookLabelRequestType bookLabelRequestType) {
         RpPartnerService rpPartnerService = new RpPartnerService();
         RpPartnerType rpPartnerPort = rpPartnerService.getRpPartnerPort();
         // Add security handler to chain
@@ -44,7 +45,8 @@ public class AmselClient {
         return new ReturnLabel(bookLabelResponseType.getIdc(), bookLabelResponseType.getRoutingCode(), bookLabelResponseType.getLabel());
     }
 
-    public ReturnLabel makeLabel(Customer customer) {
+    @Override
+    public ReturnLabel makeLabel(StoreCustomer customer) {
         // Create label request
         BookLabelRequestType bookLabelRequestType = new BookLabelRequestType();
         //

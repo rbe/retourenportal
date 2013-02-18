@@ -11,9 +11,10 @@
 
 package eu.artofcoding.retoure.store.dhl;
 
+import eu.artofcoding.beetlejuice.cdm.store.ReturnLabel;
+import eu.artofcoding.beetlejuice.cdm.store.StoreCustomer;
+import eu.artofcoding.retoure.delivery.ReturnLabelClient;
 import eu.artofcoding.retoure.delivery.dhl.AmselClient;
-import eu.artofcoding.retoure.entity.Customer;
-import eu.artofcoding.retoure.entity.ReturnLabel;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -22,12 +23,12 @@ import java.nio.file.Paths;
 
 public class AmselClientTest {
 
-    private Customer customer;
+    private StoreCustomer customer;
 
     @BeforeMethod
     public void setUp() throws Exception {
         // Create customer
-        customer = new Customer();
+        customer = new StoreCustomer();
         customer.setFirstname("Ralf");
         customer.setLastname("Bensmann");
         customer.setShippingAddress1("Grüner Weg");
@@ -40,11 +41,11 @@ public class AmselClientTest {
     @Test
     public void testMakeLabel() throws Exception {
         // Create label request
-        AmselClient amselClient = new AmselClient();
-        ReturnLabel returnLabel = amselClient.makeLabel(customer);
+        ReturnLabelClient returnLabelClient = new AmselClient();
+        ReturnLabel returnLabel = returnLabelClient.makeLabel(customer);
         Path labelPath = Paths.get("label.pdf");
         returnLabel.saveBinary(labelPath);
-        System.out.println("Wrote label to " + labelPath.toString());
+        System.out.println("Wrote label to " + labelPath.toAbsolutePath().toString());
     }
 
 }

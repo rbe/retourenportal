@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
+
+<ui:composition template="layout.xhtml">
+
+    <ui:define name="content">
+
+        <h:panelGroup id="returnPanel" class="return-panel">
+
+            <retoure:show-no-return-selected/>
+
+            <h:panelGroup class="return-placed-panel"
+                          rendered="#{not empty login.customer}"> <!--rendered="retoure.labelForInvoiceGenerated"-->
+                <h1>
+                    <h:outputText value="Die Retoure zur Rechnung Nr. #{login.invoiceIdent}"/> wurde erfolgreich angenommen!
+                </h1>
+                <h:form id="returnPlacedForm">
+                    <h3>
+                        <h:commandLink action="#{label.downloadReturnLabelForInvoice()}" target="_blank">Ich m&ouml;chte den Retourenaufkleber ausdrucken.</h:commandLink>
+                    </h3>
+                    <p>
+                        F&uuml;r den Ausdruck des Retourenscheins ben&ouml;tigen Sie den
+                        <h:outputLink target="_blank" href="http://get.adobe.com/de/reader/">Acrobat Reader</h:outputLink>
+                    </p>
+                    <h:panelGroup rendered="#{empty login.customer.agentIdent and not empty login.customer.email}">
+                        <h3>
+                            <h:commandLink action="#{label.mailReturnLabelForInvoice}" value="Ich m&ouml;chte den Retourenaufkleber per Email zugeschickt bekommen.">
+                                <f:ajax render="@form"/>
+                            </h:commandLink>
+                        </h3>
+                        <p>
+                            Wir senden den Retourenaufkleber als PDF an #{login.customer.email}
+                        </p>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{not empty login.customer.agentIdent}">
+                        <h3>
+                            <h:commandLink action="#{label.mailReturnLabelForInvoice}" value="Ich m&ouml;chte den Retourenaufkleber per Email zugeschickt bekommen.">
+                                <f:ajax render="@form"/>
+                            </h:commandLink>
+                        </h3>
+                        <p>
+                            Wir senden den Retourenaufkleber als PDF an
+                            <h:inputText value="#{login.customer.email}" immediate="true">
+                            </h:inputText>
+                        </p>
+                    </h:panelGroup>
+                    <h:panelGroup id="returnLabelMailedPanel" rendered="#{label.returnLabelMailed}">
+                        <h3>
+                            Der Retourenaufkleber wurde Ihnen per Email zugesendet!
+                        </h3>
+                    </h:panelGroup>
+                </h:form>
+            </h:panelGroup>
+
+        </h:panelGroup>
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+<ui:component>
+
+    <cc:interface>
+    </cc:interface>
+
+    <cc:implementation>
+        <h:commandButton rendered="#{retoure.pageIndex gt 0}" styleClass="wizard-back-button" action="#{retoure.previousPage()}" value="&lt; Zur&uuml;ck"/>
+        <h:outputText rendered="#{retoure.pageIndex gt 0}" styleClass="wizard-page-index" value="Schritt #{retoure.pageIndex}/#{retoure.pageCount}"/>
+        <h:commandButton disabled="#{not retoure.canProceedToNextStep()}" styleClass="wizard-next-button" action="#{retoure.nextPage()}" value="Weiter &gt;"/>
+    </cc:implementation>
+
+</ui:component>
+
+</html>

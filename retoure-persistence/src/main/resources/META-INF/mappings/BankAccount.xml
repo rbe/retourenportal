@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
                  version="2.0">
-    <entity class="eu.artofcoding.retoure.entity.BankAccount">
+    <entity class="eu.artofcoding.beetlejuice.cdm.accounting.BankAccount">
         <table name="bank_account" schema="" catalog="retoure"/>
         <pre-persist method-name="updateLastModified"/>
         <pre-update method-name="updateLastModified"/>

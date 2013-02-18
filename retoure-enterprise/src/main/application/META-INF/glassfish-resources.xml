@@ -3,7 +3,7 @@
         "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
 <resources>
     <!--
-        Send mails.
+        Send mails
     -->
     <mail-resource enabled="true" debug="true"
                    object-type="user"
@@ -18,7 +18,7 @@
         <property name="mail-smtps-password" value="xi3ain7J"/>
     </mail-resource>
     <!--
-        Access database.
+        Access database
     -->
     <!-- MySQL -->
     <jdbc-connection-pool name="jdbc/retoure-pool"

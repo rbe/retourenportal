@@ -11,10 +11,10 @@
 
 package eu.artofcoding.retoure.store;
 
-import eu.artofcoding.beetlejuice.cdm.Customer;
 import eu.artofcoding.beetlejuice.cdm.accounting.Invoice;
 import eu.artofcoding.beetlejuice.cdm.store.Article;
 import eu.artofcoding.beetlejuice.cdm.store.ReturnReason;
+import eu.artofcoding.beetlejuice.cdm.store.StoreCustomer;
 import eu.artofcoding.retoure.api.RetoureException;
 
 import javax.ejb.Local;
@@ -26,18 +26,21 @@ public interface RetoureFacade extends Serializable {
 
     /**
      * Ask for valid login and get data for invoice.
-     * @param customer {@link Customer} w/ customer ident and invoice ident.
-     * @return {@link Customer}.
+     *
+     * @param customer {@link eu.artofcoding.beetlejuice.cdm.store.StoreCustomer} w/ customer ident and invoice ident.
+     * @param ident    Identification for customer, e.g. a password.
+     * @return StoreCustomer
+     * @throws RetoureException On exception when loggin in, e.g. asking an external service.
      */
-    Customer login(Customer customer);
+    StoreCustomer login(StoreCustomer customer, String ident) throws RetoureException;
 
     /**
      * Ask for articles of a certain invoice.
-     * @param customer     {@link Customer}, previously logged in.
+     * @param customer     {@link StoreCustomer}, previously logged in.
      * @param invoiceIdent Identification of invoice to fetch data about.
-     * @return {@link Customer} w/ invoice data, especially articles.
+     * @return {@link StoreCustomer} w/ invoice data, especially articles.
      */
-    Customer fetchInvoice(Customer customer, String invoiceIdent);
+    StoreCustomer fetchInvoice(StoreCustomer customer, String invoiceIdent) throws RetoureException;
 
     /**
      * Fetch return reasons for an article.
@@ -48,25 +51,25 @@ public interface RetoureFacade extends Serializable {
 
     /**
      * Place a return.
-     * @param customer {@link Customer}.
-     * @return {@link Customer}.
+     * @param customer {@link StoreCustomer}.
+     * @return {@link StoreCustomer}.
      * @throws RetoureException
      */
-    Future<Customer> placeReturn(Customer customer, String invoiceIdent) throws RetoureException;
+    Future<StoreCustomer> placeReturn(StoreCustomer customer, String invoiceIdent) throws RetoureException;
 
     /**
-     * @param customer {@link Customer}.
+     * @param customer {@link StoreCustomer}.
      * @param invoice  {@link Invoice}.
      * @throws RetoureException
      */
-    void sendReturnLabelForInvoiceByMail(Customer customer, Invoice invoice) throws RetoureException;
+    void sendReturnLabelForInvoiceByMail(StoreCustomer customer, Invoice invoice) throws RetoureException;
 
     /**
      * Add an article to an invoice.
-     * @param customer {@link Customer}
+     * @param customer {@link StoreCustomer}
      * @param invoice  {@link Invoice}
      * @param article  {@link Article}
      */
-    void addArticleToInvoice(Customer customer, Invoice invoice, Article article);
+    void addArticleToInvoice(StoreCustomer customer, Invoice invoice, Article article);
 
 }

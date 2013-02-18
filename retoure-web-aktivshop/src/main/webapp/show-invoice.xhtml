@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
+
+<ui:composition template="layout.xhtml">
+
+    <ui:define name="content">
+
+        <h:panelGroup id="invoicePanel" class="invoice-panel">
+
+            <retoure:show-no-invoice-selected/>
+
+            <h:panelGroup rendered="#{not empty retoure.articlesOfInvoice}" styleClass="info-panel">
+                <h1>
+                    <h:outputText value="Ihre Bestellung zur Rechnung Nr. #{login.invoiceIdent}"/>
+                </h1>
+                <h2>Welche Artikel m&ouml;chten Sie zur&uuml;cksenden?</h2>
+            </h:panelGroup>
+            <h:form id="invoiceForm" rendered="#{not empty retoure.articlesOfInvoice}">
+                <retoure:select-article>
+                    <f:facet name="bottomButtons">
+                        <h:commandButton styleClass="wizard-back-button" value="&lt; Zur&uuml;ck"
+                                         action="index"/>
+                        <h:outputText styleClass="wizard-page-index" value="Schritt 1/4"/>
+                        <h:commandButton disabled="#{not retoure.canProceedToNextStep()}"
+                                         styleClass="wizard-next-button" value="Weiter &gt;"
+                                         action="show-return-reason"/>
+                    </f:facet>
+                </retoure:select-article>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    function RETOURE_clear_input(comp) {
+                        var oldval = jQuery(comp).val();
+                        jQuery(comp).val('');
+                    }
+                    //]]>
+                </script>
+            </h:form>
+        </h:panelGroup>
+
+    </ui:define>
+
+</ui:composition>
+
+</html>

@@ -6,11 +6,12 @@
     <persistence-unit name="retoure-PU" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/retoure</jta-data-source>
-        <mapping-file>/META-INF/mappings/Email.xml</mapping-file>
-        <mapping-file>/META-INF/mappings/BankAccount.xml</mapping-file>
-        <mapping-file>/META-INF/mappings/Store.xml</mapping-file>
+        <mapping-file>META-INF/mappings/Email.xml</mapping-file>
+        <mapping-file>META-INF/mappings/BankAccount.xml</mapping-file>
+        <mapping-file>META-INF/mappings/StoreCustomer.xml</mapping-file>
         <class>eu.artofcoding.beetlejuice.entity.Email</class>
-        <class>eu.artofcoding.retoure.entity.Store</class>
+        <class>eu.artofcoding.beetlejuice.cdm.accounting.BankAccount</class>
+        <class>eu.artofcoding.beetlejuice.cdm.store.StoreCustomer</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="eclipselink.ddl-generation" value="create-tables"/>

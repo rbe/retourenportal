@@ -1,0 +1,107 @@
+#wrap {
+    width: 980px;
+    margin: 0 auto;
+}
+
+#header {
+    background: #3c7935;
+}
+
+#header h1 {
+    color: #fff;
+    margin: 0;
+    padding: 10px 10px 10px 20px;
+    font-size: 3em;
+    font-weight: normal;
+}
+
+#navigation ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+    background: #004cff;
+    width: 100%;
+}
+
+#navigation ul li {
+    float: left;
+    width: auto;
+}
+
+#navigation ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#navigation ul li a:hover {
+    color: #00c;
+    background: #fff;
+}
+
+#content_area {
+    clear: both;
+    padding-top: 10px;
+}
+
+#content {
+    float: left;
+    width: 75%;
+}
+
+#content h2, #content p {
+    padding: 0 10px 0 20px;
+}
+
+#content h2 {
+    font-size: 2.0em;
+    margin: 0;
+}
+
+#content p {
+    font-size: 1.2em;
+}
+
+#sidebar {
+    margin-left: 75%;
+}
+
+#sidebar h3 {
+    font-size: 1.6em;
+    margin: 0;
+}
+
+#sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+#sidebar li {
+    /*float: left;*/
+    width: auto;
+    font-size: 1.2em;
+    list-style-type: none;
+}
+
+.block {
+    border: 1px solid #000;
+    padding: 10px;
+    margin: 5px;
+}
+
+#footer {
+    clear: both;
+    background: #aaa;
+}
+
+#footer p {
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 1.3em;
+}
