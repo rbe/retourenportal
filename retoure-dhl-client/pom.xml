@@ -5,6 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>eu.artofcoding.retoure</groupId>
     <artifactId>retoure-dhl-client</artifactId>
 
     <parent>
@@ -23,16 +24,7 @@
 
     <dependencies>
         <!--
-            Tests.
-        -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.8</version>
-            <scope>test</scope>
-        </dependency>
-        <!--
-            CDI.
+            CDI
         -->
         <dependency>
             <groupId>javax.enterprise</groupId>
@@ -40,8 +32,9 @@
             <scope>provided</scope>
         </dependency>
         <!--
-            JAX-WS.
+            JAX-WS
         -->
+        <!--
         <dependency>
             <groupId>javax.xml.ws</groupId>
             <artifactId>jaxws-api</artifactId>
@@ -50,18 +43,13 @@
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>jaxws-rt</artifactId>
         </dependency>
-        <!--
-            Metro.
         -->
-        <!--
         <dependency>
             <groupId>org.glassfish.metro</groupId>
             <artifactId>webservices-osgi</artifactId>
-            <version>2.2.1</version>
         </dependency>
-        -->
         <!--
-            Retoure.
+            Retoure
         -->
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
@@ -72,7 +60,7 @@
 
     <build>
         <plugins>
-            <!-- jaxws-maven-plugin, http://jax-ws-commons.java.net/jaxws-maven-plugin/ -->
+            <!-- jaxws-maven-plugin -->
             <plugin>
                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
@@ -89,20 +77,20 @@
                         <arg>-b</arg>
                         <arg>retoure-dhl-client/src/main/resources/wsdl/var3bl.xsd</arg>
                     </args>
-                    <!--
                     <wsdlUrls>
                         <wsdlUrl>https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3ws.wsdl</wsdlUrl>
                     </wsdlUrls>
-                    -->
+                    <!--
                     <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
                     <bindingDirectory>src/main/resources/binding</bindingDirectory>
+                    -->
                     <sourceDestDir>src/main/java</sourceDestDir>
                     <keep>true</keep>
                     <packageName>eu.artofcoding.retoure.delivery.dhl.amsel</packageName>
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>retoure-dhl-client</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
     </build>
 
 </project>

@@ -1,8 +1,16 @@
-# retoure-web
+# retoure-server
 
 ## GlassFish
 
 Version: Open Source Edition 3.1.2.2
+
+### Application Resources
+
+    asadmin --port 9048 --user retoure add-resources glassfish-resources.xml
+
+### Set JVM Options
+
+    asadmin create-jvm-options --user=admin -Dorg.apache.el.parser.COERCE_TO_ZERO=false
 
 ### Update EclipseLink
 
@@ -18,21 +26,19 @@ Download EclipseLink OSGi bundles from http://www.eclipse.org/eclipselink/downlo
     rm glassfish/modules/org.eclipse.persistence.moxy.jar
     rm glassfish/modules/org.eclipse.persistence.oracle.jar
     
-    cp eclipselink-plugins-*/org.eclipse.persistence.antlr_*.jar glassfish/modules/org.eclipse.persistence.antlr.jar
-    cp eclipselink-plugins-*/org.eclipse.persistence.asm_*.jar glassfish/modules/org.eclipse.persistence.asm.jar
-    cp eclipselink-plugins-*/org.eclipse.persistence.core_*.jar glassfish/modules/org.eclipse.persistence.core.jar
-    cp eclipselink-plugins-*/org.eclipse.persistence.jpa_*.jar glassfish/modules/org.eclipse.persistence.jpa.jar
+    cp eclipselink-plugins-*/org.eclipse.persistence.antlr_*.jar        glassfish/modules/org.eclipse.persistence.antlr.jar
+    cp eclipselink-plugins-*/org.eclipse.persistence.asm_*.jar          glassfish/modules/org.eclipse.persistence.asm.jar
+    cp eclipselink-plugins-*/org.eclipse.persistence.core_*.jar         glassfish/modules/org.eclipse.persistence.core.jar
+    cp eclipselink-plugins-*/org.eclipse.persistence.jpa_*.jar          glassfish/modules/org.eclipse.persistence.jpa.jar
     cp eclipselink-plugins-*/org.eclipse.persistence.jpa.modelgen_*.jar glassfish/modules/org.eclipse.persistence.jpa.modelgen.jar
-    cp eclipselink-plugins-*/org.eclipse.persistence.moxy_*.jar glassfish/modules/org.eclipse.persistence.moxy.jar
-    cp eclipselink-plugins-*/org.eclipse.persistence.oracle_*.jar glassfish/modules/org.eclipse.persistence.oracle.jar
-
-### Application Resources
-
-    asadmin --port 9048 --user retoure add-resources glassfish-resources.xml
+    cp eclipselink-plugins-*/org.eclipse.persistence.moxy_*.jar         glassfish/modules/org.eclipse.persistence.moxy.jar
+    cp eclipselink-plugins-*/org.eclipse.persistence.oracle_*.jar       glassfish/modules/org.eclipse.persistence.oracle.jar
 
 ### Configure HTTP Service
 
-Disable HTTP chunking to overcome error JSF1095 (while using JSF Flash) with GlassFish:
+NOTE: Flash is not used.
+
+Disable HTTP chunking to overcome JSF1095 (while using JSF Flash) with GlassFish:
 
     asadmin set server-config.network-config.protocols.protocol.http-listener-1.http.chunking-enabled=false
 

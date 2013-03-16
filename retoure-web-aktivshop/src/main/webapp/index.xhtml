@@ -1,21 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
-
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="layout.xhtml">
-
     <ui:define name="content">
-
-        <h1>Willkommen im Retourenportal!</h1>
-        <h:form id="loginForm">
-            <retoure:login-panel/>
-        </h:form>
+        <div class="col-main">
+            <div class="page-title">
+                <h1>Retouren anmelden</h1>
+            </div>
+            <div class="std">
+                <p>Bitte helfen Sie uns bei der schnellen Abwicklung Ihrer R&uuml;cksendung und beachten Sie bitte unsere Widerrufsbelehrung.</p>
+                <table style="background-color: #f7f7f7;" border="0">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <h1>Aus welchem Grund m&ouml;chten Sie einen Artikel zur&uuml;cksenden?</h1>
+                            <h2>
+                                1. <strong>Ich m&ouml;chte von meinem <a href="http://www.aktivshop.de/glossareintrag/widerrufsrecht" id="glossar_link_111" class="glossar" title="">Widerrufsrecht</a> Gebrauch machen.</strong><br/>
+                                <span style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Bei R&uuml;ckgabe innerhalb von 30 Tagen nach Erhalt der Ware!)</span>
+                            </h2>
+                            <h1>
+                                <span style="font-size: 12px;"><span style="white-space: pre;"> </span><span style="text-decoration: underline;"><a href="login.xhtml">Zum R&uuml;cksendeportal</a></span></span>
+                            </h1>
+                            <h2>
+                                2. <strong>Ich m&ouml;chte einen defekten Artikel zur Reperatur zur&uuml;cksenden.</strong><br/>
+                                <span style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Bei R&uuml;ckgabe nach 30 Tagen, innerhalb von 2 Jahren!)</span>
+                            </h2>
+                            <p>
+                                Die Nutzung unseres Online-R&uuml;cksendezentrums ist leider nicht mehr m&ouml;glich.<br/>
+                                <br/>
+                                Bitte kontaktieren Sie unseren <strong>Kundenservice unter der Telefonnummer 05971 - 91 10 10</strong> oder schreiben Sie uns eine E-Mail an: ruecksendung@aktivshop.de
+                            </p>
+                            <p>
+                                <span style="font-size: 12px;"><br/></span>
+                            </p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p>
+                    <strong>Die Nutzung unseres Retourenportals ist keine Vorraussetzung für die wirksame Aus&uuml;bung Ihres Widerrufsrechts. Das Retourenportal erleichtert lediglich eine unkomplizierte und schnelle Abwicklung Ihrer Retoure.</strong>
+                </p>
+                <div class="hidden" id="glossar_popup_111">
+                    <p>
+                        <span>Wir m&ouml;chten Sie in Ruhe &uuml;berzeugen und bieten Ihnen deshalb einen kosten- und risikofreien Test mit den &uuml;blichen 2 Wochen Umtausch- und R&uuml;ckgaberecht. Wir liefern ganz bequem bis an Ihre Haust&uuml;r. Weite Wege und schweres Tragen k&ouml;nnen Sie sich ersparen.&nbsp;</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-left sidebar">
+            <div class="sidebar-padding">
+                <div class="service-content-left">
+                    <ul>
+                        <li class="title-service-navi-link">
+                            <p>Hilfe &amp; Infos</p>
+                            <ul class="service-navi">
+                                <li>
+                                    <a href="http://www.aktivshop.de/lieferung"><strong>Versand</strong></a>
+                                </li>
+                                <li>
+                                    <a href="http://www.aktivshop.de/zahlung"><strong>Zahlungsmethoden</strong></a>
+                                </li>
+                                <li>
+                                    <a href="http://www.aktivshop.de/service_finanzierung"><strong>Finanzierung</strong></a>
+                                </li>
+                                <li>
+                                    <a href="http://www.aktivshop.de/service_faq"><strong>H&auml;ufige Fragen</strong></a>
+                                </li>
+                                <li>
+                                    <a href="http://www.aktivshop.de/service_kataloganforderung"><strong>Kataloganforderung</strong></a>
+                                </li>
+                                <li>
+                                    <a href="http://www.aktivshop.de/service_ausstellungsraume"><strong>Ausstellungsr&auml;ume </strong></a>
+                                </li>
+                                <li>
+                                    <strong><a title="Gepr&uuml;fter Shop mit K&auml;uferschutz" href="http://www.aktivshop.de/gepruefter-shop">Gepr&uuml;fter Shop</a></strong>
+                                </li>
+                                <li>
+                                    <a href="http://www.aktivshop.de/datenschutz"><strong>Datenschutz</strong></a>
+                                </li>
+                                <li>
+                                    <a href="http://www.aktivshop.de/agb"><strong>AGB</strong></a>
+                                </li>
+                                <li>
+                                    <strong><a href="http://www.aktivshop.de/widerruf">Widerruf</a></strong>
+                                </li>
+                                <li>
+                                    <strong><a href="http://www.aktivshop.de/stellenangebote">Jobs</a></strong>
+                                </li>
+                                <li>
+                                    <a href="http://www.aktivshop.de/ueber-uns"><strong>&Uuml;ber uns</strong></a>
+                                </li>
+                                <li>
+                                    <strong><a href="http://www.aktivshop.de/kontakt">Kontakt</a></strong>
+                                </li>
+                                <li>
+                                    <strong><a title="Impressum" href="http://www.aktivshop.de/impressum">Impressum</a></strong>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </ui:define>
-
 </ui:composition>
-
 </html>

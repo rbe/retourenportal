@@ -1,0 +1,69 @@
+<script type="text/javascript">
+    //<![CDATA[
+    var loadDataCallback = function(data) {
+        // Internationalization lookup:
+        // Add a new anonymous object for every string you want to internationalize (with the property being the string).
+        // These objects consist of one string for each locale, where the property is the locale code.
+        var i18n = {
+        };
+        var translate = function(string) {
+            if (i18n[string] == undefined)
+                return string;
+            else
+                return i18n[string];
+        }
+        var content = '<ul>';
+        content += '<li style="display: none" class="selected selectable-item"></li>';
+        var currentChannel = '';
+        if (data.length) {
+            if (data[0].channel == 'de') {
+                content += '<li class="delimiter">Artikel</li>';
+            } else {
+                content += '<li class="delimiter">' + translate('Channel: ' + data[0].channel) + '</li>';
+            }
+            currentChannel = data[0].channel;
+        }
+        for (var i = 0; i < data.length  ;  i++) {
+            var item = data[i];
+            if (item.channel != currentChannel) {
+                content += '<li class="delimiter">' + translate('Channel: ' + item.channel) + '</li>';
+                currentChannel = item.channel;
+            }
+            var temp = '';
+            temp += '<li title="' + item.query + '" class="selectable-item ' + item.type + '">';
+            temp += '<span class="amount">' + (item.hitCount == 0 ? '' : item.hitCount) + '</span>';
+            if (item.imageURL) {
+                temp += '<img src="' + item.imageURL + '" title="' + item.query + '" class="thumbnail"/>';
+            }
+            temp += item.query;
+            temp += '</li>';
+            content += temp;
+        }
+        content += '</ul>';
+        return content;
+    };
+    var searchForm = new FactFinderSuggest('search_mini_form', 'search', 'Den gesamten Shop durchsuchen...', loadDataCallback);
+    searchForm.initAutocomplete('http://aktivshop.fact-finder.de:80/aktivshop/Suggest.ff?channel=de', 'search_autocomplete');
+    //
+    function getManufacturer() {
+        var manufactureridentifier = $F('shopbymanufacturers');
+        var pars = 'identifier=' + manufactureridentifier;
+        if (manufactureridentifier != "na") {
+            new Ajax.Request('http://www.aktivshop.de/manufacturers/view/setManufacturer/',
+                    {
+                        method: 'GET',
+                        parameters: pars,
+                        onSuccess: function(oXHR) {
+                            window.location.replace(oXHR.responseText);
+                        },
+                        onFailure: function() {
+                            alert('Something went wrong...')
+                        }
+                    });
+        }
+    }
+    //
+    // VarienForm
+    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+    //]]>
+</script>

@@ -11,7 +11,6 @@
 
 package eu.artofcoding.retoure.web.aktivshop;
 
-import eu.artofcoding.beetlejuice.cdm.accounting.Invoice;
 import eu.artofcoding.beetlejuice.cdm.store.StoreCustomer;
 import eu.artofcoding.beetlejuice.cdm.store.StoreIdent;
 import eu.artofcoding.retoure.api.RetoureConstants;
@@ -51,7 +50,7 @@ public class LoginBean implements Serializable {
         return (HttpSession) externalContext.getSession(true);
     }
 
-    private void setCustomerInSession(StoreCustomer storeCustomer) {
+    private void saveCustomerAndInvoiceIdentInSession(StoreCustomer storeCustomer, String invoiceIdent) {
         HttpSession httpSession = getHttpSession();
         httpSession.setAttribute(RetoureConstants.CUSTOMER_IDENT, storeCustomer);
         httpSession.setAttribute(RetoureConstants.INVOICE_IDENT, invoiceIdent);
@@ -79,6 +78,9 @@ public class LoginBean implements Serializable {
     }
 
     public String performLogin() throws RetoureException {
+        // Reset customer and invoice ident in HTTP session
+        saveCustomerAndInvoiceIdentInSession(null, null);
+        //
         String storeIdent = getStoreIdent();
         // Navigation case
         String navigationCase;
@@ -86,24 +88,19 @@ public class LoginBean implements Serializable {
         StoreCustomer customer = new StoreCustomer();
         customer.setStoreIdent(new StoreIdent(storeIdent, null));
         customer.setCustomerIdent(customerIdent);
-        // Save customer in HTTP session
-        setCustomerInSession(customer);
+        // Save customer and invoice ident in HTTP session
+        saveCustomerAndInvoiceIdentInSession(customer, invoiceIdent);
         // Perform login
         retoureFacade.login(customer, invoiceIdent);
         // Return navigation case
         if (customer.isLoginOk()) {
-            retoureFacade.fetchInvoice(customer, invoiceIdent);
-            Invoice invoice = customer.getInvoices().get(invoiceIdent);
-            if (null != invoice) {
-                navigationCase = "show-invoice";
-            } else {
-                invoiceIdent = null;
-                navigationCase = "invoice-not-found";
-            }
+            navigationCase = "show-invoice";
         } else {
-            invoiceIdent = null;
             navigationCase = "login-failed";
         }
+        // Reset invoice identifier
+        invoiceIdent = null;
+        // Return navigation case
         return navigationCase;
     }
 

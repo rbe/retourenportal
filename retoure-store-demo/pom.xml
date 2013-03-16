@@ -64,11 +64,13 @@
             <artifactId>retoure-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-persistence</artifactId>
             <version>${project.version}</version>
         </dependency>
+        -->
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-dhl-client</artifactId>

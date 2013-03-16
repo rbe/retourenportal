@@ -2,21 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
-
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
 <ui:composition template="layout.xhtml">
-
     <ui:define name="content">
-
         <h1>Leider...</h1>
-        <h:outputText value="haben wir zur Ihrer Rechnung Nr. #{login.invoiceIdent} nichts gefunden!"/>
+        <h2><h:outputText value="haben wir mit diesen Daten nichts gefunden!"/></h2>
         <h:panelGroup class="retoure-invoice-panel">
-            <h:form id="invoiceNotFoundForm">
+            <h:form id="loginForm">
+                <retoure:login-panel/>
             </h:form>
         </h:panelGroup>
-
     </ui:define>
-
 </ui:composition>
-
 </html>

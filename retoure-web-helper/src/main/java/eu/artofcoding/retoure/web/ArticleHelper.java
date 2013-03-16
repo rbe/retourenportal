@@ -50,4 +50,26 @@ public class ArticleHelper {
         }
     }
 
+    public static boolean isAnyArticlesMarkedForReturn(Article[] articles) {
+        boolean b = false;
+        for (Article a : articles) {
+            if (a.getArticleReturn().isToBeReturned()) {
+                b = true;
+                break;
+            }
+        }
+        return b;
+    }
+
+    public static boolean areAllArticlesMarkedForReturn(Article[] articles) {
+        boolean b = true;
+        for (Article a : articles) {
+            if (!a.getArticleReturn().isToBeReturned()) {
+                b = false;
+                break;
+            }
+        }
+        return b;
+    }
+
 }

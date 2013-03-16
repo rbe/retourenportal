@@ -6,7 +6,7 @@
  * Alle Rechte vorbehalten. Nutzung unterliegt Lizenzbedingungen.
  * All rights reserved. Use is subject to license terms.
  *
- * rbe, 17.02.13 15:10
+ * rbe, 02.03.13 13:48
  */
 
 package eu.artofcoding.retoure.api;
@@ -91,7 +91,7 @@ public class TestData {
                             g01, s22, "DHL", 5.0f + i,
                             String.format("Beschreibung 1 für Artikel %d", i), "Beschreibung 2");
             article.getArticleReturn().setReturnable(true);
-            retoureFacade.addArticleToInvoice(customer, invoice, article);
+            invoice.addArticle(article);
         }
         customer.addInvoice(invoiceIdent, invoice);
     }

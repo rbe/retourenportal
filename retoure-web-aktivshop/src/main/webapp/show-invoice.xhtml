@@ -5,20 +5,18 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
-
 <ui:composition template="layout.xhtml">
-
     <ui:define name="content">
-
         <h:panelGroup id="invoicePanel" class="invoice-panel">
-
             <retoure:show-no-invoice-selected/>
-
             <h:panelGroup rendered="#{not empty retoure.articlesOfInvoice}" styleClass="info-panel">
                 <h1>
                     <h:outputText value="Ihre Bestellung zur Rechnung Nr. #{login.invoiceIdent}"/>
                 </h1>
                 <h2>Welche Artikel m&ouml;chten Sie zur&uuml;cksenden?</h2>
+                <p>
+                    Bitte w&auml;hlen Sie Ihren R&uuml;cksendegrund und geben Sie, wenn m&ouml;glich, eine ausf&uuml;hrliche Fehlerbeschreibung an.
+                </p>
             </h:panelGroup>
             <h:form id="invoiceForm" rendered="#{not empty retoure.articlesOfInvoice}">
                 <retoure:select-article>
@@ -41,9 +39,6 @@
                 </script>
             </h:form>
         </h:panelGroup>
-
     </ui:define>
-
 </ui:composition>
-
 </html>

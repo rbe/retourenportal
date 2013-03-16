@@ -5,15 +5,10 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
-
 <ui:composition template="layout.xhtml">
-
     <ui:define name="content">
-
         <h:panelGroup id="returnPanel" class="return-panel">
-
             <retoure:show-no-return-selected/>
-
             <h:panelGroup class="return-placed-panel"
                           rendered="#{not empty login.customer}"> <!--rendered="retoure.labelForInvoiceGenerated"-->
                 <h1>
@@ -56,11 +51,7 @@
                     </h:panelGroup>
                 </h:form>
             </h:panelGroup>
-
         </h:panelGroup>
-
     </ui:define>
-
 </ui:composition>
-
 </html>

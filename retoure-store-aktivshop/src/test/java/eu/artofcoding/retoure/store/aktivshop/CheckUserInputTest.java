@@ -19,8 +19,8 @@ public class CheckUserInputTest {
 
     @Test
     public void testCheckCustomerAndAgentIdent() throws Exception {
-        String customerIdentEntered="123-AGENT   ";
-        String customerIdentOK="123";
+        String customerIdentEntered=" 123-AGENT   ";
+        String customerIdentOK="123-AGENT";
         assertEquals(customerIdentOK, CheckUserInput.checkCustomerIdent(customerIdentEntered));
     }
 

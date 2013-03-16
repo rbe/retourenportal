@@ -11,9 +11,14 @@
 
 package eu.artofcoding.retoure.store.aktivshop;
 
+import java.math.BigDecimal;
+
 public class AktivshopConstants {
 
+    public static final String EMPTY_STRING = "".intern();
     public static final String STORE = "aktivshop".intern();
+
+    public static BigDecimal ZERO_SCALE_3 = BigDecimal.ZERO.setScale(3);
 
     public static final int LENGTH_RGNR = 9;
     public static final int LENGTH_KDNR = 8;

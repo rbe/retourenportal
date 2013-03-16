@@ -4,31 +4,22 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
-
+      xmlns:retoure="http://java.sun.com/jsf/composite/retoure" xmlns:t="http://myfaces.apache.org/tomahawk">
 <ui:composition template="layout.xhtml">
-
     <ui:define name="content">
-
         <h:panelGroup id="reasonPanel" class="reason-panel">
-
             <retoure:show-no-customer/>
-
             <h:form id="customerDataForm" rendered="#{not empty retoure.articlesMarkedForReturn}">
-
                 <retoure:select-return-reason readonly="true"/>
-
                 <h:panelGrid id="customerDataPanel"
                              styleClass="customer-data-table"
                              columnClasses="customer-data-column1,customer-data-column2,customer-data-column3"
                              rowClasses="customer-data-row1,customer-data-row2"
                              cellpadding="0" cellspacing="0"
                              columns="2">
-
                     <f:facet name="header">
                         <h1>Meine Daten</h1>
                     </f:facet>
-
                     <h:column headerClass="customer-data-column-header">
                         <h:outputText styleClass="customer-data-content" value="Anrede"/>
                     </h:column>
@@ -38,138 +29,69 @@
                             <f:selectItem itemLabel="Frau" itemValue="#{data.salutationMs}"/>
                         </h:selectOneRadio>
                     </h:column>
-
                     <h:column headerClass="customer-data-column-header">
                         <h:outputText styleClass="customer-data-content" value="Vor- und Nachname"/>
                     </h:column>
                     <h:column headerClass="customer-data-column-header">
-                        <h:inputText value="#{login.customer.firstname}"/>
-                        <h:inputText value="#{login.customer.lastname}"/>
+                        <h:inputText value="#{login.customer.fullname}"/>
                     </h:column>
-
                     <h:column headerClass="customer-data-column-header">
                         <h:outputText styleClass="customer-data-content" value="Stra&szlig;e und Hausnummer"/>
                     </h:column>
                     <h:column headerClass="customer-data-column-header">
                         <h:inputText value="#{login.customer.shippingAddress1}"/>
-                        <h:inputText value="#{login.customer.shippingAddress1StreetNumber}"/>
                     </h:column>
-
                     <h:column headerClass="customer-data-column-header">
                         <h:outputText styleClass="customer-data-content" value="PLZ Ort"/>
                     </h:column>
                     <h:column headerClass="customer-data-column-header">
-                        <h:inputText value="#{login.customer.zipcode}"/>
+                        <h:inputText value="#{login.customer.zipcode}" maxlength="5"/>
                         <h:inputText value="#{login.customer.city}"/>
                     </h:column>
-
                     <h:column headerClass="customer-data-column-header">
                         <h:outputText styleClass="customer-data-content" value="R&uuml;ckerstattung"/>
                     </h:column>
                     <h:column headerClass="customer-data-column-header">
-
-                        <h:panelGrid columns="3">
-
-                            <h:panelGrid columns="2">
-
-                                <f:facet name="header">
-                                    <h3>Art der Erstattung</h3>
-                                </f:facet>
-
-                                <h:selectOneRadio id="bankAccountTypeRadio1" value="#{login.customer.bankAccount.accountType}" immediate="true">
-                                    <f:selectItem itemValue="#{data.accountTypeCreditNote}"/>
-                                    <f:ajax event="click" listener="#{data.bankAccountTypeSelected}" render="@form"/>
-                                </h:selectOneRadio>
-                                <h:outputText styleClass="customer-data-content" value="Gutschrift"/>
-
-                                <h:selectOneRadio id="bankAccountTypeRadio2" value="#{login.customer.bankAccount.accountType}" immediate="true">
-                                    <f:selectItem itemValue="#{data.accountTypeBankAccount}"/>
-                                    <f:ajax event="click" listener="#{data.bankAccountTypeSelected}" render="@form"/>
-                                </h:selectOneRadio>
-                                <h:outputText styleClass="customer-data-content" value="&Uuml;berweisung auf Bankkonto"/>
-
-                                <h:selectOneRadio id="bankAccountTypeRadio3" value="#{login.customer.bankAccount.accountType}" immediate="true">
-                                    <f:selectItem itemValue="#{data.accountTypeCreditcard}"/>
-                                    <f:ajax event="click" listener="#{data.bankAccountTypeSelected}" render="@form"/>
-                                </h:selectOneRadio>
-                                <h:outputText styleClass="customer-data-content" value="&Uuml;berweisung auf Kreditkarte"/>
-
-                                <h:selectOneRadio id="bankAccountTypeRadio4" value="#{login.customer.bankAccount.accountType}" immediate="true">
-                                    <f:selectItem itemValue="#{data.accountTypePayPal}"/>
-                                    <f:ajax event="click" listener="#{data.bankAccountTypeSelected}" render="@form"/>
-                                </h:selectOneRadio>
-                                <h:outputText styleClass="customer-data-content" value="&Uuml;berweisung auf PayPal-Konto"/>
-
+                        <h3>Wir freuen uns auf Sie!</h3>
+                        <span class="customer-data-content">
+                            Bei einer Warenr&uuml;cksendung innerhalb der Widerrufsfrist wird der Betrag Ihrem
+                            Kundenkonto gutgeschrieben und mit Ihrer n&auml;chsten Bestellung verrechnet.
+                            Auf Ihren Wunsch erstatten wir den Gutschriftenbetrag umgehend nach Wareneingang.
+                        </span>
+                        <br/>
+                        <p>
+                            <h:commandLink actionListener="#{retoure.geldzurueck}">R&uuml;ckerstattungsart w&auml;hlen</h:commandLink>
+                        </p>
+                        <h:panelGroup rendered="#{retoure.showGeldzurueck}">
+                            <t:selectOneRadio id="erstattungsartRadio" value="gutschrift" layout="spread">
+                                <f:selectItem itemValue="gutschrift" itemLabel="Gutschrift des Warenwerts"/>
+                                <f:selectItem itemValue="austausch" itemLabel="Austausch des Artikels"/>
+                            </t:selectOneRadio>
+                            <t:selectOneRadio id="ruckerstattungRadio" value="kundenkonto" layout="spread">
+                                <f:selectItem itemValue="kundenkonto" itemLabel="Gutschrift auf Ihr Kundenkonto"/>
+                                <f:selectItem itemValue="erstattung" itemLabel="Erstattung des Kaufbetrags"/>
+                                <f:selectItem itemValue="erstattung2" itemLabel="Erstattung an eine andere Person als der Zahlungsabsender"/>
+                            </t:selectOneRadio>
+                            <h:panelGrid columns="1">
+                                <t:radio for="erstattungsartRadio" index="0"/>
+                                <t:radio for="erstattungsartRadio" index="1"/>
+                                <h:panelGrid style="margin-left: 25px;" columns="1">
+                                    <t:radio for="ruckerstattungRadio" index="0"/>
+                                    <t:radio for="ruckerstattungRadio" index="1"/>
+                                    <t:radio for="ruckerstattungRadio" index="2"/>
+                                </h:panelGrid>
+                                <br/>
+                                <span class="customer-data-content">
+                                    Bitte beachten Sie: Sollten Sie mehrere Artikel gleichzeitig zur&uuml;cksenden k&ouml;nnen
+                                    Sie eine Gutschrift nur getrennt von einem Austausch veranlassen.
+                                    Melden Sie die Retouren dann bitte getrennt voneinander an.<br/>
+                                    <br/>
+                                    Sollten Sie Fragen haben, stehen wir Ihnen selbstverst&auml;ndlich auch telefonisch zur Verf&uuml;gung:
+                                    05971 91 10 10 oder schreiben Sie uns eine E-Mail an <a href="mailto:ruecksendung@aktivshop.de">ruecksendung@aktivshop.de</a>.
+                                </span>
                             </h:panelGrid>
-
-                            <retoure:spacer width="30"/>
-
-                            <h:panelGrid rendered="#{data.accountTypeIsCreditNote()}" columns="2" styleClass="customer-bank-account">
-
-                                <f:facet name="header">
-                                    <h3>Wir freuen uns auf Sie!</h3>
-                                </f:facet>
-
-                                <h:outputText styleClass="customer-data-content"
-                                              value="Der Betrag wird Ihrem Kundenkonto gutgeschrieben und bei Ihrem n&auml;chsten Einkauf verrechnet."/>
-
-                            </h:panelGrid>
-
-                            <h:panelGrid rendered="#{data.accountTypeIsBankAccount()}" columns="2" styleClass="customer-bank-account">
-
-                                <f:facet name="header">
-                                    <h3>Kontoverbindung</h3>
-                                </f:facet>
-
-                                <h:outputLabel for="bankAccountHolder" value="Beg&uuml;nstigter"/>
-                                <h:inputText id="bankAccountHolder" value="#{login.customer.bankAccount.accountHolder}" maxlength="100"/>
-
-                                <h:outputLabel for="bankAccountRoutingCode" value="Bankleitzahl"/>
-                                <h:inputText id="bankAccountRoutingCode" value="#{login.customer.bankAccount.routingCode}" maxlength="8"/>
-
-                                <h:outputLabel for="bankAccountNumber" value="Kontonummer"/>
-                                <h:inputText id="bankAccountNumber" value="#{login.customer.bankAccount.accountNumber}" maxlength="10"/>
-
-                            </h:panelGrid>
-
-                            <h:panelGrid rendered="#{data.accountTypeIsCreditcard()}" columns="2" styleClass="customer-bank-account">
-
-                                <f:facet name="header">
-                                    <h3>Kreditkartendaten</h3>
-                                </f:facet>
-
-                                <h:outputLabel for="creditcardHolder" value="Beg&uuml;nstigter"/>
-                                <h:inputText id="creditcardHolder" value="#{login.customer.bankAccount.accountHolder}" maxlength="100"/>
-
-                                <h:outputLabel for="creditcardFinanceCompany" value="Unternehmen"/>
-                                <h:selectOneListbox id="creditcardFinanceCompany" value="#{login.customer.bankAccount.financeCompany}" immediate="true">
-                                    <f:selectItems value="#{data.financeCompanyValues}"/>
-                                    <f:ajax event="click" listener="#{data.creditcardFinanceCompanySelected}" render="@form"/>
-                                </h:selectOneListbox>
-
-                                <h:outputLabel for="creditcardNumber" value="Kartennummer"/>
-                                <h:inputText id="creditcardNumber" value="#{login.customer.bankAccount.accountNumber}" maxlength="15"/>
-
-                            </h:panelGrid>
-
-                            <h:panelGrid rendered="#{data.accountTypeIsPayPal()}" columns="2" styleClass="customer-bank-account">
-
-                                <f:facet name="header">
-                                    <h3>Bankdaten</h3>
-                                </f:facet>
-
-                                <h:outputLabel for="paypalAccountHolder" value="Beg&uuml;nstigter"/>
-                                <h:inputText id="paypalAccountHolder" value="#{login.customer.bankAccount.accountHolder}" maxlength="100"/>
-
-                                <h:outputLabel for="paypalEmail" value="PayPal-Konto"/>
-                                <h:inputText id="paypalEmail" value="#{login.customer.bankAccount.email}" maxlength="100"/>
-
-                            </h:panelGrid>
-
-                        </h:panelGrid>
-
+                        </h:panelGroup>
                     </h:column>
-
                     <f:facet name="footer">
                         <h:commandButton styleClass="wizard-back-button" value="&lt; Zur&uuml;ck"
                                          action="show-return-reason"/>
@@ -177,13 +99,9 @@
                         <h:commandButton styleClass="wizard-next-button" value="Weiter &gt;"
                                          action="#{label.makeReturnLabelForInvoice}"/>
                     </f:facet>
-
                 </h:panelGrid>
             </h:form>
         </h:panelGroup>
-
     </ui:define>
-
 </ui:composition>
-
 </html>

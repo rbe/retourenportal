@@ -3,22 +3,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
-
 <ui:composition template="layout.xhtml">
-
     <ui:define name="content">
-
-        <f:event type="preRenderView" listener="#{retoure.preRenderView}"/>
-
-        <h1>Die Anmeldung ist leider fehlgeschlagen!</h1>
+        <h1>Ihre Anmeldung ist leider fehlgeschlagen!</h1>
+        <p>
+            Das Online-Rücksendeportal steht Ihnen in folgenden Fällen nicht zur Verfügung:<br/>
+            <br/>
+            Bei Speditionsartikeln: Wenn Sie einen Artikel retournieren m&ouml;chten, dessen R&uuml;cksendung aufgrund seiner
+            Gr&ouml;&szlig;e und Beschaffenheit nicht auf dem normalen Transportweg erfolgen kann und somit eine Abholung erfordert.
+            Au&szlig;erhalb Ihres R&uuml;ckgaberechts: Bei R&uuml;ckgabe nach 14 Tagen.<br/>
+        </p>
+        <p>
+            Sollten Sie Fragen haben, stehen wir Ihnen selbstverst&auml;ndlich auch telefonisch zur Verf&uuml;gung:
+            05971 91 10 10 oder schreiben Sie uns eine E-Mail an: ruecksendung@aktivshop.de.
+        </p>
         <h2>Bitte versuchen Sie es erneut.</h2>
         <h:form id="loginForm">
             <retoure:login-panel/>
         </h:form>
     </ui:define>
-
 </ui:composition>
-
 </html>

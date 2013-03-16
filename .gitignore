@@ -22,5 +22,8 @@ target/
 # JRebel #
 rebel.xml
 
+# Resources #
+glassfish-resources.xml
+
 # Ignored projects #
 ibmitest

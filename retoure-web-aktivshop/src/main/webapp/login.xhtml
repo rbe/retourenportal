@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
+<ui:composition template="layout.xhtml">
+    <ui:define name="content">
+        <h1>Willkommen im Retourenportal!</h1>
+        <p>
+            Hier haben Sie die M&ouml;glichkeit, f&uuml;r alle Lieferungen innerhalb Deutschlands, unser vorfrankiertes R&uuml;cksendeetikett auszudrucken.
+            Sollte Ihnen kein Drucker zur Verf&uuml;gung stehen, kontaktieren Sie bitte unseren Kundenservice unter der Telefonnummer 05971 - 91 10 10.
+            Unsere Service-Mitarbeiter senden Ihnen das vorfrankierte R&uuml;cksendeetikett dann gerne zu.
+        </p>
+        <h3>Zur Erstellung des R&uuml;cksendescheins ben&ouml;tigen wir noch ein paar Daten von Ihnen:</h3>
+        <h:form id="loginForm">
+            <retoure:login-panel/>
+        </h:form>
+        <p>
+            Das Online-R&uuml;cksendeportal steht Ihnen in folgenden F&auml;llen nicht zur Verf&uuml;gung:
+        </p>
+        <ul>
+            <li>
+                Bei Speditionsartikeln:
+                Wenn Sie einen Artikel retournieren m&ouml;chten, dessen R&uuml;cksendung aufgrund seiner Gr&ouml;&szlig;e und
+                Beschaffenheit nicht auf dem normalen Transportweg erfolgen kann und somit eine Abholung erfordert.
+            </li>
+            <li>
+                Sollten Sie keinen Internetzugang oder Drucker zur Verf&uuml;gung haben.
+            </li>
+            <li>
+                Au&szlig;erhalb Ihres R&uuml;ckgaberechts: Bei R&uuml;ckgabe nach 30 Tagen, innerhalb von 2 Jahren (Gew&auml;hrleistung).
+            </li>
+        </ul>
+    </ui:define>
+</ui:composition>
+</html>

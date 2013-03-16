@@ -5,20 +5,16 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
-
 <ui:composition template="layout.xhtml">
-
     <ui:define name="content">
-
         <h:panelGroup id="reasonPanel" class="reason-panel">
-
             <retoure:show-no-return-selected/>
-
             <h:panelGroup rendered="#{not empty retoure.articlesMarkedForReturn}" styleClass="info-panel">
                 <h1>
                     <h:outputText value="R&uuml;cksendung zur Rechnung Nr. #{login.invoiceIdent}"/>
                 </h1>
                 <h2>Sie m&ouml;chten folgende Artikel zur&uuml;cksenden:</h2>
+                Bitte w&auml;hlen Sie Ihren R&uuml;cksendegrund und geben Sie, wenn m&ouml;glich, eine ausf&uuml;hrliche Fehlerbeschreibung an.
             </h:panelGroup>
             <h:form id="returnForm" rendered="#{not empty retoure.articlesMarkedForReturn}">
                 <retoure:select-return-reason>
@@ -32,9 +28,6 @@
                 </retoure:select-return-reason>
             </h:form>
         </h:panelGroup>
-
     </ui:define>
-
 </ui:composition>
-
 </html>

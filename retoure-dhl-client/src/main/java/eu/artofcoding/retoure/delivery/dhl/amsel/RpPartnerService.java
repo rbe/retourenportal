@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "RpPartnerService", targetNamespace = "https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3ws", wsdlLocation = "file:/Users/rbe/project/aktivshop.de/retoure-server/retoure-dhl-client/src/main/resources/wsdl/var3ws.wsdl")
+@WebServiceClient(name = "RpPartnerService", targetNamespace = "https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3ws", wsdlLocation = "https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3ws.wsdl")
 public class RpPartnerService
     extends Service
 {
@@ -30,7 +30,7 @@ public class RpPartnerService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/Users/rbe/project/aktivshop.de/retoure-server/retoure-dhl-client/src/main/resources/wsdl/var3ws.wsdl");
+            url = new URL("https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3ws.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

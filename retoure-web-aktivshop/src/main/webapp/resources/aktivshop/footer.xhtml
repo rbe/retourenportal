@@ -1,7 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:cc="http://java.sun.com/jsf/composite">
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:o="http://omnifaces.org/functions">
 
 <ui:component>
 
@@ -238,7 +240,7 @@
     <li><a href="http://www.aktivshop.de/Hersteller.html/" title="Hersteller">Hersteller</a></li>
     <li class=" last"><a href="http://www.aktivshop.de/sitemap/" title="Site Map">Site Map</a></li>
 </ul>
-<address>&copy; 2012 Aktivshop GmbH</address>
+<address>&copy; <h:outputText value="#{o:formatDate(now, 'yyyy')}"/> Aktivshop GmbH</address>
 </div>
 </div>
 </cc:implementation>

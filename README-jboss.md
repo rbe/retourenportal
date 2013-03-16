@@ -1,4 +1,4 @@
-# retoure-web
+# retoure-server
 
 ## JBoss
 

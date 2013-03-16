@@ -5,6 +5,9 @@
              version="2.0">
     <persistence-unit name="retoure-PU" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <!--
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        -->
         <jta-data-source>jdbc/retoure</jta-data-source>
         <mapping-file>META-INF/mappings/Email.xml</mapping-file>
         <mapping-file>META-INF/mappings/BankAccount.xml</mapping-file>
@@ -14,11 +17,11 @@
         <class>eu.artofcoding.beetlejuice.cdm.store.StoreCustomer</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
+            <!--
             <property name="eclipselink.ddl-generation" value="create-tables"/>
-            <!-- logging, log JPA statements -->
-            <property name="eclipselink.logging.level" value="FINE"/>
-            <!-- also log of the values of the parameters used for the query -->
+            <property name="eclipselink.logging.level" value="INFO"/>
             <property name="eclipselink.logging.parameters" value="true"/>
+            -->
         </properties>
     </persistence-unit>
 </persistence>

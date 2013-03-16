@@ -102,8 +102,7 @@ public class ReturnLabelBean {
                 */
                 try {
                     // Stream return label
-                    FacesHelper facesHelper = FacesHelper.getInstance(FacesContext.getCurrentInstance());
-                    facesHelper.download("application/pdf", invoice.getReturnLabel().getFilename(), Files.readAllBytes(path));
+                    FacesHelper.download("application/pdf", invoice.getReturnLabel().getFilename(), Files.readAllBytes(path));
                 } catch (IOException e) {
                     logger.log(Level.SEVERE, String.format("Cannot start download for %s", path.toString()), e);
                 }

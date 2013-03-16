@@ -26,13 +26,20 @@ public interface RetoureFacade extends Serializable {
 
     /**
      * Ask for valid login and get data for invoice.
-     *
      * @param customer {@link eu.artofcoding.beetlejuice.cdm.store.StoreCustomer} w/ customer ident and invoice ident.
      * @param ident    Identification for customer, e.g. a password.
      * @return StoreCustomer
      * @throws RetoureException On exception when loggin in, e.g. asking an external service.
      */
     StoreCustomer login(StoreCustomer customer, String ident) throws RetoureException;
+
+    /**
+     * Fetch data about customer.
+     * @param customer {@link eu.artofcoding.beetlejuice.cdm.store.StoreCustomer} w/ customer ident and invoice ident.
+     * @return StoreCustomer with data like name, address and so on.
+     * @throws RetoureException
+     */
+    StoreCustomer fetchCustomer(StoreCustomer customer) throws RetoureException;
 
     /**
      * Ask for articles of a certain invoice.
@@ -63,13 +70,5 @@ public interface RetoureFacade extends Serializable {
      * @throws RetoureException
      */
     void sendReturnLabelForInvoiceByMail(StoreCustomer customer, Invoice invoice) throws RetoureException;
-
-    /**
-     * Add an article to an invoice.
-     * @param customer {@link StoreCustomer}
-     * @param invoice  {@link Invoice}
-     * @param article  {@link Article}
-     */
-    void addArticleToInvoice(StoreCustomer customer, Invoice invoice, Article article);
 
 }

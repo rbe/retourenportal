@@ -12,7 +12,10 @@
 package eu.artofcoding.retoure.store.aktivshop;
 
 import eu.artofcoding.beetlejuice.cdm.accounting.Invoice;
-import eu.artofcoding.beetlejuice.cdm.store.*;
+import eu.artofcoding.beetlejuice.cdm.store.Article;
+import eu.artofcoding.beetlejuice.cdm.store.ReturnLabel;
+import eu.artofcoding.beetlejuice.cdm.store.ReturnReason;
+import eu.artofcoding.beetlejuice.cdm.store.StoreCustomer;
 import eu.artofcoding.beetlejuice.email.Postman;
 import eu.artofcoding.beetlejuice.email.cdi.QPostman;
 import eu.artofcoding.beetlejuice.entity.Attachment;
@@ -24,9 +27,9 @@ import eu.artofcoding.retoure.api.RetoureException;
 import eu.artofcoding.retoure.api.TestData;
 import eu.artofcoding.retoure.delivery.ReturnLabelClient;
 import eu.artofcoding.retoure.delivery.dhl.AmselClient;
-import eu.artofcoding.retoure.entity.RetoureDAO;
 import eu.artofcoding.retoure.store.RetoureFacade;
-import eu.artofcoding.retoure.store.aktivshop.irt01.IRT01Stub;
+import eu.artofcoding.retoure.store.aktivshop.wsclient.irt01t.IRT01Result;
+import eu.artofcoding.retoure.store.aktivshop.wsclient.irt02t.IRT02Result;
 import freemarker.template.ObjectWrapper;
 import freemarker.template.SimpleHash;
 import freemarker.template.TemplateException;
@@ -35,7 +38,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -56,6 +58,7 @@ import java.util.logging.Logger;
 
 import static eu.artofcoding.beetlejuice.email.cdi.TransportType.SSL_TLS;
 import static eu.artofcoding.retoure.store.aktivshop.AktivshopConstants.STORE;
+import static eu.artofcoding.retoure.store.aktivshop.AktivshopWebserviceHelper.checkIRT02Result;
 
 @Stateless
 public class AktivshopFacade implements RetoureFacade {
@@ -64,8 +67,14 @@ public class AktivshopFacade implements RetoureFacade {
 
     private transient Logger logger;
 
+/*
     @EJB
     private RetoureDAO retoureDAO;
+*/
+
+    @Inject
+    @AmselClient(portalId = "OnlineRetoure", deliveryName = "Deutschland_Var3")
+    private ReturnLabelClient returnLabelClient;
 
     @Inject
     private TemplateProcessor templateProcessor;
@@ -99,7 +108,7 @@ public class AktivshopFacade implements RetoureFacade {
         // Check state
         // Already logged in?
         if (customer.isLoginOk()) {
-            // TODO Stay logged in or log out and re-login?
+            // Log out and re-login
             if (logger.isLoggable(Level.FINE)) {
                 logger.fine(String.format("Customer %s-%s already logged in", customer.getCustomerIdent(), customer.getAgentIdent()));
             }
@@ -107,6 +116,8 @@ public class AktivshopFacade implements RetoureFacade {
             customer.setAgentIdent(null);
             customer.setInvoices(null);
         }
+        // Users wants to login, so we assume logged in == false
+        customer.setLoginOk(false);
         // Get identification entered by user
         String enteredCustomerIdent = customer.getCustomerIdent();
         if (null != enteredCustomerIdent) {
@@ -124,30 +135,40 @@ public class AktivshopFacade implements RetoureFacade {
                 customer.setLoginOk(true);
             } else {
                 // Call webservice
-                try {
-                    // Agent logging in?
-                    if (null != customer.getAgentIdent() && customer.getAgentIdent().length() > 0) {
-                        IRT01Stub.IRT01Result irt01Result = Irt01Client.call(customer.getCustomerIdent(), customer.getAgentIdent(), ident);
-                        if (irt01Result.get_SBNR().equals(BigDecimal.ZERO)) {
-                            // TODO Error message and handle exception
-                            throw new RetoureException();
-                        }
+                // Agent logging in?
+                if (null != customer.getAgentIdent() && customer.getAgentIdent().length() > 0) {
+                    IRT01Result irt01Result = IRT01Client.call(customer.getCustomerIdent(), customer.getAgentIdent(), ident);
+                    if (irt01Result.getSBNR().getValue().equals(BigDecimal.ZERO)) {
+                        // Login invalid
+                        customer.setLoginOk(false);
+                        // Error message and handle exception
+                        logger.warning(String.format("Cannot login customer '%s-%s', ERG='%s' ERGT='%s'", customer.getCustomerIdent(), customer.getAgentIdent(), irt01Result.getERG().getValue(), irt01Result.getERGT().getValue()));
                     } else {
-                        IRT01Stub.IRT01Result irt01Result = Irt01Client.call(customer.getCustomerIdent(), null, ident);
-                        if (!irt01Result.get_SBNR().equals(BigDecimal.ZERO)) {
-                            // TODO Error message and handle exception
-                            throw new RetoureException();
-                        }
+                        // Login ok
+                        customer.setLoginOk(true);
                     }
-                    // Login ok
-                    customer.setLoginOk(true);
-                } catch (RetoureException e) {
-                    // Login invalid
-                    customer.setLoginOk(false);
+                } else {
+                    IRT01Result irt01Result = IRT01Client.call(customer.getCustomerIdent(), null, ident);
+                    // ERG != 0
+                    if (!irt01Result.getERG().getValue().equals(BigDecimal.ZERO)) {
+                        // Login invalid
+                        customer.setLoginOk(false);
+                        // Error message and handle exception
+                        logger.warning(String.format("Cannot login customer '%s', ERG='%s' ERGT='%s'", customer.getCustomerIdent(), irt01Result.getERG().getValue(), irt01Result.getERGT().getValue()));
+                    } else if (irt01Result.getERG().getValue().equals(BigDecimal.ZERO)) {
+                        // Login ok
+                        customer.setLoginOk(true);
+                    }
                 }
             }
         }
         // Return
+        return customer;
+    }
+
+    @Override
+    public StoreCustomer fetchCustomer(StoreCustomer customer) throws RetoureException {
+        // Data was fetched when retrieving data about invoice
         return customer;
     }
 
@@ -157,7 +178,7 @@ public class AktivshopFacade implements RetoureFacade {
         if (!customer.isLoginOk()) {
             throw new RetoureException("Customer is not logged in");
         }
-        // TODO Call webservice
+        // Call webservice
         if (null != invoiceIdent) {
             switch (invoiceIdent) {
                 case RetoureConstants.INVOICE_DHL4:
@@ -165,6 +186,20 @@ public class AktivshopFacade implements RetoureFacade {
                     break;
                 case RetoureConstants.INVOICE_SPED01:
                     TestData.makeInvoiceSPED01(this, customer, invoiceIdent);
+                    break;
+                default:
+                    // Cast agentIdent -> sbnr
+                    BigDecimal sbnr = BigDecimal.ZERO;
+                    if (null != customer.getAgentIdent()) {
+                        sbnr = BigDecimal.valueOf(Long.valueOf(customer.getAgentIdent()));
+                    }
+                    IRT02Result irt02Result = IRT02Client.call(sbnr, invoiceIdent);
+                    if (checkIRT02Result(irt02Result)) {
+                        AktivshopWebserviceHelper.readCustomer(customer, irt02Result);
+                        AktivshopWebserviceHelper.readArticles(customer, irt02Result);
+                    } else {
+                        customer.setLoginOk(false);
+                    }
                     break;
             }
         }
@@ -183,33 +218,19 @@ public class AktivshopFacade implements RetoureFacade {
     }
 
     @Override
-    public void addArticleToInvoice(StoreCustomer customer, Invoice invoice, Article article) {
-        // Agent logged in, unset unreturnable flag
-        if (null != customer.getAgentIdent()) {
-            ArticleReturn articleReturn = article.getArticleReturn();
-            if (!articleReturn.isReturnable()) {
-                articleReturn.setReturnable(true);
-                articleReturn.setUnreturnableReason(null);
-            }
-        }
-        invoice.addArticle(article);
-    }
-
-    @Override
     @Asynchronous
     public Future<StoreCustomer> placeReturn(StoreCustomer customer, String invoiceIdent) throws RetoureException {
         if (logger.isLoggable(Level.FINE)) {
-            logger.fine("placeReturn: start");
+            logger.fine(String.format("placeReturn[customer=%s,invoice=%s]: start async", customer.getCustomerIdent(), invoiceIdent));
         }
         Invoice invoice = customer.getInvoice(invoiceIdent);
         if (null != invoice && null == invoice.getReturnLabel()) {
             // Create label request
-            ReturnLabelClient returnLabelClient = new AmselClient();
             ReturnLabel returnLabel = returnLabelClient.makeLabel(customer);
             invoice.setReturnLabel(returnLabel);
             String base64 = returnLabel.getBase64();
             if (logger.isLoggable(Level.FINE)) {
-                logger.fine(String.format("placeReturn: stop, got %d bytes", base64.length()));
+                logger.fine(String.format("placeReturn[customer=%s,invoice=%s]: stop, got %d bytes", customer.getCustomerIdent(), invoiceIdent, base64.length()));
             }
             // Filename
             String filename = String.format("%s_Retourenaufkleber_%s.pdf", customer.getCustomerIdent(), invoice.getInvoiceIdent());
@@ -217,14 +238,14 @@ public class AktivshopFacade implements RetoureFacade {
             try {
                 returnLabel.saveBinary(Paths.get("retoure", STORE, "returnlabel", filename));
                 if (logger.isLoggable(Level.FINE)) {
-                    logger.fine(String.format("Saved return label for invoice %s", invoiceIdent));
+                    logger.fine(String.format("placeReturn[customer=%s,invoice=%s]: Saved return label for invoice", customer.getCustomerIdent(), invoiceIdent));
                 }
             } catch (IOException e) {
                 throw new RetoureException(e);
             }
         } else if (null != invoice && null != invoice.getReturnLabel()) {
             if (logger.isLoggable(Level.WARNING)) {
-                logger.warning(String.format("Return label for invoice %s already fetched", invoiceIdent));
+                logger.warning(String.format("placeReturn[customer=%s,invoice=%s]: Return label for invoice already fetched", customer.getCustomerIdent(), invoiceIdent));
             }
         } else {
             String format = String.format("Invoice %s not found or no return label", invoiceIdent);
@@ -238,7 +259,7 @@ public class AktivshopFacade implements RetoureFacade {
     @Asynchronous
     public void sendReturnLabelForInvoiceByMail(StoreCustomer customer, Invoice invoice) throws RetoureException {
         if (logger.isLoggable(Level.INFO)) {
-            logger.info(String.format("Sending email to %s", customer.getEmail()));
+            logger.info(String.format("sendReturnLabelForInvoiceByMail[customer=%s,invoice=%s]: Sending email to %s", customer.getCustomerIdent(), invoice.getInvoiceIdent(), customer.getEmail()));
         }
         if (null != postman) {
             if (null != customer.getEmail()) {
@@ -257,7 +278,7 @@ public class AktivshopFacade implements RetoureFacade {
                     // Template returnlabel.html
                     email.setBody(templateProcessor.renderTemplateToString("returnlabel.html", Locale.GERMAN, root));
                     // Add return label
-                    // TODO Provide link to fetch label up to 3 times (protected through token)
+                    // TODO Provide link to fetch label up to n times (protected through token)
                     byte[] content = Files.readAllBytes(invoice.getReturnLabel().getPath());
                     Attachment attachment = new Attachment(MimeType.PDF, invoice.getReturnLabel().getFilename(), content);
                     email.addAttachment(attachment);
@@ -266,15 +287,15 @@ public class AktivshopFacade implements RetoureFacade {
                     // Send email
                     postman.sendMail(email);
                     if (logger.isLoggable(Level.INFO)) {
-                        logger.info("Email sent to " + email);
+                        logger.info(String.format("sendReturnLabelForInvoiceByMail[customer=%s,invoice=%s]: Email sent to %s", customer.getCustomerIdent(), invoice.getInvoiceIdent(), email));
                     }
                 } catch (TemplateException e) {
                     if (logger.isLoggable(Level.SEVERE)) {
-                        logger.log(Level.SEVERE, "Cannot render template", e);
+                        logger.log(Level.SEVERE, String.format("sendReturnLabelForInvoiceByMail[customer=%s,invoice=%s]: Cannot render template", customer.getCustomerIdent(), invoice.getInvoiceIdent()), e);
                     }
                 } catch (MessagingException | IOException e) {
                     if (logger.isLoggable(Level.SEVERE)) {
-                        logger.log(Level.SEVERE, "Cannot send mail", e);
+                        logger.log(Level.SEVERE, String.format("sendReturnLabelForInvoiceByMail[customer=%s,invoice=%s]: Cannot send mail", customer.getCustomerIdent(), invoice.getInvoiceIdent()), e);
                     }
                 }
             } else {

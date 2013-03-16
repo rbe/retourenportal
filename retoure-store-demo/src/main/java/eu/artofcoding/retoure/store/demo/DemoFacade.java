@@ -25,7 +25,6 @@ import eu.artofcoding.retoure.api.RetoureRuntimeException;
 import eu.artofcoding.retoure.api.TestData;
 import eu.artofcoding.retoure.delivery.ReturnLabelClient;
 import eu.artofcoding.retoure.delivery.dhl.AmselClient;
-import eu.artofcoding.retoure.entity.RetoureDAO;
 import eu.artofcoding.retoure.store.RetoureFacade;
 import freemarker.template.ObjectWrapper;
 import freemarker.template.SimpleHash;
@@ -35,7 +34,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -63,8 +61,14 @@ public class DemoFacade implements RetoureFacade {
 
     private Logger logger;
 
+/*
     @EJB
     private RetoureDAO retoureDAO;
+*/
+
+    @Inject
+    @AmselClient(portalId = "OnlineRetoure", deliveryName = "Deutschland_Var3")
+    private ReturnLabelClient returnLabelClient;
 
     @Inject
     private transient TemplateProcessor templateProcessor;
@@ -153,6 +157,11 @@ public class DemoFacade implements RetoureFacade {
     }
 
     @Override
+    public StoreCustomer fetchCustomer(StoreCustomer customer) throws RetoureException {
+        return customer;
+    }
+
+    @Override
     public StoreCustomer fetchInvoice(StoreCustomer customer, String invoiceIdent) {
         // Check state
         if (!customer.isLoginOk()) {
@@ -181,7 +190,6 @@ public class DemoFacade implements RetoureFacade {
         return returnReasons.toArray(new ReturnReason[returnReasons.size()]);
     }
 
-    @Override
     public void addArticleToInvoice(StoreCustomer customer, Invoice invoice, Article article) {
         // Agent logged in, unset unreturnable flag
         if (null != customer.getAgentIdent()) {
@@ -203,7 +211,6 @@ public class DemoFacade implements RetoureFacade {
         Invoice invoice = customer.getInvoice(invoiceIdent);
         if (null != invoice && null == invoice.getReturnLabel()) {
             // Create label request
-            ReturnLabelClient returnLabelClient = new AmselClient();
             ReturnLabel returnLabel = returnLabelClient.makeLabel(customer);
             invoice.setReturnLabel(returnLabel);
             String base64 = returnLabel.getBase64();

@@ -5,16 +5,17 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>eu.artofcoding.retoure</groupId>
     <artifactId>retoure-store-aktivshop</artifactId>
 
     <parent>
-        <artifactId>retoure-server</artifactId>
         <groupId>eu.artofcoding.retoure</groupId>
+        <artifactId>retoure-server</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <!--
-        Project Information.
+        Project Information
     -->
     <name>Retoure Store Aktivshop</name>
     <url>http://www.retourenportal.com</url>
@@ -22,6 +23,7 @@
     <packaging>jar</packaging>
 
     <properties>
+        <wsdlurl.aktivshop>http://62.214.69.250:10010</wsdlurl.aktivshop>
     </properties>
 
     <dependencies>
@@ -35,51 +37,20 @@
             <scope>provided</scope>
         </dependency>
         <!--
-            CDI.
+            JAX-WS
+        -->
+        <dependency>
+            <groupId>org.glassfish.metro</groupId>
+            <artifactId>webservices-osgi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--
+            CDI
         -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <!--
-            Apache Axis 2.
-        -->
-        <dependency>
-            <groupId>org.apache.axis2</groupId>
-            <artifactId>axis2-kernel</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.axis2</groupId>
-            <artifactId>axis2-adb</artifactId>
-        </dependency>
-        <!-- axis2-transport-local for testing, java.lang.ClassNotFoundException -->
-        <dependency>
-            <groupId>org.apache.axis2</groupId>
-            <artifactId>axis2-transport-local</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- axis2-transport-http for testing, java.lang.ClassNotFoundException -->
-        <dependency>
-            <groupId>org.apache.axis2</groupId>
-            <artifactId>axis2-transport-http</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- NoClassDefFoundError: com.sun.xml.messaging.saaj.soap.SOAPDocumentImpl -->
-        <dependency>
-            <groupId>org.apache.axis2</groupId>
-            <artifactId>axis2-saaj</artifactId>
-        </dependency>
-        <!-- NoClassDefFoundError: com.sun.xml.messaging.saaj.soap.SOAPDocumentImpl
-        <dependency>
-            <groupId>com.sun.xml.messaging.saaj</groupId>
-            <artifactId>saaj-impl</artifactId>
-        </dependency>
-        -->
-        <!-- NoClassDefFoundError com.sun.org.apache.xml.internal.resolver.CatalogManager -->
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-xjc</artifactId>
         </dependency>
         <!--
             Google
@@ -89,7 +60,14 @@
             <artifactId>guava</artifactId>
         </dependency>
         <!--
-            Beetlejuice.
+            PDF
+        -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+        </dependency>
+        <!--
+            Beetlejuice
         -->
         <dependency>
             <groupId>eu.artofcoding.beetlejuice</groupId>
@@ -104,23 +82,116 @@
             <artifactId>beetlejuice-email</artifactId>
         </dependency>
         <!--
-            Retoure.
+            Retoure
         -->
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-persistence</artifactId>
             <version>${project.version}</version>
         </dependency>
+        -->
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-dhl-client</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- maven-compiler-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArguments>
+                        <endorseddirs>lib/jaxws-ri-2.2.7</endorseddirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <!-- jaxws-maven-plugin -->
+            <plugin>
+                <groupId>org.jvnet.jax-ws-commons</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>IRT01T</id>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlUrls>
+                                <wsdlUrl>${wsdlurl.aktivshop}/web/services/IRT01T?wsdl</wsdlUrl>
+                            </wsdlUrls>
+                            <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
+                            <bindingDirectory>src/main/resources/binding</bindingDirectory>
+                            <sourceDestDir>src/main/java</sourceDestDir>
+                            <keep>true</keep>
+                            <packageName>eu.artofcoding.retoure.store.aktivshop.wsclient.irt01t</packageName>
+                        </configuration>
+                    </execution>
+                    <!--
+                    <execution>
+                        <id>IRT01E</id>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlUrls>
+                                <wsdlUrl>${wsdlurl.aktivshop}/web/services/IRT01E?wsdl</wsdlUrl>
+                            </wsdlUrls>
+                            <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
+                            <bindingDirectory>src/main/resources/binding</bindingDirectory>
+                            <sourceDestDir>src/main/java</sourceDestDir>
+                            <keep>true</keep>
+                            <packageName>eu.artofcoding.retoure.store.aktivshop.wsclient.irt01e</packageName>
+                        </configuration>
+                    </execution>
+                    -->
+                    <execution>
+                        <id>IRT02T</id>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlUrls>
+                                <wsdlUrl>${wsdlurl.aktivshop}/web/services/IRT02T?wsdl</wsdlUrl>
+                            </wsdlUrls>
+                            <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
+                            <bindingDirectory>src/main/resources/binding</bindingDirectory>
+                            <sourceDestDir>src/main/java</sourceDestDir>
+                            <keep>true</keep>
+                            <packageName>eu.artofcoding.retoure.store.aktivshop.wsclient.irt02t</packageName>
+                        </configuration>
+                    </execution>
+                    <!--
+                    <execution>
+                        <id>IRT02E</id>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlUrls>
+                                <wsdlUrl>${wsdlurl.aktivshop}/web/services/IRT02E?wsdl</wsdlUrl>
+                            </wsdlUrls>
+                            <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
+                            <bindingDirectory>src/main/resources/binding</bindingDirectory>
+                            <sourceDestDir>src/main/java</sourceDestDir>
+                            <keep>true</keep>
+                            <packageName>eu.artofcoding.retoure.store.aktivshop.wsclient.irt02e</packageName>
+                        </configuration>
+                    </execution>
+                    -->
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+    </build>
 
 </project>

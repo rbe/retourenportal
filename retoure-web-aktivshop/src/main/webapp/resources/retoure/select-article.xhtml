@@ -6,24 +6,19 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:cc="http://java.sun.com/jsf/composite"
       xmlns:retoure="http://java.sun.com/jsf/composite/retoure">
-
 <ui:component>
-
     <cc:interface>
         <cc:attribute name="readonly" type="java.lang.Boolean" required="false" default="false"/>
         <cc:facet name="bottomButtons" required="false"/>
     </cc:interface>
-
     <cc:implementation>
-
         <h:dataTable id="articleTable"
                      styleClass="article-table"
-                     columnClasses="article-column1,article-column2,article-column3,article-column4,article-column5"
+                     columnClasses="article-column1,article-column2,article-column3,article-column4,article-column5,article-column6"
                      rowClasses="article-row1,article-row2"
                      cellpadding="0" cellspacing="0"
                      value="#{retoure.articlesOfInvoice}" var="article"
                      offset="0" rows="25">
-
             <f:facet name="header">
                 <h:selectBooleanCheckbox title="Alle Artikel zur&uuml;cksenden" style="margin: 10px 10px"
                                          value="#{retoure.allArticlesMarkedForReturn}"
@@ -33,26 +28,23 @@
                 </h:selectBooleanCheckbox>
                 <h:outputText value="Alle Artikel zur&uuml;cksenden" style="margin: 15px 0"/>
             </f:facet>
-
             <h:column headerClass="article-column-header">
                 <f:facet name="header">
                     Zur&uuml;ck
                 </f:facet>
                 <h:selectBooleanCheckbox disabled="#{not article.articleReturn.returnable}"
                                          value="#{article.articleReturn.toBeReturned}"
-                                         valueChangeListener="#{retoure.markArticleForReturn}">
+                                         valueChangeListener="#{retoure.markOrUnmarkArticleForReturn}">
                     <f:attribute name="articleIdent" value="#{article.articleIdent}"/>
                     <f:ajax event="click" render="@form"/>
                 </h:selectBooleanCheckbox>
             </h:column>
-
             <h:column headerClass="article-column-header">
                 <f:facet name="header">
                     Artikelnummer
                 </f:facet>
                 <h:outputText styleClass="article-content" value="#{article.articleIdent}"/>
             </h:column>
-
             <h:column headerClass="article-column-header article-description-header">
                 <f:facet name="header">
                     Bezeichnung
@@ -62,7 +54,7 @@
                     <br/>
                     <h:outputText value="#{article.description2}"/>
                 </h:panelGroup>
-                <h:panelGroup rendered="#{not article.articleReturn.returnable}" styleClass="article-not-returnable-content">
+                <h:panelGroup rendered="#{article.shippingCompany.equals('SPED')}" styleClass="article-not-returnable-content">
                     <retoure:spacer height="30"/>
                     <p>
                         Dieser Artikel wurde &uuml;ber eine Spedition geliefert und kann nicht durch das Retourenportal
@@ -79,7 +71,6 @@
                     <br/>
                 </h:panelGroup>
             </h:column>
-
             <h:column headerClass="article-column-header">
                 <f:facet name="header">
                     Menge geliefert
@@ -88,7 +79,14 @@
                     <f:convertNumber maxFractionDigits="0"/>
                 </h:outputText>
             </h:column>
-
+            <h:column headerClass="article-column-header">
+                <f:facet name="header">
+                    Menge bereits retourniert
+                </f:facet>
+                <h:outputText styleClass="article-content" value="#{article.articleReturn.alreadyReturnedCount}">
+                    <f:convertNumber maxFractionDigits="0"/>
+                </h:outputText>
+            </h:column>
             <h:column headerClass="article-column-header">
                 <f:facet name="header">
                     Wieviele zur&uuml;cksenden?
@@ -105,24 +103,29 @@
                 </h:panelGroup>
                 <!-- readwrite, input -->
                 <h:panelGroup rendered="#{article.articleReturn.toBeReturned}">
-                    <h:inputText rendered="#{article.count == 1}" readonly="true" styleClass="article-content" value="#{article.articleReturn.returnCount}" maxlength="2">
+                    <h:inputText rendered="#{article.count == 1}"
+                                 styleClass="article-content" readonly="true"
+                                 value="#{article.articleReturn.returnCount}" maxlength="2">
                         <f:validateLength minimum="1" maximum="2"/>
                         <f:convertNumber/>
                     </h:inputText>
-                    <h:inputText rendered="#{article.count > 1}" styleClass="article-content" value="#{article.articleReturn.returnCount}" maxlength="2" onfocus="RETOURE_clear_input(this);">
+                    <h:inputText id="returnCount"
+                                 rendered="#{article.count > 1}"
+                                 styleClass="article-content"
+                                 value="#{article.articleReturn.returnCount}" maxlength="2"
+                                 onfocus="RETOURE_clear_input(this);">
+                        <f:validateLength minimum="1" maximum="2"/>
+                        <f:validator validatorId="articleDoubleRange"/>
+                        <f:attribute name="article" value="#{article}"/>
                         <f:convertNumber/>
                     </h:inputText>
+                    <h:message for="returnCount" errorStyle="color: #870000"/>
                 </h:panelGroup>
             </h:column>
-
             <f:facet name="footer">
                 <cc:renderFacet name="bottomButtons"/>
             </f:facet>
-
         </h:dataTable>
-
     </cc:implementation>
-
 </ui:component>
-
 </html>

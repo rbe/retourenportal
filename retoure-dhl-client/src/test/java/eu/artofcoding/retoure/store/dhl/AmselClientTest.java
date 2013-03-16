@@ -14,7 +14,7 @@ package eu.artofcoding.retoure.store.dhl;
 import eu.artofcoding.beetlejuice.cdm.store.ReturnLabel;
 import eu.artofcoding.beetlejuice.cdm.store.StoreCustomer;
 import eu.artofcoding.retoure.delivery.ReturnLabelClient;
-import eu.artofcoding.retoure.delivery.dhl.AmselClient;
+import eu.artofcoding.retoure.delivery.dhl.AmselClientImpl;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -41,9 +41,9 @@ public class AmselClientTest {
     @Test
     public void testMakeLabel() throws Exception {
         // Create label request
-        ReturnLabelClient returnLabelClient = new AmselClient();
+        ReturnLabelClient returnLabelClient = new AmselClientImpl("OnlineRetoure", "Deutschland_Var3");
         ReturnLabel returnLabel = returnLabelClient.makeLabel(customer);
-        Path labelPath = Paths.get("label.pdf");
+        Path labelPath = Paths.get("src/test/data/label.pdf");
         returnLabel.saveBinary(labelPath);
         System.out.println("Wrote label to " + labelPath.toAbsolutePath().toString());
     }

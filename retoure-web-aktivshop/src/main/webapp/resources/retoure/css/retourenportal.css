@@ -27,6 +27,16 @@
 
 .retoure input[type=submit] {
     font-size: 14px;
+    background: url(http://www.aktivshop.de/skin/frontend/aktivshop/default/images/btn_cart_gr_category.gif) no-repeat scroll center top transparent;
+    height: 23px;
+    width: 100px;
+    right: 10px;
+    bottom: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: none;
+    border: none;
+    color: #fff;
 }
 
 .retoure .textlink {
@@ -96,7 +106,8 @@
 .retoure .article-column2,
 .retoure .article-column3,
 .retoure .article-column4,
-.retoure .article-column5 {
+.retoure .article-column5,
+.retoure .article-column6 {
     padding: 10px 10px !important;
     margin: 0 !important;
     border-left: 0px solid #cecece !important;
