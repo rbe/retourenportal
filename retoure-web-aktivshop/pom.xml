@@ -27,10 +27,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>net.sourceforge.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-        </dependency>
         <!--
             Google
         -->
