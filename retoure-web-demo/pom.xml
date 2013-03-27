@@ -63,11 +63,6 @@
             <groupId>org.omnifaces</groupId>
             <artifactId>omnifaces</artifactId>
         </dependency>
-        <!-- PrettyFaces -->
-        <dependency>
-            <groupId>com.ocpsoft</groupId>
-            <artifactId>prettyfaces-jsf2</artifactId>
-        </dependency>
         <!--
             Beetlejuice
         -->
