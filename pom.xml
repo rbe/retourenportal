@@ -407,10 +407,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>2.5.1</version>
-                    <configuration>
-                        <source>${project.java.version}</source>
-                        <target>${project.java.version}</target>
-                    </configuration>
                 </plugin>
                 <!-- maven-reactor-plugin -->
                 <plugin>
@@ -436,10 +432,22 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <testSource>1.7</testSource>
+                    <testTarget>1.7</testTarget>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <!--
-        Maven Environment.
+        Maven Environment
     -->
     <!-- Repositories -->
     <repositories>
