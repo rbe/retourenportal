@@ -25,6 +25,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _Irt02ResponseReturn_QNAME = new QName("http://irt02t.wsbeans.iseries/xsd", "return");
+    private final static QName _Irt02Args0_QNAME = new QName("http://irt02t.wsbeans.iseries/xsd", "args0");
     private final static QName _IRT02InputRGNR_QNAME = new QName("http://irt02t.wsbeans.iseries/xsd", "_RGNR");
     private final static QName _IRT02InputAORT_QNAME = new QName("http://irt02t.wsbeans.iseries/xsd", "_AORT");
     private final static QName _IRT02InputASTR_QNAME = new QName("http://irt02t.wsbeans.iseries/xsd", "_ASTR");
@@ -40,8 +42,6 @@ public class ObjectFactory {
     private final static QName _IRT02InputKZRTER_QNAME = new QName("http://irt02t.wsbeans.iseries/xsd", "_KZRTER");
     private final static QName _IRT02InputVATX_QNAME = new QName("http://irt02t.wsbeans.iseries/xsd", "_VATX");
     private final static QName _IRT02InputKZOP_QNAME = new QName("http://irt02t.wsbeans.iseries/xsd", "_KZOP");
-    private final static QName _Irt02XMLArgs0_QNAME = new QName("http://irt02t.wsbeans.iseries/xsd", "args0");
-    private final static QName _Irt02ResponseReturn_QNAME = new QName("http://irt02t.wsbeans.iseries/xsd", "return");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: eu.artofcoding.retoure.store.aktivshop.wsclient.irt02t
@@ -96,6 +96,24 @@ public class ObjectFactory {
      */
     public IRT02Result createIRT02Result() {
         return new IRT02Result();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IRT02Result }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://irt02t.wsbeans.iseries/xsd", name = "return", scope = Irt02Response.class)
+    public JAXBElement<IRT02Result> createIrt02ResponseReturn(IRT02Result value) {
+        return new JAXBElement<IRT02Result>(_Irt02ResponseReturn_QNAME, IRT02Result.class, Irt02Response.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IRT02Input }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://irt02t.wsbeans.iseries/xsd", name = "args0", scope = Irt02 .class)
+    public JAXBElement<IRT02Input> createIrt02Args0(IRT02Input value) {
+        return new JAXBElement<IRT02Input>(_Irt02Args0_QNAME, IRT02Input.class, Irt02 .class, value);
     }
 
     /**
@@ -234,12 +252,21 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://irt02t.wsbeans.iseries/xsd", name = "return", scope = Irt02XMLResponse.class)
+    public JAXBElement<String> createIrt02XMLResponseReturn(String value) {
+        return new JAXBElement<String>(_Irt02ResponseReturn_QNAME, String.class, Irt02XMLResponse.class, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link IRT02Input }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://irt02t.wsbeans.iseries/xsd", name = "args0", scope = Irt02XML.class)
     public JAXBElement<IRT02Input> createIrt02XMLArgs0(IRT02Input value) {
-        return new JAXBElement<IRT02Input>(_Irt02XMLArgs0_QNAME, IRT02Input.class, Irt02XML.class, value);
+        return new JAXBElement<IRT02Input>(_Irt02Args0_QNAME, IRT02Input.class, Irt02XML.class, value);
     }
 
     /**
@@ -375,33 +402,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://irt02t.wsbeans.iseries/xsd", name = "_KZOP", scope = IRT02Result.class)
     public JAXBElement<BigDecimal> createIRT02ResultKZOP(BigDecimal value) {
         return new JAXBElement<BigDecimal>(_IRT02InputKZOP_QNAME, BigDecimal.class, IRT02Result.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IRT02Result }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://irt02t.wsbeans.iseries/xsd", name = "return", scope = Irt02Response.class)
-    public JAXBElement<IRT02Result> createIrt02ResponseReturn(IRT02Result value) {
-        return new JAXBElement<IRT02Result>(_Irt02ResponseReturn_QNAME, IRT02Result.class, Irt02Response.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://irt02t.wsbeans.iseries/xsd", name = "return", scope = Irt02XMLResponse.class)
-    public JAXBElement<String> createIrt02XMLResponseReturn(String value) {
-        return new JAXBElement<String>(_Irt02ResponseReturn_QNAME, String.class, Irt02XMLResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IRT02Input }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://irt02t.wsbeans.iseries/xsd", name = "args0", scope = Irt02 .class)
-    public JAXBElement<IRT02Input> createIrt02Args0(IRT02Input value) {
-        return new JAXBElement<IRT02Input>(_Irt02XMLArgs0_QNAME, IRT02Input.class, Irt02 .class, value);
     }
 
 }
