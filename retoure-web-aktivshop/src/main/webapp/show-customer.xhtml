@@ -59,38 +59,41 @@
                             Auf Ihren Wunsch erstatten wir den Gutschriftenbetrag umgehend nach Wareneingang.
                         </span>
                         <br/>
-                        <p>
-                            <h:commandLink actionListener="#{retoure.geldzurueck}">R&uuml;ckerstattungsart w&auml;hlen</h:commandLink>
-                        </p>
-                        <h:panelGroup rendered="#{retoure.showGeldzurueck}">
-                            <t:selectOneRadio id="erstattungsartRadio" value="gutschrift" layout="spread">
-                                <f:selectItem itemValue="gutschrift" itemLabel="Gutschrift des Warenwerts"/>
-                                <f:selectItem itemValue="austausch" itemLabel="Austausch des Artikels"/>
-                            </t:selectOneRadio>
-                            <t:selectOneRadio id="ruckerstattungRadio" value="kundenkonto" layout="spread">
-                                <f:selectItem itemValue="kundenkonto" itemLabel="Gutschrift auf Ihr Kundenkonto"/>
-                                <f:selectItem itemValue="erstattung" itemLabel="Erstattung des Kaufbetrags"/>
-                                <f:selectItem itemValue="erstattung2" itemLabel="Erstattung an eine andere Person als der Zahlungsabsender"/>
-                            </t:selectOneRadio>
-                            <h:panelGrid columns="1">
-                                <t:radio for="erstattungsartRadio" index="0"/>
-                                <t:radio for="erstattungsartRadio" index="1"/>
-                                <h:panelGrid style="margin-left: 25px;" columns="1">
-                                    <t:radio for="ruckerstattungRadio" index="0"/>
-                                    <t:radio for="ruckerstattungRadio" index="1"/>
-                                    <t:radio for="ruckerstattungRadio" index="2"/>
-                                </h:panelGrid>
-                                <br/>
-                                <span class="customer-data-content">
-                                    Bitte beachten Sie: Sollten Sie mehrere Artikel gleichzeitig zur&uuml;cksenden k&ouml;nnen
-                                    Sie eine Gutschrift nur getrennt von einem Austausch veranlassen.
-                                    Melden Sie die Retouren dann bitte getrennt voneinander an.<br/>
+                        <t:selectOneRadio id="erstattungsartRadio" layout="spread"
+                                          value="gutschrift">
+                            <f:selectItem itemValue="gutschrift" itemLabel="Gutschrift des Warenwerts"/>
+                            <f:selectItem itemValue="austausch" itemLabel="Austausch des Artikels"/>
+                        </t:selectOneRadio>
+                        <h:panelGrid columns="1">
+                            <t:radio for="erstattungsartRadio" index="0"/>
+                            <h:commandLink style="margin-left: 27px;"
+                                           actionListener="#{retoure.geldzurueck}">R&uuml;ckerstattungsart w&auml;hlen</h:commandLink>
+                            <h:panelGroup rendered="#{retoure.showGeldzurueck}">
+                                <t:selectOneRadio id="ruckerstattungRadio" layout="spread"
+                                                  value="kundenkonto">
+                                    <f:selectItem itemValue="kundenkonto" itemLabel="Gutschrift auf Ihr Kundenkonto"/>
+                                    <f:selectItem itemValue="erstattung" itemLabel="Erstattung des Kaufbetrags"/>
+                                    <f:selectItem itemValue="erstattung2" itemLabel="Erstattung an eine andere Person als der Zahlungsabsender"/>
+                                </t:selectOneRadio>
+                                <h:panelGrid columns="1">
+                                    <h:panelGrid style="margin-left: 25px;" columns="1">
+                                        <t:radio for="ruckerstattungRadio" index="0"/>
+                                        <t:radio for="ruckerstattungRadio" index="1"/>
+                                        <t:radio for="ruckerstattungRadio" index="2"/>
+                                    </h:panelGrid>
                                     <br/>
-                                    Sollten Sie Fragen haben, stehen wir Ihnen selbstverst&auml;ndlich auch telefonisch zur Verf&uuml;gung:
-                                    05971 91 10 10 oder schreiben Sie uns eine E-Mail an <a href="mailto:ruecksendung@aktivshop.de">ruecksendung@aktivshop.de</a>.
-                                </span>
-                            </h:panelGrid>
-                        </h:panelGroup>
+                                </h:panelGrid>
+                            </h:panelGroup>
+                            <t:radio for="erstattungsartRadio" index="1"/>
+                            <span class="customer-data-content">
+                                Bitte beachten Sie: Sollten Sie mehrere Artikel gleichzeitig zur&uuml;cksenden k&ouml;nnen
+                                Sie eine Gutschrift nur getrennt von einem Austausch veranlassen.
+                                Melden Sie die Retouren dann bitte getrennt voneinander an.<br/>
+                                <br/>
+                                Sollten Sie Fragen haben, stehen wir Ihnen selbstverst&auml;ndlich auch telefonisch zur Verf&uuml;gung:
+                                05971 91 10 10 oder schreiben Sie uns eine E-Mail an <a href="mailto:ruecksendung@aktivshop.de">ruecksendung@aktivshop.de</a>.
+                            </span>
+                        </h:panelGrid>
                     </h:column>
                     <f:facet name="footer">
                         <h:commandButton styleClass="wizard-back-button" value="&lt; Zur&uuml;ck"
