@@ -58,6 +58,18 @@
             <artifactId>javax.faces-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- Apache MyFaces Tomahawk -->
+        <dependency>
+            <groupId>org.apache.myfaces.tomahawk</groupId>
+            <artifactId>tomahawk20</artifactId>
+            <!-- Will be provided via EAR or WAR
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>jstl</artifactId>
+                </exclusion>
+            </exclusions> -->
+        </dependency>
         <!-- OmniFaces -->
         <dependency>
             <groupId>org.omnifaces</groupId>
