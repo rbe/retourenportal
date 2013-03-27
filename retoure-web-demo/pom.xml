@@ -179,6 +179,7 @@
                                     </includes>
                                 </artifactItem>
                                 <!-- retoure-persistence -->
+                                <!--
                                 <artifactItem>
                                     <groupId>eu.artofcoding.retoure</groupId>
                                     <artifactId>retoure-persistence</artifactId>
@@ -193,6 +194,7 @@
                                         eu/**
                                     </includes>
                                 </artifactItem>
+                                -->
                                 <!-- retoure-store-demo -->
                                 <artifactItem>
                                     <groupId>eu.artofcoding.retoure</groupId>
