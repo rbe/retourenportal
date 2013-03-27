@@ -19,7 +19,6 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-    -->
     <!--
         Also add JVM flag -Dorg.apache.el.parser.COERCE_TO_ZERO=false
     -->
