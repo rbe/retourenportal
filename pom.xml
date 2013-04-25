@@ -2,27 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>eu.artofcoding.retoure</groupId>
-    <artifactId>retoure-server</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-
     <parent>
         <groupId>eu.artofcoding</groupId>
         <artifactId>aoc-parent</artifactId>
         <version>1.1.0</version>
     </parent>
-
-    <!--
-        Project Information
-    -->
+    <artifactId>retoure-server</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <name>Retoure Server</name>
     <url>http://www.retourenportal.com</url>
-
     <packaging>pom</packaging>
-
     <modules>
         <module>retoure-api</module>
         <module>retoure-persistence</module>
@@ -35,16 +25,10 @@
         <module>retoure-store-aktivshop</module>
         <module>retoure-enterprise</module>
     </modules>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Java Virtual Machine -->
         <project.java.version>1.7</project.java.version>
     </properties>
-
-    <!--
-        Maven Profiles.
-    -->
     <profiles>
         <!-- arquillian-junit -->
         <profile>
@@ -216,10 +200,6 @@
             </dependencies>
         </profile>
     </profiles>
-
-    <!--
-        Dependencies
-    -->
     <dependencyManagement>
         <dependencies>
             <!--
@@ -398,10 +378,15 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <pluginManagement>
             <plugins>
+                <!-- buildnumber-maven-plugin -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>buildnumber-maven-plugin</artifactId>
+                    <version>1.2</version>
+                </plugin>
                 <!-- maven-compiler-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -414,11 +399,7 @@
                     <artifactId>maven-reactor-plugin</artifactId>
                     <version>1.0</version>
                 </plugin>
-                <!--
-                    jaxws-maven-plugin
-                    http://jax-ws-commons.java.net/jaxws-maven-plugin/usage.html
-                    Alternative: org.codehaus.mojo:jaxws-maven-plugin
-                -->
+                <!-- jaxws-maven-plugin, Alternative: org.codehaus.mojo:jaxws-maven-plugin -->
                 <plugin>
                     <groupId>org.jvnet.jax-ws-commons</groupId>
                     <artifactId>jaxws-maven-plugin</artifactId>
@@ -433,6 +414,28 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <!-- buildnumber-maven-plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <doCheck>true</doCheck>
+                    <doUpdate>false</doUpdate>
+                    <format>${project.version}.{0,number}</format>
+                    <items>
+                        <item>buildNumber</item>
+                    </items>
+                </configuration>
+            </plugin>
+            <!-- maven-compiler-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -445,11 +448,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <!--
-        Maven Environment
-    -->
-    <!-- Repositories -->
     <repositories>
         <!-- art of coding's Public Maven Repository (local) -->
         <repository>
@@ -470,7 +468,6 @@
             <url>https://maven.java.net/content/repositories/snapshots/</url>
         </repository>
     </repositories>
-    <!-- Plugin Repositories -->
     <pluginRepositories>
         <pluginRepository>
             <id>maven.java.net</id>
@@ -478,7 +475,6 @@
             <url>http://download.java.net/maven/2</url>
         </pluginRepository>
     </pluginRepositories>
-    <!-- Distribution Management -->
     <distributionManagement>
         <!-- art of coding's Private Maven Repository (local) -->
         <repository>
@@ -487,5 +483,4 @@
             <url>${aoc.private.maven.repository}</url>
         </repository>
     </distributionManagement>
-
 </project>

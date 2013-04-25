@@ -2,30 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>eu.artofcoding.retoure</groupId>
-    <artifactId>retoure-store-aktivshop</artifactId>
-
     <parent>
         <groupId>eu.artofcoding.retoure</groupId>
         <artifactId>retoure-server</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-
-    <!--
-        Project Information
-    -->
+    <artifactId>retoure-store-aktivshop</artifactId>
     <name>Retoure Store Aktivshop</name>
     <url>http://www.retourenportal.com</url>
-
     <packaging>jar</packaging>
-
     <properties>
         <wsdlurl.aktivshop>http://62.214.69.250:10010</wsdlurl.aktivshop>
     </properties>
-
     <dependencies>
         <!--
             Java EE
@@ -102,7 +91,6 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <!-- maven-compiler-plugin -->
@@ -191,7 +179,6 @@
                 </executions>
             </plugin>
         </plugins>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <finalName>${project.artifactId}-${buildNumber}</finalName>
     </build>
-
 </project>

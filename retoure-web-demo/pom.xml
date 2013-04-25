@@ -2,31 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>eu.artofcoding.retoure</groupId>
-    <artifactId>retoure-web-demo</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-
     <parent>
         <groupId>eu.artofcoding.retoure</groupId>
         <artifactId>retoure-server</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
-
-    <!--
-        Project Information.
-    -->
+    <artifactId>retoure-web-demo</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <name>Retoure Web Demo</name>
     <url>http://www.retourenportal.com</url>
-
     <packaging>war</packaging>
-
-    <properties>
-    </properties>
-
     <dependencies>
         <!--
             Java EE
@@ -134,7 +121,6 @@
             </exclusions>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <!-- maven-dependency-plugin -->
@@ -260,10 +246,6 @@
                 <artifactId>maven-glassfish-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <finalName>${project.artifactId}-${buildNumber}</finalName>
     </build>
-
-    <repositories>
-    </repositories>
-
 </project>
