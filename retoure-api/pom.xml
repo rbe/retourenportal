@@ -4,9 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>retoure-server</artifactId>
         <groupId>eu.artofcoding.retoure</groupId>
+        <artifactId>retoure-server</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
     <artifactId>retoure-api</artifactId>
     <version>1.0.0-SNAPSHOT</version>
