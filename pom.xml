@@ -604,7 +604,7 @@
     </issueManagement>
     <scm>
         <developerConnection>
-            scm:git:[fetch=]https://github.com/artofcoding/retoure-server[push=]ssh://github.com/artofcoding/retoure-server
+            scm:git:[fetch=]https://bitbucket.org/artofcoding/retoure-server[push=]ssh://bitbucket.org/artofcoding/retoure-server
         </developerConnection>
         <url>http://bitbucket.org/artofcoding/retoure-server</url>
     </scm>
