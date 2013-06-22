@@ -68,10 +68,6 @@
                     <wsdlUrls>
                         <wsdlUrl>https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3ws.wsdl</wsdlUrl>
                     </wsdlUrls>
-                    <!--
-                    <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
-                    <bindingDirectory>src/main/resources/binding</bindingDirectory>
-                    -->
                     <sourceDestDir>src/main/java</sourceDestDir>
                     <keep>true</keep>
                     <packageName>eu.artofcoding.retoure.delivery.dhl.amsel</packageName>
