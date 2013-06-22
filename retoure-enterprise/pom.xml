@@ -6,14 +6,13 @@
     <!--
         POM
     -->
-    <groupId>eu.artofcoding.retoure</groupId>
-    <artifactId>retoure-enterprise</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <parent>
         <artifactId>retoure-server</artifactId>
         <groupId>eu.artofcoding.retoure</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+    <artifactId>retoure-enterprise</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <!--
         Project Information
     -->
