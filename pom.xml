@@ -3,11 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!--
     <parent>
         <groupId>eu.artofcoding</groupId>
         <artifactId>aoc-parent</artifactId>
         <version>1.1.0</version>
     </parent>
+    -->
     <artifactId>retoure-server</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>Retoure Server</name>
@@ -26,8 +28,11 @@
         <module>retoure-enterprise</module>
     </modules>
     <properties>
+        <aoc.basedir>${user.home}/project</aoc.basedir>
+        <aoc.public.maven.repository>file:${aoc.basedir}/public.maven.repository/</aoc.public.maven.repository>
+        <aoc.private.maven.repository>file:${aoc.basedir}/private.maven.repository/</aoc.private.maven.repository>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.java.version>1.7</project.java.version>
+        <version.java>1.7</version.java>
     </properties>
     <profiles>
         <!-- arquillian-junit -->
@@ -202,6 +207,152 @@
     </profiles>
     <dependencyManagement>
         <dependencies>
+            <!--
+                Testing
+            -->
+            <!-- Arquillian -->
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.0.0.Final</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- JUnit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.11</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- Arquillian JUnit -->
+            <dependency>
+                <groupId>org.jboss.arquillian.junit</groupId>
+                <artifactId>arquillian-junit-container</artifactId>
+                <version>1.0.3.Final</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- TestNG -->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.8</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- Arquillian TestNG -->
+            <dependency>
+                <groupId>org.jboss.arquillian.testng</groupId>
+                <artifactId>arquillian-testng-container</artifactId>
+                <version>1.0.3.Final</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- Arquillian JBoss AS -->
+            <dependency>
+                <groupId>org.jboss.as</groupId>
+                <artifactId>jboss-as-arquillian-container-managed</artifactId>
+                <version>7.1.1.Final</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- Arquillian GlassFish -->
+            <dependency>
+                <groupId>org.jboss.arquillian.container</groupId>
+                <artifactId>arquillian-glassfish-embedded-3.1</artifactId>
+                <version>1.0.0.Final-SNAPSHOT</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.container</groupId>
+                <artifactId>arquillian-glassfish-managed-3.1</artifactId>
+                <version>1.0.0.CR3</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- Arquillian Drone -->
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-bom</artifactId>
+                <version>1.1.0.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-impl</artifactId>
+                <version>1.1.0.Final</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-selenium</artifactId>
+                <version>1.1.0.Final</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-selenium-server</artifactId>
+                <version>1.1.0.Final</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- Selenium -->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>2.26.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-server</artifactId>
+                <version>2.26.0</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.mortbay.jetty</groupId>
+                        <artifactId>servlet-api-2.5</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- Arquillian Servlet -->
+            <dependency>
+                <groupId>org.jboss.arquillian.protocol</groupId>
+                <artifactId>arquillian-protocol-servlet</artifactId>
+                <version>1.0.3.Final</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- GlassFish -->
+            <dependency>
+                <groupId>org.glassfish.main.extras</groupId>
+                <artifactId>glassfish-embedded-all</artifactId>
+                <version>3.1.2.2</version>
+            </dependency>
+            <!-- JBoss AS -->
+            <dependency>
+                <groupId>org.jboss.as</groupId>
+                <artifactId>jboss-as-dist</artifactId>
+                <version>7.1.1.Final</version>
+            </dependency>
+            <!--
+                CDI
+            -->
+            <!-- CDI API -->
+            <dependency>
+                <groupId>javax.enterprise</groupId>
+                <artifactId>cdi-api</artifactId>
+                <version>1.1.EDR1.2</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- Arquillian Weld -->
+            <dependency>
+                <groupId>org.jboss.arquillian.container</groupId>
+                <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
+                <version>1.0.0.CR5</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- JBoss Weld -->
+            <dependency>
+                <groupId>org.jboss.weld</groupId>
+                <artifactId>weld-core</artifactId>
+                <version>1.1.10.Final</version>
+            </dependency>
             <!--
                 Code Quality
             -->
@@ -448,6 +599,16 @@
             </plugin>
         </plugins>
     </build>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/artofcoding/retoure-server/issues</url>
+    </issueManagement>
+    <scm>
+        <developerConnection>
+            scm:git:[fetch=]https://github.com/artofcoding/retoure-server[push=]ssh://github.com/artofcoding/retoure-server
+        </developerConnection>
+        <url>http://bitbucket.org/artofcoding/retoure-server</url>
+    </scm>
     <repositories>
         <!-- art of coding's Public Maven Repository (local) -->
         <repository>
