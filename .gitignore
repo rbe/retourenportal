@@ -2,7 +2,7 @@
 *.iml
 .idea/
 atlassian-ide-plugin.xml
-/lib/
+lib/
 
 # Compiler #
 *.class
@@ -21,9 +21,3 @@ target/
 
 # JRebel #
 rebel.xml
-
-# Resources #
-glassfish-resources.xml
-
-# Ignored projects #
-ibmitest
