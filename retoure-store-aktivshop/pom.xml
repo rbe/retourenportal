@@ -108,6 +108,7 @@
                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
                 <executions>
+                    <!--
                     <execution>
                         <id>IRT01T</id>
                         <goals>
@@ -124,6 +125,7 @@
                             <packageName>eu.artofcoding.retoure.store.aktivshop.wsclient.irt01t</packageName>
                         </configuration>
                     </execution>
+                    -->
                     <!--
                     <execution>
                         <id>IRT01E</id>
@@ -142,6 +144,7 @@
                         </configuration>
                     </execution>
                     -->
+                    <!--
                     <execution>
                         <id>IRT02T</id>
                         <goals>
@@ -158,6 +161,7 @@
                             <packageName>eu.artofcoding.retoure.store.aktivshop.wsclient.irt02t</packageName>
                         </configuration>
                     </execution>
+                    -->
                     <!--
                     <execution>
                         <id>IRT02E</id>
