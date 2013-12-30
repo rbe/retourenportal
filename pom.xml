@@ -27,6 +27,7 @@
         <aoc.private.maven.repository>file:${aoc.basedir}/private.maven.repository/</aoc.private.maven.repository>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.java>1.7</version.java>
+        <version.eu.artofcoding.beetlejuice>1.3.0-SNAPSHOT</version.eu.artofcoding.beetlejuice>
     </properties>
     <profiles>
         <!-- arquillian-junit -->
@@ -37,12 +38,14 @@
                 <dependency>
                     <groupId>junit</groupId>
                     <artifactId>junit</artifactId>
+                    <version>4.11</version>
                     <scope>test</scope>
                 </dependency>
                 <!-- Arquillian -->
                 <dependency>
                     <groupId>org.jboss.arquillian.junit</groupId>
                     <artifactId>arquillian-junit-container</artifactId>
+                    <version>1.1.2.Final</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -55,12 +58,14 @@
                 <dependency>
                     <groupId>org.testng</groupId>
                     <artifactId>testng</artifactId>
+                    <version>6.8.7</version>
                     <scope>test</scope>
                 </dependency>
                 <!-- Arquillian TestNG -->
                 <dependency>
                     <groupId>org.jboss.arquillian.testng</groupId>
                     <artifactId>arquillian-testng-container</artifactId>
+                    <version>1.1.2.Final</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -72,22 +77,26 @@
                 <dependency>
                     <groupId>org.jboss.spec</groupId>
                     <artifactId>jboss-javaee-6.0</artifactId>
+                    <version>3.0.2.Final</version>
                     <type>pom</type>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.jboss.arquillian.container</groupId>
                     <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
+                    <version>1.0.0.CR7</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.jboss.weld</groupId>
                     <artifactId>weld-core</artifactId>
+                    <version>1.1.9.Final</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-simple</artifactId>
+                    <version>1.7.5</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -99,11 +108,13 @@
                 <dependency>
                     <groupId>org.jboss.arquillian.container</groupId>
                     <artifactId>arquillian-glassfish-embedded-3.1</artifactId>
+                    <version>1.0.0.CR4</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.glassfish.main.extras</groupId>
                     <artifactId>glassfish-embedded-all</artifactId>
+                    <version>4.0</version>
                     <scope>provided</scope>
                 </dependency>
             </dependencies>
@@ -167,27 +178,32 @@
                 <dependency>
                     <groupId>org.jboss.arquillian.extension</groupId>
                     <artifactId>arquillian-drone-impl</artifactId>
+                    <version>1.2.0.Final</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.jboss.arquillian.extension</groupId>
                     <artifactId>arquillian-drone-selenium</artifactId>
+                    <version>1.2.0.Final</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.jboss.arquillian.extension</groupId>
                     <artifactId>arquillian-drone-selenium-server</artifactId>
+                    <version>1.2.0.Final</version>
                     <scope>test</scope>
                 </dependency>
                 <!-- Selenium -->
                 <dependency>
                     <groupId>org.seleniumhq.selenium</groupId>
                     <artifactId>selenium-java</artifactId>
+                    <version>2.37.1</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.seleniumhq.selenium</groupId>
                     <artifactId>selenium-server</artifactId>
+                    <version>2.37.1</version>
                     <scope>test</scope>
                     <exclusions>
                         <exclusion>
@@ -202,144 +218,14 @@
     <dependencyManagement>
         <dependencies>
             <!--
-                Testing
-            -->
-            <!-- Arquillian -->
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>1.0.0.Final</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <!-- JUnit -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.11</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- Arquillian JUnit -->
-            <dependency>
-                <groupId>org.jboss.arquillian.junit</groupId>
-                <artifactId>arquillian-junit-container</artifactId>
-                <version>1.0.3.Final</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- TestNG -->
-            <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>6.8</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- Arquillian TestNG -->
-            <dependency>
-                <groupId>org.jboss.arquillian.testng</groupId>
-                <artifactId>arquillian-testng-container</artifactId>
-                <version>1.0.3.Final</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- Arquillian JBoss AS -->
-            <dependency>
-                <groupId>org.jboss.as</groupId>
-                <artifactId>jboss-as-arquillian-container-managed</artifactId>
-                <version>7.1.1.Final</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- Arquillian GlassFish -->
-            <dependency>
-                <groupId>org.jboss.arquillian.container</groupId>
-                <artifactId>arquillian-glassfish-embedded-3.1</artifactId>
-                <version>1.0.0.Final-SNAPSHOT</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian.container</groupId>
-                <artifactId>arquillian-glassfish-managed-3.1</artifactId>
-                <version>1.0.0.CR3</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- Arquillian Drone -->
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-drone-bom</artifactId>
-                <version>1.1.0.Final</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-drone-impl</artifactId>
-                <version>1.1.0.Final</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-drone-selenium</artifactId>
-                <version>1.1.0.Final</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-drone-selenium-server</artifactId>
-                <version>1.1.0.Final</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- Selenium -->
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-java</artifactId>
-                <version>2.26.0</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-server</artifactId>
-                <version>2.26.0</version>
-                <scope>test</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.mortbay.jetty</groupId>
-                        <artifactId>servlet-api-2.5</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <!-- Arquillian Servlet -->
-            <dependency>
-                <groupId>org.jboss.arquillian.protocol</groupId>
-                <artifactId>arquillian-protocol-servlet</artifactId>
-                <version>1.0.3.Final</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- GlassFish -->
-            <dependency>
-                <groupId>org.glassfish.main.extras</groupId>
-                <artifactId>glassfish-embedded-all</artifactId>
-                <version>3.1.2.2</version>
-            </dependency>
-            <!-- JBoss AS -->
-            <dependency>
-                <groupId>org.jboss.as</groupId>
-                <artifactId>jboss-as-dist</artifactId>
-                <version>7.1.1.Final</version>
-            </dependency>
-            <!--
                 CDI
             -->
             <!-- CDI API -->
             <dependency>
                 <groupId>javax.enterprise</groupId>
                 <artifactId>cdi-api</artifactId>
-                <version>1.1.EDR1.2</version>
+                <version>1.0-SP4</version>
                 <scope>provided</scope>
-            </dependency>
-            <!-- Arquillian Weld -->
-            <dependency>
-                <groupId>org.jboss.arquillian.container</groupId>
-                <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
-                <version>1.0.0.CR5</version>
-                <scope>test</scope>
             </dependency>
             <!-- JBoss Weld -->
             <dependency>
@@ -421,7 +307,7 @@
             <dependency>
                 <groupId>org.eclipse.persistence</groupId>
                 <artifactId>org.eclipse.persistence.jpa</artifactId>
-                <version>2.4.1</version>
+                <version>2.5.1</version>
                 <scope>provided</scope>
             </dependency>
             <!-- MySQL -->
@@ -489,42 +375,42 @@
             <dependency>
                 <groupId>eu.artofcoding.beetlejuice</groupId>
                 <artifactId>beetlejuice-api</artifactId>
-                <version>1.2.0-SNAPSHOT</version>
+                <version>${version.eu.artofcoding.beetlejuice}</version>
             </dependency>
             <dependency>
                 <groupId>eu.artofcoding.beetlejuice</groupId>
                 <artifactId>beetlejuice-persistence</artifactId>
-                <version>1.2.0-SNAPSHOT</version>
+                <version>${version.eu.artofcoding.beetlejuice}</version>
             </dependency>
             <dependency>
                 <groupId>eu.artofcoding.beetlejuice</groupId>
                 <artifactId>beetlejuice-cdm</artifactId>
-                <version>1.2.0-SNAPSHOT</version>
+                <version>${version.eu.artofcoding.beetlejuice}</version>
             </dependency>
             <dependency>
                 <groupId>eu.artofcoding.beetlejuice</groupId>
                 <artifactId>beetlejuice-template</artifactId>
-                <version>1.2.0-SNAPSHOT</version>
+                <version>${version.eu.artofcoding.beetlejuice}</version>
             </dependency>
             <dependency>
                 <groupId>eu.artofcoding.beetlejuice</groupId>
                 <artifactId>beetlejuice-email</artifactId>
-                <version>1.2.0-SNAPSHOT</version>
+                <version>${version.eu.artofcoding.beetlejuice}</version>
             </dependency>
             <dependency>
                 <groupId>eu.artofcoding.beetlejuice</groupId>
                 <artifactId>beetlejuice-web</artifactId>
-                <version>1.2.0-SNAPSHOT</version>
+                <version>${version.eu.artofcoding.beetlejuice}</version>
             </dependency>
             <dependency>
                 <groupId>eu.artofcoding.beetlejuice</groupId>
                 <artifactId>beetlejuice-web-security</artifactId>
-                <version>1.2.0-SNAPSHOT</version>
+                <version>${version.eu.artofcoding.beetlejuice}</version>
             </dependency>
             <dependency>
                 <groupId>eu.artofcoding.beetlejuice</groupId>
                 <artifactId>beetlejuice-web-jsfcomponents</artifactId>
-                <version>1.2.0-SNAPSHOT</version>
+                <version>${version.eu.artofcoding.beetlejuice}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -560,6 +446,18 @@
                     <groupId>org.glassfish.maven.plugin</groupId>
                     <artifactId>maven-glassfish-plugin</artifactId>
                     <version>2.1</version>
+                </plugin>
+                <!-- maven-war-plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+                <!-- maven-ear-plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ear-plugin</artifactId>
+                    <version>2.9</version>
                 </plugin>
             </plugins>
         </pluginManagement>
