@@ -13,11 +13,11 @@ package eu.artofcoding.retoure.store.aktivshop;
 
 import eu.artofcoding.retoure.api.RetoureException;
 import eu.artofcoding.retoure.store.aktivshop.wsclient.irt01t.IRT01Result;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static org.testng.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class IRT01ClientTest {
 

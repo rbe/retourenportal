@@ -20,17 +20,20 @@ import eu.artofcoding.beetlejuice.cdm.store.StoreCustomer;
 import eu.artofcoding.beetlejuice.cdm.store.StoreIdent;
 import eu.artofcoding.retoure.api.RetoureException;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.testng.Arquillian;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 
-public class RetourenWebHelperTest extends Arquillian {
+import static org.junit.Assert.assertNotNull;
+
+@RunWith(Arquillian.class)
+public class RetourenWebHelperTest {
 
     private static final String WEBAPP_SRC = "src/main/webapp";
 
@@ -63,7 +66,7 @@ public class RetourenWebHelperTest extends Arquillian {
 
     @Test
     public void testInjection() {
-        Assert.assertNotNull(retourenWebHelper, "RetourenWebHelper");
+        assertNotNull("retourenWebHelper is null", retourenWebHelper);
     }
 
 }

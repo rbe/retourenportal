@@ -1,4 +1,4 @@
-package eu.artofcoding.retoure.web;/*
+/*
  * retoure-server
  * retoure-web-helper
  * Copyright (C) 2012-2013 art of coding UG, http://www.art-of-coding.eu
@@ -8,6 +8,8 @@ package eu.artofcoding.retoure.web;/*
  *
  * rbe, 13.02.13 12:32
  */
+
+package eu.artofcoding.retoure.web;
 
 import com.thoughtworks.selenium.DefaultSelenium;
 import eu.artofcoding.beetlejuice.api.persistence.GenericEntity;
@@ -20,18 +22,20 @@ import eu.artofcoding.beetlejuice.cdm.store.StoreIdent;
 import eu.artofcoding.retoure.api.RetoureException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
-import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.net.URL;
 
-public class StoreIdentTest extends Arquillian {
+@RunWith(Arquillian.class)
+public class StoreIdentTest {
 
     private static final String WEBAPP_SRC = "src/main/webapp";
 

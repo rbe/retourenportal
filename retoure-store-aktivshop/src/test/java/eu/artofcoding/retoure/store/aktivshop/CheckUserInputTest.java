@@ -11,23 +11,23 @@
 
 package eu.artofcoding.retoure.store.aktivshop;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
-import static org.testng.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class CheckUserInputTest {
 
     @Test
     public void testCheckCustomerAndAgentIdent() throws Exception {
-        String customerIdentEntered=" 123-AGENT   ";
-        String customerIdentOK="123-AGENT";
+        String customerIdentEntered = " 123-AGENT   ";
+        String customerIdentOK = "123-AGENT";
         assertEquals(customerIdentOK, CheckUserInput.checkCustomerIdent(customerIdentEntered));
     }
 
     @Test
     public void testCheckCustomerIdent() throws Exception {
-        String customerIdentEntered="123   ";
-        String customerIdentOK="123";
+        String customerIdentEntered = "123   ";
+        String customerIdentOK = "123";
         assertEquals(customerIdentOK, CheckUserInput.checkCustomerIdent(customerIdentEntered));
     }
 
