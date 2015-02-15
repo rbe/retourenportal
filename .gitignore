@@ -4,6 +4,10 @@
 atlassian-ide-plugin.xml
 lib/
 
+# Maven #
+pom.*.*Backup
+buildNumber.properties
+
 # Compiler #
 *.class
 out/
@@ -13,6 +17,8 @@ target/
 *.jar
 *.war
 *.ear
+
+**/src/test/data/**
 
 # oXygen XML Editor #
 *.xpr
