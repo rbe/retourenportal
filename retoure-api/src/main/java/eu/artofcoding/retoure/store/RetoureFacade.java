@@ -65,10 +65,10 @@ public interface RetoureFacade extends Serializable {
     Future<StoreCustomer> placeReturn(StoreCustomer customer, String invoiceIdent) throws RetoureException;
 
     /**
-     * @param customer {@link StoreCustomer}.
-     * @param invoice  {@link Invoice}.
+     * @param customer {@link eu.artofcoding.beetlejuice.cdm.store.StoreCustomer}.
+     * @param invoice  {@link eu.artofcoding.beetlejuice.cdm.accounting.Invoice}.
      * @throws RetoureException
      */
-    void sendReturnLabelForInvoiceByMail(StoreCustomer customer, Invoice invoice) throws RetoureException;
+    Future<Boolean> sendReturnLabelForInvoiceByMail(StoreCustomer customer, Invoice invoice) throws RetoureException;
 
 }

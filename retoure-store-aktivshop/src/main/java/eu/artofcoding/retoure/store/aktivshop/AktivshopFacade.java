@@ -52,7 +52,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -257,7 +260,7 @@ public class AktivshopFacade implements RetoureFacade {
 
     @Override
     @Asynchronous
-    public void sendReturnLabelForInvoiceByMail(StoreCustomer customer, Invoice invoice) throws RetoureException {
+    public Future<Boolean> sendReturnLabelForInvoiceByMail(StoreCustomer customer, Invoice invoice) throws RetoureException {
         if (logger.isLoggable(Level.INFO)) {
             logger.info(String.format("sendReturnLabelForInvoiceByMail[customer=%s,invoice=%s]: Sending email to %s", customer.getCustomerIdent(), invoice.getInvoiceIdent(), customer.getEmail()));
         }
@@ -304,6 +307,32 @@ public class AktivshopFacade implements RetoureFacade {
         } else {
             throw new RetoureException("No postman, no emails!");
         }
+        return new Future<Boolean>() {
+            @Override
+            public boolean cancel(boolean mayInterruptIfRunning) {
+                return false;
+            }
+
+            @Override
+            public boolean isCancelled() {
+                return false;
+            }
+
+            @Override
+            public boolean isDone() {
+                return false;
+            }
+
+            @Override
+            public Boolean get() throws InterruptedException, ExecutionException {
+                return null;
+            }
+
+            @Override
+            public Boolean get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
+                return null;
+            }
+        };
     }
 
 }
