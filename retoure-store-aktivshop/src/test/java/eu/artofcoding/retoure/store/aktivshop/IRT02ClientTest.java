@@ -13,6 +13,7 @@ package eu.artofcoding.retoure.store.aktivshop;
 
 import eu.artofcoding.retoure.api.RetoureException;
 import eu.artofcoding.retoure.store.aktivshop.wsclient.irt02t.IRT02Result;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -26,6 +27,7 @@ import static org.junit.Assert.assertNotNull;
  * KZRTER: Kennzeichen Retoure erlaubt? 9=Fehler beim Ermittlung, 2=Retoure zu spät
  * KZOP:   Kennzeichnung Rechnung offen? 0=OP nicht ermittelt, 1=OP noch offen, 2=OP bezahlt
  */
+@Ignore
 public class IRT02ClientTest {
 
     public boolean assertOneOf(int expected, int... list) {
