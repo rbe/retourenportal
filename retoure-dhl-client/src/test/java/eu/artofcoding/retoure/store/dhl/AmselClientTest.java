@@ -15,8 +15,8 @@ import eu.artofcoding.beetlejuice.cdm.store.ReturnLabel;
 import eu.artofcoding.beetlejuice.cdm.store.StoreCustomer;
 import eu.artofcoding.retoure.delivery.ReturnLabelClient;
 import eu.artofcoding.retoure.delivery.dhl.AmselClientImpl;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,7 +25,7 @@ public class AmselClientTest {
 
     private StoreCustomer customer;
 
-    @BeforeMethod
+    @Before
     public void setUp() throws Exception {
         // Create customer
         customer = new StoreCustomer();
