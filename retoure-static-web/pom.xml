@@ -6,7 +6,7 @@
     <parent>
         <artifactId>retoure-server</artifactId>
         <groupId>eu.artofcoding.retoure</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-static-web</artifactId>
     <name>Retoure Static Web</name>
@@ -37,6 +37,5 @@
                 <version>${version.org.glassfish.maven.plugin.maven-glassfish-plugin}</version>
             </plugin>
         </plugins>
-        <finalName>${project.artifactId}-${buildNumber}</finalName>
     </build>
 </project>

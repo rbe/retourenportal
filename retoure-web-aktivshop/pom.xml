@@ -6,124 +6,17 @@
     <parent>
         <groupId>eu.artofcoding.retoure</groupId>
         <artifactId>retoure-server</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-web-aktivshop</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <name>Retoure Web Aktivshop</name>
     <url>http://www.retourenportal.com</url>
     <packaging>war</packaging>
     <dependencies>
-        <!--
-            Google
-        -->
-        <!-- Guava -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!--
-            Java EE
-        -->
-        <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-javaee-6.0</artifactId>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-        <!--
-            CDI
-        -->
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!--
-            JavaServer Faces
-        -->
-        <dependency>
-            <groupId>javax.faces</groupId>
-            <artifactId>javax.faces-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Apache MyFaces Tomahawk -->
-        <dependency>
-            <groupId>org.apache.myfaces.tomahawk</groupId>
-            <artifactId>tomahawk20</artifactId>
-            <!-- Will be provided via EAR or WAR
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>jstl</artifactId>
-                </exclusion>
-            </exclusions> -->
-        </dependency>
-        <!-- OmniFaces -->
-        <dependency>
-            <groupId>org.omnifaces</groupId>
-            <artifactId>omnifaces</artifactId>
-        </dependency>
-        <!--
-            Beetlejuice
-        -->
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-cdm</artifactId>
-        </dependency>
-        <!--
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-persistence</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.hibernate.javax.persistence</groupId>
-                    <artifactId>hibernate-jpa-2.0-api</artifactId>
-                </exclusion>
-            </exclusions>
-            </dependency>
-        -->
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-web</artifactId>
-        </dependency>
-        <!--
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-web-security</artifactId>
-        </dependency>
-        -->
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-web-jsfcomponents</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-template</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-email</artifactId>
-            <!-- Will be provided via EAR or WAR
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.mail</groupId>
-                    <artifactId>javax.mail-api</artifactId>
-                </exclusion>
-            </exclusions> -->
-        </dependency>
-        <!--
-            Retoure
-        -->
+        <!-- Retoure -->
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-api</artifactId>
-            <version>${project.version}</version>
             <scope>provided</scope>
             <!-- Will be provided via EAR or WAR
             <exclusions>
@@ -140,14 +33,12 @@
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-web-helper</artifactId>
-            <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-store-aktivshop</artifactId>
-            <version>${project.version}</version>
-            <scope>provided</scope>
+            <!--<scope>provided</scope>-->
             <!-- Will be provided via EAR or WAR
             <exclusions>
                 <exclusion>
@@ -159,6 +50,93 @@
                     <artifactId>webservices-osgi</artifactId>
                 </exclusion>
             </exclusions> -->
+        </dependency>
+        <!-- Beetlejuice -->
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.cdm</artifactId>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>beetlejuice-persistence</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate.javax.persistence</groupId>
+                    <artifactId>hibernate-jpa-2.0-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.web</artifactId>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>beetlejuice-web-security</artifactId>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.web.jsf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.template</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.email</artifactId>
+            <!-- Will be provided via EAR or WAR
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>javax.mail-api</artifactId>
+                </exclusion>
+            </exclusions> -->
+        </dependency>
+        <!-- Third Party -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-6.0</artifactId>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>javax.faces-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.myfaces.tomahawk</groupId>
+            <artifactId>tomahawk20</artifactId>
+            <!-- Will be provided via EAR or WAR
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>jstl</artifactId>
+                </exclusion>
+            </exclusions> -->
+        </dependency>
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -296,10 +274,11 @@
                                 org.omnifaces,
                                 com.ocpsoft,
                                 com.google.guava,
+                                javax.mail,
                                 eu.artofcoding.beetlejuice
                             </includeGroupIds>
                             <!--
-                                Included in WEB-INF/classes
+                                Excluded in WEB-INF/classes
                             -->
                             <excludeGroupIds>
                                 <!--
@@ -372,6 +351,5 @@
                 <artifactId>maven-glassfish-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>${project.artifactId}-${buildNumber}</finalName>
     </build>
 </project>

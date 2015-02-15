@@ -6,18 +6,66 @@
     <parent>
         <groupId>eu.artofcoding.retoure</groupId>
         <artifactId>retoure-server</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>LOCALBUILD</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>retoure-web-demo</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <name>Retoure Web Demo</name>
     <url>http://www.retourenportal.com</url>
     <packaging>war</packaging>
     <dependencies>
-        <!--
-            Java EE
-        -->
+        <!-- Retoure -->
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-web-helper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-store-demo</artifactId>
+            <exclusions>
+                <!-- Will be provided via EAR or WAR -->
+                <exclusion>
+                    <groupId>eu.artofcoding.retoure</groupId>
+                    <artifactId>retoure-persistence</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Beetlejuice -->
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.cdm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.persistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.web.jsf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.template</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.email</artifactId>
+        </dependency>
+        <!-- Third Party -->
         <dependency>
             <groupId>org.jboss.spec</groupId>
             <artifactId>jboss-javaee-6.0</artifactId>
@@ -29,23 +77,16 @@
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!--
-            CDI
-        -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!--
-            JavaServer Faces
-        -->
         <dependency>
             <groupId>javax.faces</groupId>
             <artifactId>javax.faces-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- Apache MyFaces Tomahawk -->
         <dependency>
             <groupId>org.apache.myfaces.tomahawk</groupId>
             <artifactId>tomahawk20</artifactId>
@@ -57,68 +98,9 @@
                 </exclusion>
             </exclusions> -->
         </dependency>
-        <!-- OmniFaces -->
         <dependency>
             <groupId>org.omnifaces</groupId>
             <artifactId>omnifaces</artifactId>
-        </dependency>
-        <!--
-            Beetlejuice
-        -->
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-cdm</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-persistence</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-web-jsfcomponents</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-template</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-email</artifactId>
-        </dependency>
-        <!--
-            Retoure
-        -->
-        <dependency>
-            <groupId>eu.artofcoding.retoure</groupId>
-            <artifactId>retoure-api</artifactId>
-            <version>${project.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.retoure</groupId>
-            <artifactId>retoure-web-helper</artifactId>
-            <version>${project.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.retoure</groupId>
-            <artifactId>retoure-store-demo</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-                <!-- Will be provided via EAR or WAR -->
-                <exclusion>
-                    <groupId>eu.artofcoding.retoure</groupId>
-                    <artifactId>retoure-persistence</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
     <build>
@@ -246,6 +228,5 @@
                 <artifactId>maven-glassfish-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>${project.artifactId}-${buildNumber}</finalName>
     </build>
 </project>

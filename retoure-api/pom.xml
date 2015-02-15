@@ -6,45 +6,34 @@
     <parent>
         <groupId>eu.artofcoding.retoure</groupId>
         <artifactId>retoure-server</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>LOCALBUILD</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>retoure-api</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <name>Retoure API</name>
     <url>http://www.retourenportal.com</url>
     <packaging>jar</packaging>
     <dependencies>
-        <!--
-            Java EE
-        -->
+        <!-- Beetlejuice -->
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.cdm</artifactId>
+        </dependency>
+        <!-- Third Party -->
         <dependency>
             <groupId>org.jboss.spec</groupId>
             <artifactId>jboss-javaee-6.0</artifactId>
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
-        <!--
-            CDI
-        -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!--
-            Beetlejuice
-        -->
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-cdm</artifactId>
-        </dependency>
     </dependencies>
-    <build>
-        <finalName>${project.artifactId}-${buildNumber}</finalName>
-    </build>
 </project>

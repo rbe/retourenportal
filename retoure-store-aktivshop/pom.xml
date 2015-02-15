@@ -6,7 +6,7 @@
     <parent>
         <groupId>eu.artofcoding.retoure</groupId>
         <artifactId>retoure-server</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-store-aktivshop</artifactId>
     <name>Retoure Store Aktivshop</name>
@@ -16,81 +16,60 @@
         <wsdlurl.aktivshop>http://62.214.69.250:10010</wsdlurl.aktivshop>
     </properties>
     <dependencies>
+        <!-- Retoure -->
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-api</artifactId>
+        </dependency>
         <!--
-            Java EE
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-persistence</artifactId>
+        </dependency>
         -->
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-dhl-client</artifactId>
+        </dependency>
+        <!-- Beetlejuice -->
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.template</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.email</artifactId>
+        </dependency>
+        <!-- Third Party -->
         <dependency>
             <groupId>org.jboss.spec</groupId>
             <artifactId>jboss-javaee-6.0</artifactId>
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
-        <!--
-            JAX-WS
-        -->
         <dependency>
             <groupId>org.glassfish.metro</groupId>
             <artifactId>webservices-osgi</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!--
-            CDI
-        -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!--
-            Google
-        -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
-        <!--
-            PDF
-        -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
         </dependency>
-        <!--
-            Beetlejuice
-        -->
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-template</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-email</artifactId>
-        </dependency>
-        <!--
-            Retoure
-        -->
-        <dependency>
-            <groupId>eu.artofcoding.retoure</groupId>
-            <artifactId>retoure-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <!--
-        <dependency>
-            <groupId>eu.artofcoding.retoure</groupId>
-            <artifactId>retoure-persistence</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        -->
-        <dependency>
-            <groupId>eu.artofcoding.retoure</groupId>
-            <artifactId>retoure-dhl-client</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
+     </dependencies>
     <build>
         <plugins>
             <!-- maven-compiler-plugin -->
@@ -183,6 +162,5 @@
                 </executions>
             </plugin>
         </plugins>
-        <finalName>${project.artifactId}-${buildNumber}</finalName>
     </build>
 </project>

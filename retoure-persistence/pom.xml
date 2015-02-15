@@ -6,60 +6,41 @@
     <parent>
         <artifactId>retoure-server</artifactId>
         <groupId>eu.artofcoding.retoure</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-persistence</artifactId>
     <name>Retoure Persistence</name>
     <url>http://www.retourenportal.com</url>
     <packaging>ejb</packaging>
     <dependencies>
-        <!--
-            Java EE
-        -->
+        <!-- Retoure -->
+        <dependency>
+            <groupId>eu.artofcoding.retoure</groupId>
+            <artifactId>retoure-api</artifactId>
+        </dependency>
+        <!-- Beetlejuice -->
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.artofcoding.beetlejuice</groupId>
+            <artifactId>eu.artofcoding.beetlejuice.persistence</artifactId>
+        </dependency>
+        <!-- Third Party -->
         <dependency>
             <groupId>org.jboss.spec</groupId>
             <artifactId>jboss-javaee-6.0</artifactId>
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
-        <!--
-            JPA
-        -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa</artifactId>
         </dependency>
-        <!-- MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!--
-            Beetlejuice
-        -->
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-persistence</artifactId>
-        </dependency>
-        <!--
-            Retoure
-        -->
-        <dependency>
-            <groupId>eu.artofcoding.retoure</groupId>
-            <artifactId>retoure-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-        <finalName>${project.artifactId}-${buildNumber}</finalName>
-    </build>
 </project>
