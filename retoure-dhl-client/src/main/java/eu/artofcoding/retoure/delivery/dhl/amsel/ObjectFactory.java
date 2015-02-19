@@ -24,8 +24,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _BookLabelRequest_QNAME = new QName("https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3bl", "BookLabelRequest");
     private final static QName _BookLabelResponse_QNAME = new QName("https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3bl", "BookLabelResponse");
+    private final static QName _BookLabelRequest_QNAME = new QName("https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3bl", "BookLabelRequest");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: eu.artofcoding.retoure.delivery.dhl.amsel
@@ -67,21 +67,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link BookLabelRequestType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3bl", name = "BookLabelRequest")
-    public JAXBElement<BookLabelRequestType> createBookLabelRequest(BookLabelRequestType value) {
-        return new JAXBElement<BookLabelRequestType>(_BookLabelRequest_QNAME, BookLabelRequestType.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BookLabelResponseType }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3bl", name = "BookLabelResponse")
     public JAXBElement<BookLabelResponseType> createBookLabelResponse(BookLabelResponseType value) {
         return new JAXBElement<BookLabelResponseType>(_BookLabelResponse_QNAME, BookLabelResponseType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BookLabelRequestType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "https://amsel.dpwn.net/abholportal/gw/lp/schema/1.0/var3bl", name = "BookLabelRequest")
+    public JAXBElement<BookLabelRequestType> createBookLabelRequest(BookLabelRequestType value) {
+        return new JAXBElement<BookLabelRequestType>(_BookLabelRequest_QNAME, BookLabelRequestType.class, null, value);
     }
 
 }
