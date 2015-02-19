@@ -43,7 +43,7 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tomeeVersion>${version.org.apache.tomee}</tomeeVersion>
+                            <tomeeVersion>${version.org.apache.openejb}</tomeeVersion>
                             <tomeeClassifier>${apache-tomee.classifier}</tomeeClassifier>
                             <debugPort>5005</debugPort>
                             <tomeeHttpPort>8080</tomeeHttpPort>
