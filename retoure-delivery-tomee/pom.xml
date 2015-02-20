@@ -9,76 +9,129 @@
         <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-delivery-tomee</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <properties>
-        <version.org.apache.openejb>1.7.1</version.org.apache.openejb>
-        <apache-tomee.classifier>plume</apache-tomee.classifier>
+        <tomee.version>1.7.1</tomee.version>
+        <tomee.classifier>webprofile</tomee.classifier>
+        <tomee-maven-plugin.version>1.5.2</tomee-maven-plugin.version>
     </properties>
     <dependencies>
         <!-- Third Party -->
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>apache-tomee</artifactId>
-            <version>${version.org.apache.openejb}</version>
-            <classifier>${apache-tomee.classifier}</classifier>
+            <version>${tomee.version}</version>
+            <classifier>${tomee.classifier}</classifier>
             <type>zip</type>
         </dependency>
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>tomee-embedded</artifactId>
-            <version>${version.org.apache.openejb}</version>
+            <version>${tomee.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <skipIfEmpty>true</skipIfEmpty>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.openejb.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>
-                <version>${version.org.apache.openejb}</version>
+                <version>${tomee-maven-plugin.version}</version>
+                <configuration>
+                    <tomeeVersion>${tomee.version}</tomeeVersion>
+                    <tomeeClassifier>${tomee.classifier}</tomeeClassifier>
+                    <removeDefaultWebapps>true</removeDefaultWebapps>
+                    <removeTomeeWebapp>true</removeTomeeWebapp>
+                    <skipCurrentProject>true</skipCurrentProject>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>tomee-retoure-all</id>
-                        <phase>package</phase>
+                        <id>start-tomee-retoure-all</id>
+                        <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>run</goal>
+                            <goal>start</goal>
                         </goals>
                         <configuration>
-                            <tomeeVersion>${version.org.apache.openejb}</tomeeVersion>
-                            <tomeeClassifier>${apache-tomee.classifier}</tomeeClassifier>
-                            <debugPort>5005</debugPort>
-                            <tomeeHttpPort>8080</tomeeHttpPort>
-                            <removeDefaultWebapps>true</removeDefaultWebapps>
-                            <removeTomeeWebapp>true</removeTomeeWebapp>
-                            <libs>
-                                <lib>mysql:mysql-connector-java:5.1.20</lib>
-                            </libs>
                             <webapps>
-                                <webapp>eu.artofcoding.retoure:retoure-web-demo:LOCALBUILD:war</webapp>
-                                <webapp>eu.artofcoding.retoure:retoure-web-aktivshop:LOCALBUILD:war</webapp>
+                                <webapp>eu.artofcoding.retoure:retoure-web-demo:${project.version}:war</webapp>
+                                <webapp>eu.artofcoding.retoure:retoure-web-aktivshop:${project.version}:war</webapp>
                             </webapps>
-                            <reloadOnUpdate>true</reloadOnUpdate>
-                            <synchronization>
-                                <extensions>
-                                    <extension>.class</extension>
-                                </extensions>
-                                <updateOnlyExtensions>
-                                    <updateOnlyExtension>.html</updateOnlyExtension>
-                                    <updateOnlyExtension>.js</updateOnlyExtension>
-                                    <updateOnlyExtension>.jcss</updateOnlyExtension>
-                                </updateOnlyExtensions>
-                            </synchronization>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-tomee-retoure-all</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                    <!--<execution>
+                        <id>tomee-package</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <webapps>
+                                <webapp>eu.artofcoding.retoure:retoure-web-demo:${project.version}:war</webapp>
+                                <webapp>eu.artofcoding.retoure:retoure-web-aktivshop:${project.version}:war</webapp>
+                            </webapps>
+                        </configuration>
+                    </execution>-->
+                    <execution>
+                        <id>tomee-build</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>2.18.1</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>failsafe-integration-test</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/*ITSuite.java</include>
+                            </includes>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>bla</id>
-            <name>bla</name>
-            <layout>default</layout>
-            <url>file:///Users/rbe/.m2/repository</url>
-        </repository>
-    </repositories>
 </project>
