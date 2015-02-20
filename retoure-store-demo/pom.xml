@@ -9,8 +9,6 @@
         <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-store-demo</artifactId>
-    <name>Retoure Store Demo</name>
-    <url>http://www.retourenportal.com</url>
     <packaging>jar</packaging>
     <dependencies>
         <!-- Retoure -->

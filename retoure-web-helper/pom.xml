@@ -9,8 +9,6 @@
         <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-web-helper</artifactId>
-    <name>Retoure Web Components and Helper</name>
-    <url>http://www.retourenportal.com</url>
     <packaging>jar</packaging>
     <dependencies>
         <!-- Retoure -->

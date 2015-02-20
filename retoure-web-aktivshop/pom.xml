@@ -9,8 +9,6 @@
         <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-web-aktivshop</artifactId>
-    <name>Retoure Web Aktivshop</name>
-    <url>http://www.retourenportal.com</url>
     <packaging>war</packaging>
     <dependencies>
         <!-- Retoure -->

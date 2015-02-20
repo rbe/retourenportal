@@ -9,8 +9,6 @@
         <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-static-web</artifactId>
-    <name>Retoure Static Web</name>
-    <url>http://www.retourenportal.com</url>
     <properties>
         <!-- Maven Plugins -->
         <version.org.apache.maven.plugins.maven-war-plugin>2.2</version.org.apache.maven.plugins.maven-war-plugin>

@@ -9,8 +9,6 @@
         <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-store-aktivshop</artifactId>
-    <name>Retoure Store Aktivshop</name>
-    <url>http://www.retourenportal.com</url>
     <packaging>jar</packaging>
     <properties>
         <wsdlurl.aktivshop>http://62.214.69.250:10010</wsdlurl.aktivshop>
@@ -51,11 +49,11 @@
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.glassfish.metro</groupId>
             <artifactId>webservices-osgi</artifactId>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
@@ -86,8 +84,10 @@
             <plugin>
                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
+                <configuration>
+                    <verbose>true</verbose>
+                </configuration>
                 <executions>
-                    <!--
                     <execution>
                         <id>IRT01T</id>
                         <goals>
@@ -104,8 +104,6 @@
                             <packageName>eu.artofcoding.retoure.store.aktivshop.wsclient.irt01t</packageName>
                         </configuration>
                     </execution>
-                    -->
-                    <!--
                     <execution>
                         <id>IRT01E</id>
                         <goals>
@@ -122,8 +120,6 @@
                             <packageName>eu.artofcoding.retoure.store.aktivshop.wsclient.irt01e</packageName>
                         </configuration>
                     </execution>
-                    -->
-                    <!--
                     <execution>
                         <id>IRT02T</id>
                         <goals>
@@ -140,8 +136,6 @@
                             <packageName>eu.artofcoding.retoure.store.aktivshop.wsclient.irt02t</packageName>
                         </configuration>
                     </execution>
-                    -->
-                    <!--
                     <execution>
                         <id>IRT02E</id>
                         <goals>
@@ -158,7 +152,6 @@
                             <packageName>eu.artofcoding.retoure.store.aktivshop.wsclient.irt02e</packageName>
                         </configuration>
                     </execution>
-                    -->
                 </executions>
             </plugin>
         </plugins>

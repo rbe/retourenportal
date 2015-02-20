@@ -9,8 +9,6 @@
         <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-persistence</artifactId>
-    <name>Retoure Persistence</name>
-    <url>http://www.retourenportal.com</url>
     <packaging>ejb</packaging>
     <dependencies>
         <!-- Retoure -->
@@ -41,6 +39,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

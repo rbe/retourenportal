@@ -9,8 +9,6 @@
         <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-enterprise</artifactId>
-    <name>Retoure Enterprise</name>
-    <url>http://www.retourenportal.com</url>
     <packaging>ear</packaging>
     <dependencies>
         <!-- Retoure -->

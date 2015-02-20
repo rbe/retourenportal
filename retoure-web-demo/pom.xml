@@ -10,8 +10,6 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>retoure-web-demo</artifactId>
-    <name>Retoure Web Demo</name>
-    <url>http://www.retourenportal.com</url>
     <packaging>war</packaging>
     <dependencies>
         <!-- Retoure -->

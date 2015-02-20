@@ -9,8 +9,6 @@
         <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-dhl-client</artifactId>
-    <name>Retoure DHL Client</name>
-    <url>http://www.retourenportal.com</url>
     <dependencies>
         <!-- Retoure -->
         <dependency>
@@ -18,16 +16,18 @@
             <artifactId>retoure-api</artifactId>
         </dependency>
         <!-- Third Party -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
             <version>${version.org.apache.cxf}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
             <version>${version.org.apache.cxf}</version>
-        </dependency>
+            <scope>provided</scope>
+        </dependency>-->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>

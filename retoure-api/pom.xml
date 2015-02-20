@@ -10,8 +10,6 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>retoure-api</artifactId>
-    <name>Retoure API</name>
-    <url>http://www.retourenportal.com</url>
     <packaging>jar</packaging>
     <dependencies>
         <!-- Beetlejuice -->
