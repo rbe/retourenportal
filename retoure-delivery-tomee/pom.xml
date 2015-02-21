@@ -12,7 +12,7 @@
     <packaging>jar</packaging>
     <properties>
         <tomee.version>1.7.1</tomee.version>
-        <tomee.classifier>webprofile</tomee.classifier>
+        <tomee.classifier>plume</tomee.classifier>
         <tomee-maven-plugin.version>1.5.2</tomee-maven-plugin.version>
     </properties>
     <dependencies>
@@ -65,6 +65,7 @@
                             <goal>start</goal>
                         </goals>
                         <configuration>
+                            <args>-Xms128m -Xmx128m</args>
                             <webapps>
                                 <webapp>eu.artofcoding.retoure:retoure-web-demo:${project.version}:war</webapp>
                                 <webapp>eu.artofcoding.retoure:retoure-web-aktivshop:${project.version}:war</webapp>
