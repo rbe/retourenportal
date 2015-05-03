@@ -462,10 +462,12 @@
         <system>GitHub</system>
         <url>https://github.com/artofcoding/retoure-server/issues</url>
     </issueManagement>
+    <!--
     <scm>
         <developerConnection>
             scm:git:[fetch=]https://bitbucket.org/artofcoding/retoure-server[push=]ssh://bitbucket.org/artofcoding/retoure-server
         </developerConnection>
         <url>http://bitbucket.org/artofcoding/retoure-server</url>
     </scm>
+    -->
 </project>
