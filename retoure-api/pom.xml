@@ -21,17 +21,5 @@
             <groupId>eu.artofcoding.beetlejuice</groupId>
             <artifactId>eu.artofcoding.beetlejuice.cdm</artifactId>
         </dependency>
-        <!-- Third Party -->
-        <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-javaee-6.0</artifactId>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 </project>

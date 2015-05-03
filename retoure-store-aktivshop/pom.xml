@@ -11,7 +11,7 @@
     <artifactId>retoure-store-aktivshop</artifactId>
     <packaging>jar</packaging>
     <properties>
-        <wsdlurl.aktivshop>http://62.214.69.250:10010</wsdlurl.aktivshop>
+        <aktivshop.backend.wsdl.url>http://62.214.69.250:10010</aktivshop.backend.wsdl.url>
     </properties>
     <dependencies>
         <!-- Retoure -->
@@ -19,12 +19,6 @@
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-api</artifactId>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>eu.artofcoding.retoure</groupId>
-            <artifactId>retoure-persistence</artifactId>
-        </dependency>
-        -->
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-dhl-client</artifactId>
@@ -49,11 +43,6 @@
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
-        <!--<dependency>
-            <groupId>org.glassfish.metro</groupId>
-            <artifactId>webservices-osgi</artifactId>
-            <scope>provided</scope>
-        </dependency>-->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
@@ -95,7 +84,7 @@
                         </goals>
                         <configuration>
                             <wsdlUrls>
-                                <wsdlUrl>${wsdlurl.aktivshop}/web/services/IRT01T?wsdl</wsdlUrl>
+                                <wsdlUrl>${aktivshop.backend.wsdl.url}/web/services/IRT01T?wsdl</wsdlUrl>
                             </wsdlUrls>
                             <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
                             <bindingDirectory>src/main/resources/binding</bindingDirectory>
@@ -111,7 +100,7 @@
                         </goals>
                         <configuration>
                             <wsdlUrls>
-                                <wsdlUrl>${wsdlurl.aktivshop}/web/services/IRT01E?wsdl</wsdlUrl>
+                                <wsdlUrl>${aktivshop.backend.wsdl.url}/web/services/IRT01E?wsdl</wsdlUrl>
                             </wsdlUrls>
                             <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
                             <bindingDirectory>src/main/resources/binding</bindingDirectory>
@@ -127,7 +116,7 @@
                         </goals>
                         <configuration>
                             <wsdlUrls>
-                                <wsdlUrl>${wsdlurl.aktivshop}/web/services/IRT02T?wsdl</wsdlUrl>
+                                <wsdlUrl>${aktivshop.backend.wsdl.url}/web/services/IRT02T?wsdl</wsdlUrl>
                             </wsdlUrls>
                             <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
                             <bindingDirectory>src/main/resources/binding</bindingDirectory>
@@ -143,7 +132,7 @@
                         </goals>
                         <configuration>
                             <wsdlUrls>
-                                <wsdlUrl>${wsdlurl.aktivshop}/web/services/IRT02E?wsdl</wsdlUrl>
+                                <wsdlUrl>${aktivshop.backend.wsdl.url}/web/services/IRT02E?wsdl</wsdlUrl>
                             </wsdlUrls>
                             <wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
                             <bindingDirectory>src/main/resources/binding</bindingDirectory>

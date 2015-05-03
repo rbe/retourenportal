@@ -16,17 +16,6 @@
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-api</artifactId>
             <scope>provided</scope>
-            <!-- Will be provided via EAR or WAR
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.shrinkwrap</groupId>
-                    <artifactId>shrinkwrap-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss.shrinkwrap.descriptors</groupId>
-                    <artifactId>shrinkwrap-descriptors-impl</artifactId>
-                </exclusion>
-            </exclusions> -->
         </dependency>
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
@@ -36,18 +25,6 @@
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-store-aktivshop</artifactId>
-            <!--<scope>provided</scope>-->
-            <!-- Will be provided via EAR or WAR
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.xml</groupId>
-                    <artifactId>jaxrpc-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.glassfish.metro</groupId>
-                    <artifactId>webservices-osgi</artifactId>
-                </exclusion>
-            </exclusions> -->
         </dependency>
         <!-- Beetlejuice -->
         <dependency>
@@ -58,28 +35,10 @@
             <groupId>eu.artofcoding.beetlejuice</groupId>
             <artifactId>eu.artofcoding.beetlejuice.cdm</artifactId>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-persistence</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.hibernate.javax.persistence</groupId>
-                    <artifactId>hibernate-jpa-2.0-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        -->
         <dependency>
             <groupId>eu.artofcoding.beetlejuice</groupId>
             <artifactId>eu.artofcoding.beetlejuice.web</artifactId>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>eu.artofcoding.beetlejuice</groupId>
-            <artifactId>beetlejuice-web-security</artifactId>
-        </dependency>
-        -->
         <dependency>
             <groupId>eu.artofcoding.beetlejuice</groupId>
             <artifactId>eu.artofcoding.beetlejuice.web.jsf</artifactId>
@@ -91,13 +50,6 @@
         <dependency>
             <groupId>eu.artofcoding.beetlejuice</groupId>
             <artifactId>eu.artofcoding.beetlejuice.email</artifactId>
-            <!-- Will be provided via EAR or WAR
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.mail</groupId>
-                    <artifactId>javax.mail-api</artifactId>
-                </exclusion>
-            </exclusions> -->
         </dependency>
         <!-- Third Party -->
         <dependency>
@@ -112,25 +64,17 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <scope>provided</scope>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>javax.faces</groupId>
             <artifactId>javax.faces-api</artifactId>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.apache.myfaces.tomahawk</groupId>
             <artifactId>tomahawk20</artifactId>
-            <!-- Will be provided via EAR or WAR
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>jstl</artifactId>
-                </exclusion>
-            </exclusions> -->
         </dependency>
         <dependency>
             <groupId>org.omnifaces</groupId>
@@ -152,21 +96,6 @@
                         </goals>
                         <configuration>
                             <artifactItems>
-                                <!-- tomahawk
-                                <artifactItem>
-                                    <groupId>org.apache.myfaces.tomahawk</groupId>
-                                    <artifactId>tomahawk20</artifactId>
-                                    <version>1.1.14</version>
-                                    <type>jar</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes
-                                    </outputDirectory>
-                                    <includes>
-                                        META-INF/**,
-                                        org/**
-                                    </includes>
-                                </artifactItem> -->
                                 <!-- retoure-api -->
                                 <artifactItem>
                                     <groupId>eu.artofcoding.retoure</groupId>
@@ -178,7 +107,7 @@
                                         ${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes
                                     </outputDirectory>
                                     <includes>
-                                        eu/**
+                                        eu/artofcoding/**
                                     </includes>
                                 </artifactItem>
                                 <!-- retoure-dhl-client -->
@@ -192,26 +121,9 @@
                                         ${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes
                                     </outputDirectory>
                                     <includes>
-                                        eu/**
+                                        eu/artofcoding/**
                                     </includes>
                                 </artifactItem>
-                                <!-- retoure-persistence -->
-                                <!--
-                                <artifactItem>
-                                    <groupId>eu.artofcoding.retoure</groupId>
-                                    <artifactId>retoure-persistence</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>jar</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes
-                                    </outputDirectory>
-                                    <includes>
-                                        META-INF/**,
-                                        eu/**
-                                    </includes>
-                                </artifactItem>
-                                -->
                                 <!-- retoure-store-aktivshop -->
                                 <artifactItem>
                                     <groupId>eu.artofcoding.retoure</groupId>
@@ -224,7 +136,7 @@
                                     </outputDirectory>
                                     <includes>
                                         META-INF/**,
-                                        eu/**
+                                        eu/artofcoding/**
                                     </includes>
                                 </artifactItem>
                                 <!-- retoure-web-helper -->
@@ -239,7 +151,7 @@
                                     </outputDirectory>
                                     <includes>
                                         META-INF/**,
-                                        eu/**
+                                        eu/artofcoding/**
                                     </includes>
                                 </artifactItem>
                             </artifactItems>
@@ -260,59 +172,28 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <!--
-                            <useSubDirectoryPerType>true</useSubDirectoryPerType>
-                            <excludeTransitive>true</excludeTransitive>
-                            <includeScope>compile</includeScope>
-                            <excludeScope>provided,test</excludeScope>
-                            -->
                             <includeGroupIds>
                                 org.apache.myfaces.tomahawk,
                                 org.apache.pdfbox,
                                 org.omnifaces,
                                 com.ocpsoft,
                                 com.google.guava,
-                                javax.mail,
+                                javax.mail, com.sun.mail,
                                 eu.artofcoding.beetlejuice
                             </includeGroupIds>
                             <!--
                                 Excluded in WEB-INF/classes
                             -->
                             <excludeGroupIds>
-                                <!--
-                                javax.enterprise,
-                                javax.faces,
-                                javax.validation,
-                                javax.el,
-                                javax.jws,
-                                javax.annotation,
-                                javax.xml,
-                                org.jboss.spec,
-                                org.jboss.arquillian.core,
-                                org.jboss.arquillian.config,
-                                org.jboss.arquillian.testng,
-                                org.jboss.arquillian.container,
-                                org.jboss.arquillian.extension,
-                                org.jboss.shrinkwrap,
-                                org.seleniumhq.selenium,
-                                org.glassfish.main.extras,
-                                org.glassfish.metro,
-                                org.jvnet,
-                                org.testng,
-                                junit,
-                                com.sun.xml.bind,
-                                com.ctc.wstx,
-                                xalan,
-                                -->
                                 org.hibernate.javax.persistence,
                                 eu.artofcoding.retoure
                             </excludeGroupIds>
                             <!-- Absent code attribute... -->
-                            <excludeArtifactIds>
+                            <!--<excludeArtifactIds>
                                 shrinkwrap-impl-base,
                                 shrinkwrap-api
                                 retoure-store-aktivshop,
-                            </excludeArtifactIds>
+                            </excludeArtifactIds>-->
                             <outputDirectory>
                                 ${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/lib
                             </outputDirectory>
@@ -342,11 +223,6 @@
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin>
-            <!-- maven-glassfish-plugin -->
-            <plugin>
-                <groupId>org.glassfish.maven.plugin</groupId>
-                <artifactId>maven-glassfish-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

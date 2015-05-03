@@ -9,30 +9,15 @@
         <version>LOCALBUILD</version>
     </parent>
     <artifactId>retoure-static-web</artifactId>
-    <properties>
-        <!-- Maven Plugins -->
-        <version.org.apache.maven.plugins.maven-war-plugin>2.2</version.org.apache.maven.plugins.maven-war-plugin>
-        <!-- Java EE -->
-        <version.javaee-api>6.0</version.javaee-api>
-        <!-- GlassFish -->
-        <version.org.glassfish.maven.plugin.maven-glassfish-plugin>2.1</version.org.glassfish.maven.plugin.maven-glassfish-plugin>
-    </properties>
     <build>
         <plugins>
             <!-- maven-war-plugin -->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>${version.org.apache.maven.plugins.maven-war-plugin}</version>
+                <version>${version.maven-war-plugin}</version>
                 <configuration>
-                    <!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
-            </plugin>
-            <!-- maven-glassfish-plugin -->
-            <plugin>
-                <groupId>org.glassfish.maven.plugin</groupId>
-                <artifactId>maven-glassfish-plugin</artifactId>
-                <version>${version.org.glassfish.maven.plugin.maven-glassfish-plugin}</version>
             </plugin>
         </plugins>
     </build>

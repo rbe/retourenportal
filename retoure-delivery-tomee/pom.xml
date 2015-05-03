@@ -79,7 +79,8 @@
                             <goal>stop</goal>
                         </goals>
                     </execution>
-                    <!--<execution>
+                    <!-- w/ tomee-maven-plugin 1.7
+                    <execution>
                         <id>tomee-package</id>
                         <phase>package</phase>
                         <goals>
@@ -91,7 +92,8 @@
                                 <webapp>eu.artofcoding.retoure:retoure-web-aktivshop:${project.version}:war</webapp>
                             </webapps>
                         </configuration>
-                    </execution>-->
+                    </execution>
+                    -->
                     <execution>
                         <id>tomee-build</id>
                         <phase>package</phase>

@@ -16,20 +16,18 @@
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-api</artifactId>
         </dependency>
-        <!-- Java EE -->
+        <!-- Third Party -->
         <dependency>
             <groupId>org.jboss.spec</groupId>
             <artifactId>jboss-javaee-6.0</artifactId>
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
-        <!-- CDI -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- JavaServer Faces -->
         <dependency>
             <groupId>javax.faces</groupId>
             <artifactId>javax.faces-api</artifactId>

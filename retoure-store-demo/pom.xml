@@ -16,12 +16,6 @@
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-api</artifactId>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>eu.artofcoding.retoure</groupId>
-            <artifactId>retoure-persistence</artifactId>
-        </dependency>
-        -->
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-dhl-client</artifactId>

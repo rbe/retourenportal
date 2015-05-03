@@ -16,18 +16,6 @@
             <artifactId>retoure-api</artifactId>
         </dependency>
         <!-- Third Party -->
-        <!--<dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>${version.org.apache.cxf}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${version.org.apache.cxf}</version>
-            <scope>provided</scope>
-        </dependency>-->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>

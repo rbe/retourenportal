@@ -26,13 +26,6 @@
         <dependency>
             <groupId>eu.artofcoding.retoure</groupId>
             <artifactId>retoure-store-demo</artifactId>
-            <exclusions>
-                <!-- Will be provided via EAR or WAR -->
-                <exclusion>
-                    <groupId>eu.artofcoding.retoure</groupId>
-                    <artifactId>retoure-persistence</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!-- Beetlejuice -->
         <dependency>
@@ -71,30 +64,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.faces</groupId>
-            <artifactId>javax.faces-api</artifactId>
-            <scope>provided</scope>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.myfaces.tomahawk</groupId>
             <artifactId>tomahawk20</artifactId>
-            <!-- Will be provided via EAR or WAR
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>jstl</artifactId>
-                </exclusion>
-            </exclusions> -->
         </dependency>
         <dependency>
             <groupId>org.omnifaces</groupId>
@@ -216,14 +191,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
-            </plugin>
-            <!-- maven-glassfish-plugin -->
-            <plugin>
-                <groupId>org.glassfish.maven.plugin</groupId>
-                <artifactId>maven-glassfish-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
