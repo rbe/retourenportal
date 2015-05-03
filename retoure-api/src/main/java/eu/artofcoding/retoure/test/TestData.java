@@ -9,7 +9,7 @@
  * rbe, 02.03.13 13:48
  */
 
-package eu.artofcoding.retoure.api;
+package eu.artofcoding.retoure.test;
 
 import eu.artofcoding.beetlejuice.cdm.Group;
 import eu.artofcoding.beetlejuice.cdm.Salutation;

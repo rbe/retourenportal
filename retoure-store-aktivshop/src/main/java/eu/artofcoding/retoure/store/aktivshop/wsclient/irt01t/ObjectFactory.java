@@ -26,13 +26,13 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _Irt01XMLResponseReturn_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "return");
-    private final static QName _IRT01ResultSBNR_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_SBNR");
-    private final static QName _IRT01ResultFNR_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_FNR");
-    private final static QName _IRT01ResultRGNR_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_RGNR");
-    private final static QName _IRT01ResultERGT_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_ERGT");
-    private final static QName _IRT01ResultID_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_ID");
-    private final static QName _IRT01ResultERG_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_ERG");
-    private final static QName _Irt01XMLArgs0_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "args0");
+    private final static QName _Irt01Args0_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "args0");
+    private final static QName _IRT01InputSBNR_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_SBNR");
+    private final static QName _IRT01InputFNR_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_FNR");
+    private final static QName _IRT01InputRGNR_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_RGNR");
+    private final static QName _IRT01InputERGT_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_ERGT");
+    private final static QName _IRT01InputID_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_ID");
+    private final static QName _IRT01InputERG_QNAME = new QName("http://irt01t.wsbeans.iseries/xsd", "_ERG");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: eu.artofcoding.retoure.store.aktivshop.wsclient.irt01t
@@ -99,57 +99,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link IRT01Input }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_SBNR", scope = IRT01Result.class)
-    public JAXBElement<BigDecimal> createIRT01ResultSBNR(BigDecimal value) {
-        return new JAXBElement<BigDecimal>(_IRT01ResultSBNR_QNAME, BigDecimal.class, IRT01Result.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_FNR", scope = IRT01Result.class)
-    public JAXBElement<String> createIRT01ResultFNR(String value) {
-        return new JAXBElement<String>(_IRT01ResultFNR_QNAME, String.class, IRT01Result.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_RGNR", scope = IRT01Result.class)
-    public JAXBElement<BigDecimal> createIRT01ResultRGNR(BigDecimal value) {
-        return new JAXBElement<BigDecimal>(_IRT01ResultRGNR_QNAME, BigDecimal.class, IRT01Result.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_ERGT", scope = IRT01Result.class)
-    public JAXBElement<String> createIRT01ResultERGT(String value) {
-        return new JAXBElement<String>(_IRT01ResultERGT_QNAME, String.class, IRT01Result.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_ID", scope = IRT01Result.class)
-    public JAXBElement<String> createIRT01ResultID(String value) {
-        return new JAXBElement<String>(_IRT01ResultID_QNAME, String.class, IRT01Result.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_ERG", scope = IRT01Result.class)
-    public JAXBElement<BigDecimal> createIRT01ResultERG(BigDecimal value) {
-        return new JAXBElement<BigDecimal>(_IRT01ResultERG_QNAME, BigDecimal.class, IRT01Result.class, value);
+    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "args0", scope = Irt01 .class)
+    public JAXBElement<IRT01Input> createIrt01Args0(IRT01Input value) {
+        return new JAXBElement<IRT01Input>(_Irt01Args0_QNAME, IRT01Input.class, Irt01 .class, value);
     }
 
     /**
@@ -158,7 +113,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "args0", scope = Irt01XML.class)
     public JAXBElement<IRT01Input> createIrt01XMLArgs0(IRT01Input value) {
-        return new JAXBElement<IRT01Input>(_Irt01XMLArgs0_QNAME, IRT01Input.class, Irt01XML.class, value);
+        return new JAXBElement<IRT01Input>(_Irt01Args0_QNAME, IRT01Input.class, Irt01XML.class, value);
     }
 
     /**
@@ -167,7 +122,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_SBNR", scope = IRT01Input.class)
     public JAXBElement<BigDecimal> createIRT01InputSBNR(BigDecimal value) {
-        return new JAXBElement<BigDecimal>(_IRT01ResultSBNR_QNAME, BigDecimal.class, IRT01Input.class, value);
+        return new JAXBElement<BigDecimal>(_IRT01InputSBNR_QNAME, BigDecimal.class, IRT01Input.class, value);
     }
 
     /**
@@ -176,7 +131,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_FNR", scope = IRT01Input.class)
     public JAXBElement<String> createIRT01InputFNR(String value) {
-        return new JAXBElement<String>(_IRT01ResultFNR_QNAME, String.class, IRT01Input.class, value);
+        return new JAXBElement<String>(_IRT01InputFNR_QNAME, String.class, IRT01Input.class, value);
     }
 
     /**
@@ -185,7 +140,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_RGNR", scope = IRT01Input.class)
     public JAXBElement<BigDecimal> createIRT01InputRGNR(BigDecimal value) {
-        return new JAXBElement<BigDecimal>(_IRT01ResultRGNR_QNAME, BigDecimal.class, IRT01Input.class, value);
+        return new JAXBElement<BigDecimal>(_IRT01InputRGNR_QNAME, BigDecimal.class, IRT01Input.class, value);
     }
 
     /**
@@ -194,7 +149,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_ERGT", scope = IRT01Input.class)
     public JAXBElement<String> createIRT01InputERGT(String value) {
-        return new JAXBElement<String>(_IRT01ResultERGT_QNAME, String.class, IRT01Input.class, value);
+        return new JAXBElement<String>(_IRT01InputERGT_QNAME, String.class, IRT01Input.class, value);
     }
 
     /**
@@ -203,7 +158,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_ID", scope = IRT01Input.class)
     public JAXBElement<String> createIRT01InputID(String value) {
-        return new JAXBElement<String>(_IRT01ResultID_QNAME, String.class, IRT01Input.class, value);
+        return new JAXBElement<String>(_IRT01InputID_QNAME, String.class, IRT01Input.class, value);
     }
 
     /**
@@ -212,7 +167,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_ERG", scope = IRT01Input.class)
     public JAXBElement<BigDecimal> createIRT01InputERG(BigDecimal value) {
-        return new JAXBElement<BigDecimal>(_IRT01ResultERG_QNAME, BigDecimal.class, IRT01Input.class, value);
+        return new JAXBElement<BigDecimal>(_IRT01InputERG_QNAME, BigDecimal.class, IRT01Input.class, value);
     }
 
     /**
@@ -225,12 +180,57 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IRT01Input }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "args0", scope = Irt01 .class)
-    public JAXBElement<IRT01Input> createIrt01Args0(IRT01Input value) {
-        return new JAXBElement<IRT01Input>(_Irt01XMLArgs0_QNAME, IRT01Input.class, Irt01 .class, value);
+    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_SBNR", scope = IRT01Result.class)
+    public JAXBElement<BigDecimal> createIRT01ResultSBNR(BigDecimal value) {
+        return new JAXBElement<BigDecimal>(_IRT01InputSBNR_QNAME, BigDecimal.class, IRT01Result.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_FNR", scope = IRT01Result.class)
+    public JAXBElement<String> createIRT01ResultFNR(String value) {
+        return new JAXBElement<String>(_IRT01InputFNR_QNAME, String.class, IRT01Result.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_RGNR", scope = IRT01Result.class)
+    public JAXBElement<BigDecimal> createIRT01ResultRGNR(BigDecimal value) {
+        return new JAXBElement<BigDecimal>(_IRT01InputRGNR_QNAME, BigDecimal.class, IRT01Result.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_ERGT", scope = IRT01Result.class)
+    public JAXBElement<String> createIRT01ResultERGT(String value) {
+        return new JAXBElement<String>(_IRT01InputERGT_QNAME, String.class, IRT01Result.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_ID", scope = IRT01Result.class)
+    public JAXBElement<String> createIRT01ResultID(String value) {
+        return new JAXBElement<String>(_IRT01InputID_QNAME, String.class, IRT01Result.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://irt01t.wsbeans.iseries/xsd", name = "_ERG", scope = IRT01Result.class)
+    public JAXBElement<BigDecimal> createIRT01ResultERG(BigDecimal value) {
+        return new JAXBElement<BigDecimal>(_IRT01InputERG_QNAME, BigDecimal.class, IRT01Result.class, value);
     }
 
 }

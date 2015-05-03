@@ -24,7 +24,7 @@ import eu.artofcoding.beetlejuice.entity.MimeType;
 import eu.artofcoding.beetlejuice.template.TemplateProcessor;
 import eu.artofcoding.retoure.api.RetoureConstants;
 import eu.artofcoding.retoure.api.RetoureException;
-import eu.artofcoding.retoure.api.TestData;
+import eu.artofcoding.retoure.test.TestData;
 import eu.artofcoding.retoure.delivery.ReturnLabelClient;
 import eu.artofcoding.retoure.delivery.dhl.AmselClient;
 import eu.artofcoding.retoure.store.RetoureFacade;
@@ -38,6 +38,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -64,6 +65,7 @@ import static eu.artofcoding.retoure.store.aktivshop.AktivshopConstants.STORE;
 import static eu.artofcoding.retoure.store.aktivshop.AktivshopWebserviceHelper.checkIRT02Result;
 
 @Stateless
+@Local
 public class AktivshopFacade implements RetoureFacade {
 
     private static final long serialVersionUID = 1L;

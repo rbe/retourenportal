@@ -17,11 +17,9 @@ import eu.artofcoding.beetlejuice.cdm.store.ReturnReason;
 import eu.artofcoding.beetlejuice.cdm.store.StoreCustomer;
 import eu.artofcoding.retoure.api.RetoureException;
 
-import javax.ejb.Local;
 import java.io.Serializable;
 import java.util.concurrent.Future;
 
-@Local
 public interface RetoureFacade extends Serializable {
 
     /**

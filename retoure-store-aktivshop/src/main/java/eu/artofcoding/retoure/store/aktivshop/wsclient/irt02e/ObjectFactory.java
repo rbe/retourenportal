@@ -25,7 +25,6 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Irt02XMLResponseReturn_QNAME = new QName("http://irt02e.wsbeans.iseries/xsd", "return");
     private final static QName _Irt02XMLArgs0_QNAME = new QName("http://irt02e.wsbeans.iseries/xsd", "args0");
     private final static QName _IRT02InputVATX_QNAME = new QName("http://irt02e.wsbeans.iseries/xsd", "_VATX");
     private final static QName _IRT02InputKZOP_QNAME = new QName("http://irt02e.wsbeans.iseries/xsd", "_KZOP");
@@ -41,6 +40,7 @@ public class ObjectFactory {
     private final static QName _IRT02InputAORT_QNAME = new QName("http://irt02e.wsbeans.iseries/xsd", "_AORT");
     private final static QName _IRT02InputASTR_QNAME = new QName("http://irt02e.wsbeans.iseries/xsd", "_ASTR");
     private final static QName _IRT02InputANAM4_QNAME = new QName("http://irt02e.wsbeans.iseries/xsd", "_ANAM4");
+    private final static QName _Irt02XMLResponseReturn_QNAME = new QName("http://irt02e.wsbeans.iseries/xsd", "return");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: eu.artofcoding.retoure.store.aktivshop.wsclient.irt02e
@@ -98,30 +98,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://irt02e.wsbeans.iseries/xsd", name = "return", scope = Irt02XMLResponse.class)
-    public JAXBElement<String> createIrt02XMLResponseReturn(String value) {
-        return new JAXBElement<String>(_Irt02XMLResponseReturn_QNAME, String.class, Irt02XMLResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IRT02Result }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://irt02e.wsbeans.iseries/xsd", name = "return", scope = Irt02Response.class)
-    public JAXBElement<IRT02Result> createIrt02ResponseReturn(IRT02Result value) {
-        return new JAXBElement<IRT02Result>(_Irt02XMLResponseReturn_QNAME, IRT02Result.class, Irt02Response.class, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link IRT02Input }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://irt02e.wsbeans.iseries/xsd", name = "args0", scope = Irt02XML.class)
     public JAXBElement<IRT02Input> createIrt02XMLArgs0(IRT02Input value) {
         return new JAXBElement<IRT02Input>(_Irt02XMLArgs0_QNAME, IRT02Input.class, Irt02XML.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IRT02Input }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://irt02e.wsbeans.iseries/xsd", name = "args0", scope = Irt02 .class)
+    public JAXBElement<IRT02Input> createIrt02Args0(IRT02Input value) {
+        return new JAXBElement<IRT02Input>(_Irt02XMLArgs0_QNAME, IRT02Input.class, Irt02 .class, value);
     }
 
     /**
@@ -377,12 +368,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IRT02Input }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://irt02e.wsbeans.iseries/xsd", name = "args0", scope = Irt02 .class)
-    public JAXBElement<IRT02Input> createIrt02Args0(IRT02Input value) {
-        return new JAXBElement<IRT02Input>(_Irt02XMLArgs0_QNAME, IRT02Input.class, Irt02 .class, value);
+    @XmlElementDecl(namespace = "http://irt02e.wsbeans.iseries/xsd", name = "return", scope = Irt02XMLResponse.class)
+    public JAXBElement<String> createIrt02XMLResponseReturn(String value) {
+        return new JAXBElement<String>(_Irt02XMLResponseReturn_QNAME, String.class, Irt02XMLResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IRT02Result }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://irt02e.wsbeans.iseries/xsd", name = "return", scope = Irt02Response.class)
+    public JAXBElement<IRT02Result> createIrt02ResponseReturn(IRT02Result value) {
+        return new JAXBElement<IRT02Result>(_Irt02XMLResponseReturn_QNAME, IRT02Result.class, Irt02Response.class, value);
     }
 
 }
